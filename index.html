@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Official Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 <style>
   body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
+    background-color: #f0f0f0;
   }
 
   .logo {
@@ -39,30 +41,34 @@
   }
 
   .button {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 15px 30px; /* Reduced padding */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Get the block-level look */
-    font-size: 16px; /* Smaller font size */
-    margin: 10px; /* Add some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 10px; /* Rounded corners */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Add shadow */
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: black;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
   }
 
   .button:hover {
-    background-color: #45a049; /* Darker green */
-    transform: translateY(-5px); /* Slightly move up */
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
 
   .button:active {
-    background-color: #3e8e41; /* Even darker green */
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2); /* Less shadow */
-    transform: translateY(2px); /* Move down on click */
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
   }
 </style>
 </head>
