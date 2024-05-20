@@ -1,12 +1,12 @@
-**Unlocking Xiaomi Bootloader Without a PC (Using Termux)**
+# Unlocking Xiaomi Bootloader Without a PC (Using Termux)
 
-Requirements:
-1. A second Android phone to install the MiUnlockTool.
+## Requirements:
+1. A second Android phone
 2. OTG adapter.
 
 ___
 
-Step 1: Xiaomi phone
+### Step 1: Xiaomi phone
 
 Go to Settings » About phone » MIUI version.
 Tap repeatedly on the MIUI version until you see the pop-up You are now a developer!
@@ -15,7 +15,7 @@ Enable OEM unlocking and USB debugging.
 Bind your Xiaomi account to your phone. Tap Mi Unlock status » Agree » Add account and device. Make sure your device can connect to the internet using mobile data.
 Once the account is successfully bound, you should get a message Added successfully. Mi account is associated with this device now.
 
-Step 2: On the second device(Android)
+### Step 2: On the second Android phone
 
 1 Install Termux
 
