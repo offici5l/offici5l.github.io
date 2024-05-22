@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Official Blog</title>
-<meta name="description" content="Welcome to Offici5l Blog. Here, I share my experiences, projects, and topics related to technology and creativity.">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 <style>
   body {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -48,6 +47,7 @@
     padding: 15px 20px;
     text-align: center;
     text-decoration: none;
+    display: inline-block;
     font-size: 16px;
     margin: 10px;
     cursor: pointer;
@@ -55,6 +55,7 @@
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
   }
 
@@ -70,37 +71,21 @@
     transform: translateY(0);
   }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5025829811155537" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <div>
-      <img src="./logo.png" alt="Official Blog Logo" class="logo">
-    </div>
-  </header>
-  
-  <main>
-    <div>
-      <p class="welcome-text"><strong>Welcome to Offici5l Blog</strong></p>
-      <p class="description"><strong>Here, I share my experiences, projects, and topics related to technology and creativity💡</strong></p>
-    </div>
-    
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-5025829811155537"
-         data-ad-slot="7741494611"></ins>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5025829811155537" crossorigin="anonymous"></script>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+  <div>
+    <img src="./logo.png" alt="logo" class="logo">
+  </div>
 
-    <div class="button-container">
-      <a href="./Projects" class="button">Projects</a>
-      <a href="./Articles" class="button">Articles</a>
-      <a href="./Contact" class="button">Contact</a>
-    </div>
-  </main>
+  <div>
+    <p class="welcome-text"><strong>Welcome to Offici5l Blog</strong></p>
+    <p class="description"><strong>Here, I share my experiences, projects, and topics related to technology and creativity💡</strong></p>
+  </div>
+
+  <div class="button-container">
+    <button class="button" onclick="window.location.href='./Projects';">Projects</button>
+    <button class="button" onclick="window.location.href='./Articles';">Articles</button>
+    <button class="button" onclick="window.location.href='./Contact';">Contact</button>
+  </div>
 </body>
 </html>
