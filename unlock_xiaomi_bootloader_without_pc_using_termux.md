@@ -17,9 +17,9 @@ Once the account is successfully bound, you should get a message Added successfu
 
 ### Step 2: On the second Android phone
 
-**1** Install Termux
+**1** Install [Termux app](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk)
 
-**2** Install Termux API
+**2** Install [Termux API app](https://github.com/termux/termux-api/releases/download/v0.50.1/termux-api_v0.50.1+github-debug.apk)
 
 **3** From Termux command line:
 ```
