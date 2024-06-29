@@ -23,11 +23,15 @@ Once the account is successfully bound, you should get a message Added successfu
 
 **3** From Termux command line:
 ```
+termux-setup-storage
+```
+```
 curl https://raw.githubusercontent.com/offici5l/MiUnlockTool/main/.install | bash
 ```
 **4** Run MiUnlockTool with command:
+```
 miunlock
-
+```
 **5** enter your Xiaomi account username("Id" or "Email" or "Phone with +")  and press Enter
 
 **6** Enter password and press Enter
