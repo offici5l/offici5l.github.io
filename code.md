@@ -6,6 +6,7 @@ Currently, there is no solution for this issue unfortunately
 
 The only solution currently is to contact the Xiaomi support team.
 
+___
 
 ### Explanation of the reason according to my analysis:
 
