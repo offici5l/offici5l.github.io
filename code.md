@@ -1,5 +1,6 @@
 <details markdown='1'><summary>code 10013 = This device  is not activated, please activate it and try to unlock it again</summary>
 
+
 the issue is due to changing a piece of the phone's hardware, most likely the motherboard
 
 Currently, there is no solution for this issue unfortunately
@@ -29,8 +30,10 @@ Therefore, Xiaomi's server, upon analyzing the security DeviceId, returns error 
 
 </details>
 
+___
 
 <details markdown='1'><summary>code 20030 = Sorry, couldn't unlock more devices by this account this month</summary>
+
 
 The reason is because you have already unlocked a device recently from one Mi account at once
 
