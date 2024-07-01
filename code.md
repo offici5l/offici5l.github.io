@@ -74,3 +74,13 @@ r = RetrieveEncryptData("/api/v3/ahaUnlock", {"appId":"1", "data":{"clientId":"2
 
 </details>
 
+___
+
+<details markdown='1'><summary>code 10000 = Request parameter error</summary>
+
+___
+
+invalid device "token or product"
+
+</details>
+
