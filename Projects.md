@@ -9,8 +9,9 @@ Bypass HyperOS Restriction(Couldn't add. Please go to Mi Community to apply for 
 Bypass Restriction(Cant add more accounts to this SIM Card)
 
 
-**[MiTool](https://github.com/offici5l/MiTool)**
-- MiTool is compatible only with Android (with Termux). It includes MiUnlockTool, MiBypassTool, MiAssistantTool, ROM flashing, and adb and fastboot commands...
-
 **[MiAssistantTool](https://github.com/offici5l/MiAssistantTool)**
 - for flash official recovery rom in Mi-Assistant mode without unlocking bootloader
+
+
+**[MiTool](https://github.com/offici5l/MiTool)**
+- MiTool is compatible only with Android (with Termux). It includes MiUnlockTool, MiBypassTool, MiAssistantTool, ROM flashing, and adb and fastboot commands...
