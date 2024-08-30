@@ -4,10 +4,11 @@
 **[MiBypassTool](https://github.com/offici5l/MiBypassTool)**
 - for :
 
-- [1] Bypass HyperOS Restriction(Couldn't add. Please go to Mi Community to apply for authorization and try again.)
+• [1] Bypass HyperOS Restriction(Couldn't add. Please go to Mi Community to apply for authorization and try again.)
+
 note: that if your device was made directly with HyperOS from the factory, currently bypassing the restriction [1] is currently not possible.
 
-- [2] Bypass Restriction(Cant add more accounts to this SIM Card)
+• [2] Bypass Restriction(Cant add more accounts to this SIM Card)
 
 
 **[MiTool](https://github.com/offici5l/MiTool)**
