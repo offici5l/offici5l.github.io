@@ -84,3 +84,33 @@ invalid device "token or product"
 
 </details>
 
+___
+
+<details markdown='1'><summary>code 20045 = Please use the common user tool on the official website</summary>
+
+___
+
+invalid server region
+
+Change server by command :
+
+in Termux
+
+```
+miunlock global
+```
+
+in Windows Linux Macos
+
+```
+python3 Miunlocktool.py global
+```
+
+Available Servers :
+global, india, russia, china, europe
+
+</details>
+
+
+
+
