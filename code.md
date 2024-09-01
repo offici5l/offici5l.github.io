@@ -111,6 +111,20 @@ global, india, russia, china, europe
 
 </details>
 
+___
+
+<details markdown='1'><summary>code 20035 = Please upgrade your unlock tool</summary>
+
+___
+
+If you are using an official tool or other tools Download the latest version of the tool.
+
+If you are using the MiUnlockTool, Just update "clientVersion":"Place a higher version than the previous one"
+
+github.com/offici5l/MiUnlockTool/blob/main/MiUnlockTool.py#L331
+
+</details>
+
 
 
 
