@@ -61,21 +61,6 @@ The Xiaomi server has indeed sent the encryptedData(token) before, to unlock the
 
 ___
 
-<details markdown='1'><summary>code 20035 = Please upgrade your unlock tool.</summary>
-
-___
-
-If you are using an official tool or other tools Download the latest version of the tool.
-
-If you are using the MiUnlockTool, Just update "clientVersion":"Place a higher version than the previous one"
-
-You find it in the file MiUnlockTool.py., in the line containing :
-r = RetrieveEncryptData("/api/v3/ahaUnlock", {"appId":"1", "data":{"clientId":"2", "clientVersion":"7.6.727.43", .........
-
-</details>
-
-___
-
 <details markdown='1'><summary>code 10000 = Request parameter error</summary>
 
 ___
