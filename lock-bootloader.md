@@ -12,13 +12,11 @@ To enter **Fastboot mode**, follow these steps:
 
 ## Step 2: Ensure Partitions are Clean
 
-**Notice:**  
-Before locking the bootloader, make sure that all partitions are clean. If you've:
+Make sure that all partitions are clean:
 
-- Previously rooted your device, flash the clean `boot.img`.
-- Made any modifications to any partition, flash the clean `partition-name.img`.
+- If you've previously rooted your device, flash the clean boot.img or if any modifications have been made to any partition, flash the clean partition-name.img 
 
-This will help prevent any potential issues in the future.
+to prevent any potential issues in the future.
 
 ---
 
