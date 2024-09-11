@@ -42,7 +42,6 @@
     - Add a **Xiaomi account** in Developer Options.
     - Wait for the bootloader to be unlocked.
 
----
 
 ### After the Bootloader is Unlocked
 
