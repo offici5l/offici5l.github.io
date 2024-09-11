@@ -43,7 +43,7 @@
     - Wait for the bootloader to be unlocked.
 
 
-### After the Bootloader is Unlocked
+**After the Bootloader is Unlocked**
 
 1. Switch back to the corrupted slot using the command:
 
