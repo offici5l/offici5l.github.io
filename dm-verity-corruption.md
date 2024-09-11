@@ -34,10 +34,11 @@
     fastboot set_active a
     ```
 
-4. Restart the device. It should now boot into the system normally.  
-   However, one of the slots will remain corrupted. To fix this:
+4. Restart the device. It should now boot into the system normally.
 
-    - Add a **Xiaomi account** in Developer Options. and do the steps to unlock the bootloader ...
+
+5. However, one of the slots will remain corrupted. To fix this:
+- Add a **Xiaomi account** in Developer Options. and do the steps to unlock the bootloader ...
 
 
 **After the Bootloader is Unlocked**
