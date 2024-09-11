@@ -4,4 +4,4 @@
 
 ### [Dm-Verity Corruption](https://offici5l.github.io/dm-verity-corruption)
 
-### [Lock Bootloader](https://github.com/offici5l/offici5l.github.io/blob/main/lock-bootloader.md)
+### [Lock Bootloader](https://github.com/offici5l/offici5l.github.io/lock-bootloader)
