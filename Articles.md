@@ -3,3 +3,5 @@
 ### [Xiaomi Unlock Bootloader Code issues](https://offici5l.github.io/code)
 
 ### [Dm-Verity Corruption](https://offici5l.github.io/dm-verity-corruption)
+
+### [Lock Bootloader](https://github.com/offici5l/offici5l.github.io/blob/main/lock-bootloader.md)
