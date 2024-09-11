@@ -1,5 +1,3 @@
-# DM-Verity Corruption
-
 ## Fixing DM-Verity Corruption
 
 ### Method 1: If the Bootloader is Unlocked
