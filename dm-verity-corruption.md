@@ -37,8 +37,7 @@
 4. Restart the device. It should now boot into the system normally.  
    However, one of the slots will remain corrupted. To fix this:
 
-    - Add a **Xiaomi account** in Developer Options.
-    - Wait for the bootloader to be unlocked.
+    - Add a **Xiaomi account** in Developer Options. and do the steps to unlock the bootloader ...
 
 
 **After the Bootloader is Unlocked**
