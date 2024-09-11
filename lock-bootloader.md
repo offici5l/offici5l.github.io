@@ -26,3 +26,4 @@ Once you are in **Fastboot mode** and have ensured the partitions are clean, loc
 
 ```bash
 fastboot oem lock
+```
