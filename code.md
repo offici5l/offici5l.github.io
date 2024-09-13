@@ -110,6 +110,37 @@ github.com/offici5l/MiUnlockTool/blob/main/MiUnlockTool.py#L331
 
 </details>
 
+___
 
+<details markdown='1'><summary>code 20031 = Please add your account in Settings > Developer options > Mi Unlock status.</summary>
+
+___
+
+If you've successfully added your account in the developer options but are still encountering this issue, try changing the server region.
+
+Example:
+
+For Windows, Linux, or macOS:
+
+```
+python3 MiUnlockTool.py global
+```
+
+For Termux:
+```
+miunlock global
+```
+
+Available regions:
+
+global
+india
+russia
+china
+europe
+
+
+
+</details>
 
 
