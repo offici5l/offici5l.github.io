@@ -134,9 +134,13 @@ miunlock global
 Available regions:
 
 global
+
 india
+
 russia
+
 china
+
 europe
 
 
