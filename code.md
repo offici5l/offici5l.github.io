@@ -144,7 +144,21 @@ china
 europe
 
 
-
 </details>
 
+___
+
+<details markdown='1'><summary>code 20033 = Your account is not authorized to unlock. Please change to another account.</summary>
+
+___
+
+This error occurs because the account has been banned from accessing the bootloader unlock service. It usually happens due to the use of modified tools or an outdated version of MiUnlockTool. Ensure you are always using a version higher than 1.5.1.
+
+The error can also occur for other reasons. In short, Xiaomi's servers may have detected unusual activity or strange usage of the account, such as sending unauthorized requests to the server. This could lead to your Xiaomi account being restricted from using the bootloader unlocking feature.
+
+
+Solution: Sometimes, simply enabling "Find Device" in settings can resolve the issue.
+If the problem persists, create a new account.
+
+</details>
 
