@@ -8,6 +8,9 @@
     ```bash
     fastboot oem cdms
     ```
+    ```bash
+    fastboot oem cdms fix
+    ```
 
 ---
 
@@ -53,4 +56,7 @@
 
     ```bash
     fastboot oem cdms
+    ```
+    ```bash
+    fastboot oem cdms fix
     ```
