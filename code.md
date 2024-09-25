@@ -116,7 +116,9 @@ ___
 
 ___
 
-If you've successfully added your account in the developer options but are still encountering this issue, try changing the server region.
+Go to Settings, click on Additional settings, then Developer options. Enable OEM unlocking and USB debugging. Bind your Xiaomi account to your phone. Tap Mi Unlock status » Agree » Add account and device. Make sure your device can connect to the internet using mobile data. Once the account is successfully bound, you should get a message Added successfully. Mi account is associated with this device now.
+
+If you've successfully added your account in the developer options but are still encountering this issue code 20031, try changing the server region.
 
 Example:
 
