@@ -1,3 +1,90 @@
-<div style="text-align: center;">
-    <img src="https://img.shields.io/github/downloads/offici5l/MiTool/total?style=social&label=Total%20Users%20Mitool" style="width: 300px; height: auto;">
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Activities</title>
+    <style>
+        /* Basic settings for responsive page */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Transparent background settings */
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Design for the transparent box in the center */
+        .transparent-box {
+            background-color: rgba(255, 255, 255, 0.9); /* 90% transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: center;
+        }
+
+        /* Text settings */
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .download-count {
+            color: #555;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Loader design */
+        .loader {
+            border: 6px solid #f3f3f3; /* Background color */
+            border-top: 6px solid #3498db; /* Moving part color */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite; /* Spinning animation */
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="transparent-box">
+        <h1>Project Activities</h1>
+        <div class="download-count" id="downloadCount">
+            <div class="loader"></div> <!-- Loading spinner -->
+        </div>
+    </div>
+
+    <script>
+        // Fetching download count from GitHub API
+        fetch('https://api.github.com/repos/offici5l/MiTool/releases/assets/197052365')
+            .then(response => response.json())
+            .then(data => {
+                // Update the download count on the page
+                document.getElementById('downloadCount').innerHTML = 'Total Users Mitool: ' + data.download_count;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('downloadCount').innerText = 'Failed to fetch download count.';
+            });
+    </script>
+
+</body>
+</html>
