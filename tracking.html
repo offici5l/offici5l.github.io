@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Project Activities</title>
+    
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Project Activities" />
+    <meta property="og:url" content="https://offici5l.github.io/tracking" />
+    <meta property="og:type" content="website" />
+
     <style>
         /* Basic settings for responsive page */
         body, html {
@@ -78,7 +84,7 @@
             .then(response => response.json())
             .then(data => {
                 // Update the download count on the page
-                document.getElementById('downloadCount').innerHTML = 'Total Users Mitool: ' + data.download_count;
+                document.getElementById('downloadCount').innerHTML = 'Downloads: ' + data.download_count;
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
