@@ -51,6 +51,27 @@
             margin: 10px 0;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff4500;
+            animation: bounce 1s infinite;
+            margin-left: 5px;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
     </style>
 </head>
@@ -60,7 +81,9 @@
         <div class="mitool-box">
             <div class="mitool-title">Mitool</div>
             <div class="description">Created on 2023-12-14.</div>
-            <div class="description" id="totalUsers">Total Users since 2024-10-05: Loading...</div>
+            <div class="description">
+                Total Users since 2024-10-05: <span class="logo" id="totalUsers">Loading...</span>
+            </div>
         </div>
     </div>
 
@@ -73,11 +96,11 @@
                 return response.json();
             })
             .then(data => {
-                document.getElementById('totalUsers').innerHTML = 'Total Users since 2024-10-05: ' + data.download_count;
+                document.getElementById('totalUsers').innerHTML = data.download_count;
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
-                document.getElementById('totalUsers').innerHTML = 'Total Users since 2024-10-05: Error loading data';
+                document.getElementById('totalUsers').innerHTML = 'Error loading data';
             });
     </script>
 </body>
