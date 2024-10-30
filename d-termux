@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .note {
+            background-color: #f9f9f9;
+            border-left: 4px solid #007BFF;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffeeba;
+            padding: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Termux & Termux-API</h1>
+
+    <div class="warning">
+        <h3>⚠️ It is recommended to install both Termux and Termux-API from the same source.</h3>
+    </div>
+
+    <h2>🌐 From GitHub:</h2>
+    <ul>
+        <li><a href="https://github.com/termux/termux-app/releases/latest" target="_blank">Termux</a></li>
+        <li><a href="https://github.com/termux/termux-api/releases/latest" target="_blank">Termux API</a></li>
+    </ul>
+
+    <h2>🌐 From F-Droid:</h2>
+    <ul>
+        <li><a href="https://f-droid.org/packages/com.termux.api" target="_blank">Termux APK</a></li>
+        <li><a href="https://f-droid.org/packages/com.termux" target="_blank">Termux API APK</a></li>
+    </ul>
+
+    <div class="note">
+        <h3>💡 Note: If you are facing issues recognizing your device through ADB & Fastboot commands, consider using termux-monet:</h3>
+        <ul>
+            <li><a href="https://github.com/Termux-Monet/termux-monet/releases" target="_blank">Termux Monet</a></li>
+            <li><a href="https://github.com/Termux-Monet/termux-api/releases" target="_blank">Termux API Monet</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>
