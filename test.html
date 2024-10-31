@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST Example</title>
+</head>
+<body>
+    <h1>Test POST Request</h1>
+    <button onclick="sendPost('test1')">Send test1</button>
+    <button onclick="sendPost('test2')">Send test2</button>
+    <p id="response"></p>
+
+    <script>
+        function sendPost(testValue) {
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `test=${testValue}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('response').innerText = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
