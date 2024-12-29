@@ -3,49 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch Request with Error Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #output {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            white-space: pre-wrap; /* Preserve formatting */
-        }
-    </style>
+    <title>Execute POST with Fetch</title>
 </head>
 <body>
-    <h1>Fetch Request with Error Details</h1>
-    <button id="fetchButton">Execute Request</button>
-    <div id="output">The result will appear here...</div>
+    <h1>Result</h1>
+    <pre id="result">Loading data...</pre>
 
     <script>
-        document.getElementById('fetchButton').addEventListener('click', function () {
-            // Execute the fetch request and send the session cookies
-            fetch("https://account.xiaomi.com/pass/serviceLogin?sid=unlockApi&checkSafeAddress=true&_json=true", {
-                method: 'GET',
-                credentials: 'same-origin'  // Send the session cookies with the request
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    // Display the result inside the frame
-                    document.getElementById('output').textContent = data;
-                })
-                .catch(error => {
-                    // Display the full error inside the frame
-                    document.getElementById('output').textContent = 
-                        `Error: ${error.message}\n` +
-                        `Additional Details: ${error.stack || "No additional details available"}`;
-                });
+        const url = "https://account.xiaomi.com/pass/serviceLoginAuth2";
+        const bodyData = `https://account.xiaomi.com/pass/serviceLogin?sid=unlockApi&checkSafeAddress=true&_json=true`;
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: bodyData
+        })
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('result').textContent = data;
+        })
+        .catch(error => {
+            document.getElementById('result').textContent = "Error occurred: " + error;
         });
     </script>
 </body>
