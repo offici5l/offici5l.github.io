@@ -5,3 +5,5 @@
 ### [Dm-Verity Corruption](https://offici5l.github.io/dm-verity-corruption)
 
 ### [Lock Bootloader](https://offici5l.github.io/lock-bootloader)
+
+### [Create Xiaomi account(region china)](https://offici5l.github.io/Articles/code20045)
