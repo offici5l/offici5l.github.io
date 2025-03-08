@@ -6,4 +6,4 @@
 
 ### [Lock Bootloader](https://offici5l.github.io/lock-bootloader)
 
-### [Create Xiaomi account(region china)](https://offici5l.github.io/Articles/code20045.html)
+### [Create Xiaomi account(region china)](https://offici5l.github.io/Articles/code_20045.html)
