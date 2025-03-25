@@ -2,7 +2,7 @@ Following up on the previous article https://offici5l.github.io/Articles/code_20
 
 I will now discuss my opinion on whether to use the global Xiaomi Community app (com.mi.global.bbs) or the Chinese one (com.xiaomi.vipaccount) to obtain authorization ?
 
-![micommunit_P](micommunit_P.jpg)
+![micommunity_P](micommunity_P.jpg)
 
 
 Chinese App (Image 1):
