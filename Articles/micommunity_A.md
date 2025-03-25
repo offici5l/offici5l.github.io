@@ -4,7 +4,6 @@ I will now discuss my opinion on whether to use the global Xiaomi Community app 
 
 ![Thumbnail](https://offici5l.github.io/Articles/micommunity_P.jpg)
 
-![micommunity_P](micommunity_P.jpg)
 
 
 Chinese App (Image 1):
