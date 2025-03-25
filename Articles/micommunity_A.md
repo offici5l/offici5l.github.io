@@ -2,6 +2,12 @@ Following up on the previous article https://offici5l.github.io/Articles/code_20
 
 I will now discuss my opinion on whether to use the global Xiaomi Community app (com.mi.global.bbs) or the Chinese one (com.xiaomi.vipaccount) to obtain authorization ?
 
+---
+title: "Following up on the previous article https://offici5l.github.io/Articles/code_20045 regarding the solution to unlock the bootloader for Chinese devices outside of China with a Chinese account ..."
+image: "https://offici5l.github.io/Articles/micommunity_P.jpg"
+type: "article"
+---
+
 ![micommunity_P](micommunity_P.jpg)
 
 
