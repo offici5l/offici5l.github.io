@@ -22,3 +22,7 @@ As for devices with the MIUI system, and some hyperOs1 devices (that tools bypas
 
 Now we are waiting for the user experience ...
 https://t.me/Offici5l_Group
+
+___
+Article update
+One of the users reported today (March 26, 2025) in https://t.me/Offici5l_Group that he obtained permission from the mi community app(global) using a chinese account .... 🔥
