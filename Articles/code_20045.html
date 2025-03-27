@@ -9,33 +9,40 @@
     <meta property="og:type" content="article">
     <title>The place where the account is registered does not match the place where the phone is sold.(Code 20045)</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
             color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 800px;
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow: hidden;
         }
-        h1 {
+        h1, h2 {
             color: #0056b3;
-            font-size: 24px;
             text-align: center;
         }
+        h1 {
+            font-size: 24px;
+        }
         h2 {
-            color: #0056b3;
             font-size: 20px;
         }
         p, li {
@@ -44,6 +51,7 @@
         a {
             color: #007bff;
             text-decoration: none;
+            word-break: break-word;
         }
         a:hover {
             text-decoration: underline;
@@ -53,17 +61,18 @@
             padding: 5px 10px;
             border-radius: 3px;
             font-family: monospace;
+            display: inline-block;
+            word-break: break-word;
         }
         hr {
             border: 1px solid #ddd;
             margin: 20px 0;
         }
-        ol {
+        ol, ul {
             padding-left: 20px;
         }
         ul {
             list-style-type: none;
-            padding: 0;
         }
         li {
             margin-bottom: 10px;
