@@ -8,78 +8,136 @@
     <meta property="og:image" content="https://offici5l.github.io/Articles/thumbnail.jpg">
     <meta property="og:type" content="article">
     <title>The place where the account is registered does not match the place where the phone is sold.(Code 20045)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+            font-size: 24px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 20px;
+        }
+        p, li {
+            font-size: 16px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Xiaomi Bootloader Unlock Restriction: Code 20045 = "The place where the account is registered does not match the place where the phone is sold." Solution</h1>
+    <div class="container">
+        <h1>Xiaomi Bootloader Unlock Restriction: Code 20045 = "The place where the account is registered does not match the place where the phone is sold." Solution</h1>
 
-    <h2>Description</h2>
-    <p>On October 20, 2024, Xiaomi introduced a new restriction for bootloader unlocking.<br>
-    Users who own a Chinese device with a global Xiaomi account or vice versa (a global device with a Chinese Xiaomi account) will encounter the following restriction when attempting to unlock the bootloader:</p>
+        <h2>Description</h2>
+        <p>On October 20, 2024, Xiaomi introduced a new restriction for bootloader unlocking.<br>
+        Users who own a Chinese device with a global Xiaomi account or vice versa (a global device with a Chinese Xiaomi account) will encounter the following restriction when attempting to unlock the bootloader:</p>
 
-    <p><code>Code 20045</code> = "The place where the account is registered does not match the place where the phone is sold."</p>
+        <p><code>Code 20045</code> = "The place where the account is registered does not match the place where the phone is sold."</p>
 
-    <p>For users outside China who own Chinese devices, this is a major obstacle. Creating a Chinese Xiaomi account outside of China is nearly impossible, as the official website requires a Chinese phone number for registration.</p>
+        <p>For users outside China who own Chinese devices, this is a major obstacle. Creating a Chinese Xiaomi account outside of China is nearly impossible, as the official website requires a Chinese phone number for registration.</p>
 
-    <h2>Is there a solution?</h2>
-    <p>On December 4, I successfully created a Chinese Xiaomi account using an email via the following link:<br>
-    <a href="https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN" target="_blank">https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN</a></p>
+        <h2>Is there a solution?</h2>
+        <p>On December 4, I successfully created a Chinese Xiaomi account using an email via the following link:<br>
+        <a href="https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN" target="_blank">https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN</a></p>
 
-    <p>However, this method alone is not sufficient. During the final step of unlocking the bootloader, the following error appears:</p>
+        <p>However, this method alone is not sufficient. During the final step of unlocking the bootloader, the following error appears:</p>
 
-    <p><code>Code 20041</code> = "sorry, your mi id is not associated with a phone number"</p>
+        <p><code>Code 20041</code> = "sorry, your mi id is not associated with a phone number"</p>
 
-    <p>This happens because a phone number is required in the final step. Unfortunately, the account does not allow adding a non-Chinese phone number.</p>
+        <p>This happens because a phone number is required in the final step. Unfortunately, the account does not allow adding a non-Chinese phone number.</p>
 
-    <p>After spending days searching for another method, I discovered a glitch on February 28, 2025, which allows creating a Chinese Xiaomi account using an international phone number successfully.</p>
+        <p>After spending days searching for another method, I discovered a glitch on February 28, 2025, which allows creating a Chinese Xiaomi account using an international phone number successfully.</p>
 
-    <hr>
+        <hr>
 
-    <h2>Solution: Step-by-Step Bootloader Unlock for Chinese Devices (For Users Outside China)</h2>
-    <ol>
-        <li>
-            <strong>Create a Chinese Xiaomi Account:</strong>
-            <p>Clear cookies from your browser.</p>
-            <p>Open the following link in a browser to register an account with the China region:<br>
-            <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN" target="_blank">https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN</a></p>
+        <h2>Solution: Step-by-Step Bootloader Unlock for Chinese Devices (For Users Outside China)</h2>
+        <ol>
+            <li>
+                <strong>Create a Chinese Xiaomi Account:</strong>
+                <p>Clear cookies from your browser.</p>
+                <p>Open the following link in a browser to register an account with the China region:<br>
+                <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN" target="_blank">https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN</a></p>
 
-            <strong>Important Notes:</strong>
-            <ul>
-                <li>The following international phone numbers are not supported:<br>
-                +91 (India), +62 (Indonesia), +1 (all phone with +1)</li>
-                <li>You can use free online services to obtain a temporary phone number.</li>
-                <li>If you do not receive the verification code via SMS, try opening WhatsApp (if the number is linked to WhatsApp, the code may arrive there instead).</li>
-                <li>If you still don't receive the code, try adding your region to the registration link:<br>
-                &uRegion=&lt;Your Region&gt;</li>
-                <li>Example for Russia:<br>
-                <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN&uRegion=RU" target="_blank">https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN&uRegion=RU</a></li>
-                <li>You can find your region code by visiting:<br>
-                <a href="https://account.xiaomi.com/pass2/config?key=areaConfig" target="_blank">https://account.xiaomi.com/pass2/config?key=areaConfig</a></li>
-            </ul>
-        </li>
+                <strong>Important Notes:</strong>
+                <ul>
+                    <li>The following international phone numbers are not supported:<br>
+                    +91 (India), +62 (Indonesia), +1 (all phone with +1)</li>
+                    <li>You can use free online services to obtain a temporary phone number.</li>
+                    <li>If you do not receive the verification code via SMS, try opening WhatsApp (if the number is linked to WhatsApp, the code may arrive there instead).</li>
+                    <li>If you still don't receive the code, try adding your region to the registration link:<br>
+                    &uRegion=&lt;Your Region&gt;</li>
+                    <li>Example for Russia:<br>
+                    <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN&uRegion=RU" target="_blank">https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN&uRegion=RU</a></li>
+                    <li>You can find your region code by visiting:<br>
+                    <a href="https://account.xiaomi.com/pass2/config?key=areaConfig" target="_blank">https://account.xiaomi.com/pass2/config?key=areaConfig</a></li>
+                </ul>
+            </li>
 
-        <li>
-            <strong>Get Permission from the Xiaomi Community App:</strong>
-            <p><em>Note: (Skip this step for MIUI users)</em></p>
-            <p>For HyperOS devices that support bypassing via <a href="https://github.com/offici5l/MiBypassTool" target="_blank">https://github.com/offici5l/MiBypassTool</a>, skip steps (2 + 3).</p>
-            <p>Log in to the Mi Community app and request unlocking permission.</p>
-        </li>
+            <li>
+                <strong>Get Permission from the Xiaomi Community App:</strong>
+                <p><em>Note: (Skip this step for MIUI users)</em></p>
+                <p>For HyperOS devices that support bypassing via <a href="https://github.com/offici5l/MiBypassTool" target="_blank">https://github.com/offici5l/MiBypassTool</a>, skip steps (2 + 3).</p>
+                <p>Log in to the Mi Community app and request unlocking permission.</p>
+            </li>
 
-        <li><strong>Link the Account in Developer Options</strong></li>
-        <li>
-            <strong>Run the Unlock Tool:</strong><br>
-            <a href="https://github.com/offici5l/MiUnlockTool" target="_blank">https://github.com/offici5l/MiUnlockTool</a>
-        </li>
-    </ol>
+            <li><strong>Link the Account in Developer Options</strong></li>
+            <li>
+                <strong>Run the Unlock Tool:</strong><br>
+                <a href="https://github.com/offici5l/MiUnlockTool" target="_blank">https://github.com/offici5l/MiUnlockTool</a>
+            </li>
+        </ol>
 
-    <h2>Warning:</h2>
-    <p>This method might be patched by Xiaomi at any time.<br>
-    Last verified: February 28, 2025.</p>
+        <h2>Warning:</h2>
+        <p>This method might be patched by Xiaomi at any time.<br>
+        Last verified: February 28, 2025.</p>
 
-    <h2>GitHub & Telegram:</h2>
-    <ul>
-        <li>GitHub: <a href="https://github.com/offici5l" target="_blank">https://github.com/offici5l</a></li>
-        <li>Telegram (Channel): <a href="https://t.me/Offici5l_Channel" target="_blank">https://t.me/Offici5l_Channel</a></li>
-        <li>Telegram (Group): <a href="https://t.me/Offici5l_Group" target="_blank">https://t.me/Offici5l_Group</a></li>
-    </ul>
+        <h2>GitHub & Telegram:</h2>
+        <ul>
+            <li>GitHub: <a href="https://github.com/offici5l" target="_blank">https://github.com/offici5l</a></li>
+            <li>Telegram (Channel): <a href="https://t.me/Offici5l_Channel" target="_blank">https://t.me/Offici5l_Channel</a></li>
+            <li>Telegram (Group): <a href="https://t.me/Offici5l_Group" target="_blank">https://t.me/Offici5l_Group</a></li>
+        </ul>
+    </div>
 </body>
 </html>
