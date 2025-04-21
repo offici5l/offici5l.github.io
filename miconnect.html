@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miconnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Theme Variables */
+        :root {
+            --primary-color: #1a1a2e;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #4b5563;
+            --input-bg: #fafafa;
+            --border-color: #e5e7eb;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --shadow-accent: rgba(79, 70, 229, 0.4);
+            --shadow-input: rgba(79, 70, 229, 0.1);
+            --success-bg: #ecfdf5;
+            --error-bg: #fef2f2;
+            --success-text: #065f46;
+            --error-text: #991b1b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 550px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            padding: 2.5rem;
+            animation: fadeIn 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            background: var(--input-bg);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px var(--shadow-input);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-accent);
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .response {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            display: none;
+            font-size: 0.9rem;
+            animation: slideIn 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .success {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .error {
+            background: var(--error-bg);
+            color: var(--error-text);
+        }
+
+        .response::before {
+            font-family: 'FontAwesome';
+            font-size: 1.1rem;
+        }
+
+        .success::before {
+            content: '\f058';
+        }
+
+        .error::before {
+            content: '\f06a';
+        }
+
+        .version {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .version span {
+            display: block;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.75rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Miconnect</h1>
+
+            <!-- Codename Checker Form -->
+            <form id="checkerForm">
+                <div class="form-group">
+                    <label for="codename">Codename:</label>
+                    <input type="text" id="codename" name="codename" placeholder="Enter Codename">
+                </div>
+                <button type="button" id="checkCodename">Check if codename is supported</button>
+            </form>
+            <div id="checkResponse" class="response"></div>
+
+            <hr>
+
+            <!-- Connect Form -->
+            <form id="workerForm">
+                <div class="form-group">
+                    <label for="id">Account ID:</label>
+                    <input type="text" id="id" name="id" required placeholder="Enter your Account ID">
+                </div>
+
+                <div class="form-group">
+                    <label for="token">Device Token:</label>
+                    <input type="text" id="token" name="token" required placeholder="Enter your Device Token">
+                </div>
+
+                <div class="form-group">
+                    <label for="region">Device Region:</label>
+                    <select id="region" name="region" required>
+                        <option value="">Select Device Region</option>
+                        <option value="cn">China</option>
+                        <option value="g">Global</option>
+                    </select>
+                </div>
+
+                <button type="submit">Connect</button>
+            </form>
+            <div id="connectResponse" class="response"></div>
+
+            <div class="version">
+                <span>v1</span>
+                <span>offici5l: Under development</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const API_URLS = {
+            CHECK: 'https://check.offici5l.workers.dev',
+            CONNECT: 'https://miconnect.offici5l.workers.dev'
+        };
+
+        const MESSAGES = {
+            CHECK: {
+                EMPTY_CODENAME: 'Please enter a codename',
+                SUPPORTED: codename => `codename ${codename}: supported`,
+                NOT_SUPPORTED: codename => `codename ${codename}: not supported`,
+                UNEXPECTED_RESPONSE: 'Unexpected response from server',
+                CONNECTION_ERROR: 'Connection error: Unable to reach the server',
+                CHECK_FAILED: 'Failed to check codename'
+            },
+            CONNECT: {
+                SUCCESS: 'Connected successfully!',
+                CONNECTION_ERROR: message => `Connection error: ${message}`,
+                FAILED: 'Failed to connect'
+            },
+            BUTTON: {
+                CHECK: {
+                    DEFAULT: 'Check if codename is supported',
+                    LOADING: 'Checking...'
+                },
+                CONNECT: {
+                    DEFAULT: 'Connect',
+                    LOADING: 'Connecting...'
+                }
+            }
+        };
+
+        const REQUEST_HEADERS = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        };
+
+        const checkerForm = document.getElementById('checkerForm');
+        const checkResponseDiv = document.getElementById('checkResponse');
+        const checkButton = document.getElementById('checkCodename');
+        const codenameInput = document.getElementById('codename');
+
+        checkButton.addEventListener('click', async () => {
+            const codename = codenameInput.value.trim();
+
+            if (!codename) {
+                checkResponseDiv.style.display = 'flex';
+                checkResponseDiv.className = 'response error';
+                checkResponseDiv.textContent = MESSAGES.CHECK.EMPTY_CODENAME;
+                return;
+            }
+
+            const url = new URL(API_URLS.CHECK);
+            url.searchParams.append('codename', codename);
+
+            try {
+                checkResponseDiv.style.display = 'none';
+                checkResponseDiv.className = 'response';
+                checkButton.disabled = true;
+                checkButton.textContent = MESSAGES.BUTTON.CHECK.LOADING;
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: REQUEST_HEADERS,
+                    mode: 'cors'
+                });
+
+                const data = await response.json();
+                console.log('Check API response:', data);
+
+                checkResponseDiv.style.display = 'flex';
+                if (response.ok && 'result' in data) {
+                    if (data.result === 0) {
+                        checkResponseDiv.className = 'response success';
+                        checkResponseDiv.textContent = MESSAGES.CHECK.SUPPORTED(codename);
+                    } else if (data.result === 1) {
+                        checkResponseDiv.className = 'response error';
+                        checkResponseDiv.textContent = MESSAGES.CHECK.NOT_SUPPORTED(codename);
+                    } else {
+                        checkResponseDiv.className = 'response error';
+                        checkResponseDiv.textContent = MESSAGES.CHECK.UNEXPECTED_RESPONSE;
+                        console.error('Unexpected result value:', data.result);
+                    }
+                } else {
+                    checkResponseDiv.className = 'response error';
+                    checkResponseDiv.textContent = data.error || MESSAGES.CHECK.CHECK_FAILED;
+                    console.error('Check codename failed:', data);
+                }
+            } catch (error) {
+                checkResponseDiv.style.display = 'flex';
+                checkResponseDiv.className = 'response error';
+                checkResponseDiv.textContent = MESSAGES.CHECK.CONNECTION_ERROR;
+                console.error('Check codename error:', error.message, error);
+            } finally {
+                checkButton.disabled = false;
+                checkButton.textContent = MESSAGES.BUTTON.CHECK.DEFAULT;
+            }
+        });
+
+        // Connect
+        const workerForm = document.getElementById('workerForm');
+        const connectResponseDiv = document.getElementById('connectResponse');
+        const submitButton = workerForm.querySelector('button[type="submit"]');
+
+        workerForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const id = document.getElementById('id').value;
+            const token = document.getElementById('token').value;
+            const region = document.getElementById('region').value;
+            const url = new URL(API_URLS.CONNECT);
+            url.searchParams.append('id', id);
+            url.searchParams.append('token', token);
+            url.searchParams.append('region', region);
+
+            try {
+                connectResponseDiv.style.display = 'none';
+                connectResponseDiv.className = 'response';
+                submitButton.disabled = true;
+                submitButton.textContent = MESSAGES.BUTTON.CONNECT.LOADING;
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: REQUEST_HEADERS
+                });
+
+                const data = await response.json();
+                console.log('Connect API response:', data);
+
+                connectResponseDiv.style.display = 'flex';
+                if (response.ok) {
+                    connectResponseDiv.className = 'response success';
+                    connectResponseDiv.textContent = data.message || MESSAGES.CONNECT.SUCCESS;
+                } else {
+                    connectResponseDiv.className = 'response error';
+                    connectResponseDiv.textContent = data.message || data.error || MESSAGES.CONNECT.FAILED;
+                    console.error('Connect failed:', data);
+                }
+            } catch (error) {
+                connectResponseDiv.style.display = 'flex';
+                connectResponseDiv.className = 'response error';
+                connectResponseDiv.textcontent = MESSAGES.CONNECT.CONNECTION_ERROR(error.message);
+                console.error('Connect error:', error.message, error);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = MESSAGES.BUTTON.CONNECT.DEFAULT;
+            }
+        });
+    </script>
+</body>
+</html>
