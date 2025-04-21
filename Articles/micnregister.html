@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Chinese Xiaomi Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: #34495e;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff6200;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #e55a00;
+        }
+
+        .notes {
+            background: #fff3e0;
+            border-left: 5px solid #ff6200;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .notes h2 {
+            color: #d35400;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .notes ul {
+            list-style: none;
+        }
+
+        .notes li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            color: #34495e;
+            font-size: 1rem;
+        }
+
+        .notes li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ff6200;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p, .notes li {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create a Chinese Xiaomi Account</h1>
+        <p>To register an account with the China region, click the button below:</p>
+        <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN" target="_blank" class="btn">Register Now</a>
+
+        <div class="notes">
+            <h2>Important Notes</h2>
+            <ul>
+                <li>The following international phone numbers are not supported: <strong>+91 (India)</strong>, <strong>+62 (Indonesia)</strong>, <strong>+1 (all numbers with +1)</strong>.</li>
+                <li>You can use free online services to obtain a temporary phone number for registration.</li>
+                <li>If you do not receive the verification code via SMS, check WhatsApp (if the number is linked, the code may arrive there instead).</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
