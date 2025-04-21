@@ -3,135 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offici5l Tools Activities</title>
+    <title>Tools Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body, html {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body, html {
             height: 100%;
-            font-family: 'Arial', sans-serif;
-            background-color: #e8f0fe;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #e6efff, #c3d7ff);
             display: flex;
             justify-content: center;
             align-items: center;
+            color: #1f2a44;
+            overflow-x: hidden;
         }
+
         .container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            max-width: 400px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 720px;
+            width: 95%;
             text-align: center;
         }
-        h1 {
-            color: #333;
-            font-size: 32px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Arial Black', sans-serif;
+
+        .tools-grid {
+            display: grid;
+            gap: 32px;
         }
+
         .mitool-box {
-            border: 2px solid #000;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            background-color: #f9f9f9;
-        }
-        .mitool-title {
-            font-size: 30px;
-            color: #4a90e2;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            font-family: 'Verdana', sans-serif;
-        }
-        .description {
-            color: #555;
-            font-size: 16px;
-            margin: 10px 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            font-family: 'Georgia', serif;
+            background: #fbfdff;
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .mitool-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1a73e8, #34c759);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .mitool-box:hover::before {
+            opacity: 1;
+        }
+
+        .mitool-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mitool-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a73e8;
+            line-height: 1.4;
+        }
+
+        .description {
+            font-size: 1.05rem;
+            color: #4b5e7e;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+
         .logo {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff4500;
-            animation: bounce 1s infinite;
-            margin-left: 5px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #ff6f00;
+            animation: pulse 2.5s infinite ease-in-out;
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
             }
-            40% {
-                transform: translateY(-10px);
+            50% {
+                transform: scale(1.1);
             }
-            60% {
-                transform: translateY(-5px);
+        }
+
+        .loading {
+            position: relative;
+            color: transparent;
+            min-width: 80px;
+        }
+
+        .loading::after {
+            content: 'Loading...';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4b5e7e;
+            animation: dots 1.5s infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes dots {
+            0% { content: 'Loading'; }
+            33% { content: 'Loading.'; }
+            66% { content: 'Loading..'; }
+            100% { content: 'Loading...'; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px;
+            }
+            .mitool-title {
+                font-size: 1.7rem;
+            }
+            .description {
+                font-size: 0.95rem;
+                flex-wrap: wrap;
+                white-space: normal;
+                text-align: center;
+            }
+            .mitool-box {
+                padding: 24px;
+                gap: 14px;
+            }
+            .loading {
+                min-width: 60px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .mitool-title {
+                font-size: 1.5rem;
+            }
+            .description {
+                font-size: 0.9rem;
+            }
+            .mitool-box {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Offici5l Tools Activities</h1>
-        
-        <div class="mitool-box">
-            <div class="mitool-title">Mitool</div>
-            <div class="description">Created on 2023-12-14.</div>
-            <div class="description">
-                Total Users since 2024-10-05 : <span class="logo" id="totalUsers">Loading...</span>
+        <div class="tools-grid">
+            <div class="mitool-box">
+                <div class="mitool-title">MiTool</div>
+                <div class="description">Created on 2023-12-14</div>
+                <div class="description">
+                    Total Users since 2024-10-05: <span class="logo loading" id="totalUsers"></span>
+                </div>
+            </div>
+            <div class="mitool-box">
+                <div class="mitool-title">MiUnlockTool</div>
+                <div class="description">Created on 2024-01-14</div>
+                <div class="description">
+                    Total Users since 2024-10-25: <span class="logo loading" id="miUnlockToolUsers"></span>
+                </div>
             </div>
         </div>
-
-        <div class="mitool-box">
-            <div class="mitool-title">MiUnlockTool</div>
-            <div class="description">Created on 2024-01-14.</div>
-            <div class="description">
-                Total Users since 2024-10-25 : <span class="logo" id="miUnlockToolUsers">Loading...</span>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        fetch('https://api.github.com/repos/offici5l/MiTool/releases/assets/197052365')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('totalUsers').innerHTML = data.download_count;
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                document.getElementById('totalUsers').innerHTML = 'Error loading data';
-            });
+        const fetchData = async (url, elementId, reducer = null) => {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch data');
+                const data = await response.json();
+                const count = reducer ? reducer(data) : data.download_count;
+                const element = document.getElementById(elementId);
+                element.textContent = count.toLocaleString();
+                element.classList.remove('loading');
+            } catch (error) {
+                console.error('Error:', error);
+                const element = document.getElementById(elementId);
+                element.textContent = 'Error loading data';
+                element.classList.remove('loading');
+            }
+        };
 
-        fetch('https://api.github.com/repos/offici5l/MiUnlockTool/releases')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const userCount = data.reduce((sum, release) => {
-                    return sum + release.assets.reduce((assetSum, asset) => {
-                        return assetSum + asset.download_count;
-                    }, 0);
-                }, 0);
-                document.getElementById('miUnlockToolUsers').innerHTML = userCount;
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                document.getElementById('miUnlockToolUsers').innerHTML = 'Error loading data';
-            });
+        fetchData(
+            'https://api.github.com/repos/offici5l/MiTool/releases/assets/197052365',
+            'totalUsers'
+        );
+
+        fetchData(
+            'https://api.github.com/repos/offici5l/MiUnlockTool/releases',
+            'miUnlockToolUsers',
+            (data) => data.reduce((sum, release) => 
+                sum + release.assets.reduce((assetSum, asset) => 
+                    assetSum + asset.download_count, 0
+                ), 0)
+        );
     </script>
 </body>
 </html>
