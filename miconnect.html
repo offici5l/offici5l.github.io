@@ -254,7 +254,6 @@
                 <p>- Devices that operate normally</p>
                 <p>- Damaged devices unable to enter normal mode</p>
                 <p>- Devices that cannot connect via SIM card or have other issues</p>
-                <p><strong>Check if codename is supported:</strong> If the device is supported, you won't need an account with permission from the Xiaomi community. If it is not supported, you will need an account ID with permission from the Xiaomi community.</p>
             </div>
 
             <!-- Codename Checker Form -->
@@ -272,9 +271,9 @@
             <!-- Connect Form -->
             <form id="workerForm">
                 <div class="form-group">
-                    <label for="access">Account granted access:</label>
+                    <label for="access">Account ID Apply for authorization | Xiaomi Community Requirement:</label>
                     <select id="access" name="access" required disabled>
-                        <option value="">Select Access</option>
+                        <option value=""></option>
                         <option value="yes">yes</option>
                         <option value="no">no</option>
                     </select>
@@ -320,7 +319,7 @@
 
         const MESSAGES = {
             CHECK: {
-                EMPTY_CODENAME: 'Please enter a product codename',
+                EMPTY_CODENAME: 'Please enter a codename',
                 UNEXPECTED_RESPONSE: 'Unexpected response from server',
                 CONNECTION_ERROR: 'Connection error: Unable to reach the server',
                 CHECK_FAILED: 'Failed to check codename'
