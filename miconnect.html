@@ -359,6 +359,7 @@
 
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
+            const accessValue = document.getElementById('access').value; // Get access value
 
             if (!codename) {
                 checkResponseDiv.style.display = 'flex';
@@ -389,11 +390,13 @@
                 if (response.ok && 'result' in data) {
                     if (data.result === 0) {
                         checkResponseDiv.className = 'response success';
-                        checkResponseDiv.textContent = MESSAGES.CHECK.SUPPORTED(codename);
+                        checkResponseDiv.textContent = `codename ${codename}: supported, Account granted access ${accessValue || "yes/no"}`;
                     } else if (data.result === 1) {
                         checkResponseDiv.className = 'response success';
-                        checkResponseDiv.textContent = MESSAGES.CHECK.SUPPORTEDD(codename);
-                    } else if (data.result === -1) {
+                        checkResponseDiv.textContent = `codename ${codename}: supported but, Account granted access yes`;
+                    } else if (data.result ===
+
+ -1) {
                         checkResponseDiv.className = 'response error';
                         checkResponseDiv.textContent = MESSAGES.CHECK.NOT_SUPPORTED(codename);
                     } else {
