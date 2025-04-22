@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miconnect</title>
+    <title>MiConnect</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Theme Variables */
@@ -62,10 +62,35 @@
         h1 {
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             font-size: 1.8rem;
             font-weight: 600;
             letter-spacing: -0.025em;
+        }
+
+        /* Contact and Description Styles */
+        .contact-description {
+            text-align: left;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .contact-description p {
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-description a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-description a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
         }
 
         .form-group {
@@ -79,6 +104,7 @@
             font-weight: 500;
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
+            text-align: left;
         }
 
         input, select {
@@ -89,6 +115,7 @@
             font-size: 1rem;
             background: var(--input-bg);
             transition: all 0.3s ease;
+            text-align: left;
         }
 
         input:focus, select:focus {
@@ -133,6 +160,7 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            text-align: left;
         }
 
         .success {
@@ -167,8 +195,20 @@
             line-height: 1.5;
         }
 
-        .version span {
-            display: block;
+        .version a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .version a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .version p {
+            margin-bottom: 0.5rem; /* Added to space out lines */
         }
 
         hr {
@@ -195,6 +235,10 @@
             h1 {
                 font-size: 1.5rem;
             }
+
+            .contact-description {
+                font-size: 0.9rem;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -202,7 +246,17 @@
 <body>
     <div class="container">
         <div class="card">
-            <h1>Miconnect</h1>
+            <h1>MiConnect</h1>
+
+            <!-- Contact and Description Section with Full English Description -->
+            <div class="contact-description">
+                <p>service allows to unlock the bootloader for Xiaomi devices:</p>
+                <p>- Devices that operate normally</p>
+                <p>- Damaged devices unable to enter normal mode</p>
+                <p>- Devices that cannot connect via SIM card or have other issues</p>
+                <p><strong>Check if codename is supported:</strong> If the device is supported, you won't need an account with permission from the Xiaomi community. If it is not supported, you will need an account ID with permission from the Xiaomi community.</p>
+                
+            </div>
 
             <!-- Codename Checker Form -->
             <form id="checkerForm">
@@ -237,13 +291,23 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="access">Access:</label>
+                    <select id="access" name="access" required>
+                        <option value="">Select Access</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+
                 <button type="submit">Connect</button>
             </form>
             <div id="connectResponse" class="response"></div>
 
+            <!-- Updated Version Section with Separate Lines -->
             <div class="version">
-                <span>v1</span>
-                <span>offici5l: Under development</span>
+                <p>Version: 1</p>
+                <p>Contact: <a href="mailto:offici5lcontact@proton.me">offici5lcontact@proton.me</a></p>
             </div>
         </div>
     </div>
@@ -360,10 +424,12 @@
             const id = document.getElementById('id').value;
             const token = document.getElementById('token').value;
             const region = document.getElementById('region').value;
+            const access = document.getElementById('access').value;
             const url = new URL(API_URLS.CONNECT);
             url.searchParams.append('id', id);
             url.searchParams.append('token', token);
             url.searchParams.append('region', region);
+            url.searchParams.append('access', access);
 
             try {
                 connectResponseDiv.style.display = 'none';
@@ -391,7 +457,7 @@
             } catch (error) {
                 connectResponseDiv.style.display = 'flex';
                 connectResponseDiv.className = 'response error';
-                connectResponseDiv.textcontent = MESSAGES.CONNECT.CONNECTION_ERROR(error.message);
+                connectResponseDiv.textContent = MESSAGES.CONNECT.CONNECTION_ERROR(error.message);
                 console.error('Connect error:', error.message, error);
             } finally {
                 submitButton.disabled = false;
