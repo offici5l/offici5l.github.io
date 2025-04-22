@@ -323,6 +323,7 @@
             CHECK: {
                 EMPTY_CODENAME: 'Please enter a product codename',
                 SUPPORTED: codename => `codename ${codename}: supported`,
+                SUPPORTEDD: codename => `codename ${codename}: supported but`,
                 NOT_SUPPORTED: codename => `codename ${codename}: not supported`,
                 UNEXPECTED_RESPONSE: 'Unexpected response from server',
                 CONNECTION_ERROR: 'Connection error: Unable to reach the server',
@@ -390,6 +391,9 @@
                         checkResponseDiv.className = 'response success';
                         checkResponseDiv.textContent = MESSAGES.CHECK.SUPPORTED(codename);
                     } else if (data.result === 1) {
+                        checkResponseDiv.className = 'response success';
+                        checkResponseDiv.textContent = MESSAGES.CHECK.SUPPORTEDD(codename);
+                    } else if (data.result === -1) {
                         checkResponseDiv.className = 'response error';
                         checkResponseDiv.textContent = MESSAGES.CHECK.NOT_SUPPORTED(codename);
                     } else {
