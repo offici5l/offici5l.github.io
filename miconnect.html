@@ -255,7 +255,6 @@
                 <p>- Damaged devices unable to enter normal mode</p>
                 <p>- Devices that cannot connect via SIM card or have other issues</p>
                 <p><strong>Check if codename is supported:</strong> If the device is supported, you won't need an account with permission from the Xiaomi community. If it is not supported, you will need an account ID with permission from the Xiaomi community.</p>
-                
             </div>
 
             <!-- Codename Checker Form -->
@@ -264,7 +263,7 @@
                     <label for="codename">Codename:</label>
                     <input type="text" id="codename" name="codename" placeholder="Enter Codename">
                 </div>
-                <button type="button" id="checkCodename">Check if codename is supported</button>
+                <button type="button" id="checkCodename">Check</button>
             </form>
             <div id="checkResponse" class="response"></div>
 
@@ -273,34 +272,34 @@
             <!-- Connect Form -->
             <form id="workerForm">
                 <div class="form-group">
-                    <label for="id">Account ID:</label>
-                    <input type="text" id="id" name="id" required placeholder="Enter your Account ID">
-                </div>
-
-                <div class="form-group">
-                    <label for="token">Device Token:</label>
-                    <input type="text" id="token" name="token" required placeholder="Enter your Device Token">
-                </div>
-
-                <div class="form-group">
-                    <label for="region">Device Region:</label>
-                    <select id="region" name="region" required>
-                        <option value="">Select Device Region</option>
-                        <option value="cn">China</option>
-                        <option value="g">Global</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="access">Account granted access:</label>
-                    <select id="access" name="access" required>
+                    <select id="access" name="access" required disabled>
                         <option value="">Select Access</option>
                         <option value="yes">yes</option>
                         <option value="no">no</option>
                     </select>
                 </div>
 
-                <button type="submit">Connect</button>
+                <div class="form-group">
+                    <label for="id">Account ID:</label>
+                    <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="token">Device Token:</label>
+                    <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="region">Device Region:</label>
+                    <select id="region" name="region" required disabled>
+                        <option value="">Select Device Region</option>
+                        <option value="cn">China</option>
+                        <option value="g">Global</option>
+                    </select>
+                </div>
+
+                <button type="submit" disabled>Connect</button>
             </form>
             <div id="connectResponse" class="response"></div>
 
@@ -322,8 +321,6 @@
         const MESSAGES = {
             CHECK: {
                 EMPTY_CODENAME: 'Please enter a product codename',
-                SUPPORTED: codename => `codename ${codename}: supported`,
-                NOT_SUPPORTED: codename => `codename ${codename}: not supported`,
                 UNEXPECTED_RESPONSE: 'Unexpected response from server',
                 CONNECTION_ERROR: 'Connection error: Unable to reach the server',
                 CHECK_FAILED: 'Failed to check codename'
@@ -335,7 +332,7 @@
             },
             BUTTON: {
                 CHECK: {
-                    DEFAULT: 'Check if codename is supported',
+                    DEFAULT: 'Check',
                     LOADING: 'Checking...'
                 },
                 CONNECT: {
@@ -355,10 +352,31 @@
         const checkResponseDiv = document.getElementById('checkResponse');
         const checkButton = document.getElementById('checkCodename');
         const codenameInput = document.getElementById('codename');
+        const workerForm = document.getElementById('workerForm');
+        const connectResponseDiv = document.getElementById('connectResponse');
+        const submitButton = workerForm.querySelector('button[type="submit"]');
+        const accessSelect = document.getElementById('access');
+        const idInput = document.getElementById('id');
+        const tokenInput = document.getElementById('token');
+        const regionSelect = document.getElementById('region');
+
+        // Function to enable Connect Form fields
+        function enableConnectForm() {
+            idInput.disabled = false;
+            tokenInput.disabled = false;
+            regionSelect.disabled = false;
+            submitButton.disabled = false;
+        }
+
+        // Function to set Account granted access to a fixed value
+        function setAccessValue(value) {
+            accessSelect.disabled = false; // Enable temporarily to set value
+            accessSelect.value = value;
+            accessSelect.disabled = true; // Disable to make it unchangeable
+        }
 
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
-            const accessValue = document.getElementById('access').value; // Get access value
 
             if (!codename) {
                 checkResponseDiv.style.display = 'flex';
@@ -385,22 +403,22 @@
                 const data = await response.json();
                 console.log('Check API response:', data);
 
-                checkResponseDiv.style.display = 'flex';
+                checkResponseDiv.style.display = 'none'; // No response message displayed
                 if (response.ok && 'result' in data) {
                     if (data.result === 0) {
-                        checkResponseDiv.className = 'response success';
-                        checkResponseDiv.textContent = MESSAGES.CHECK.SUPPORTED(codename);
-                    } else if (data.result ===
-
- 1) {
-                        checkResponseDiv.className = 'response error';
-                        checkResponseDiv.textContent = MESSAGES.CHECK.NOT_SUPPORTED(codename);
+                        enableConnectForm();
+                        setAccessValue('no'); // Fixed to 'no' for supported codenames
+                    } else if (data.result === 1) {
+                        enableConnectForm();
+                        setAccessValue('yes'); // Fixed to 'yes' for unsupported codenames
                     } else {
+                        checkResponseDiv.style.display = 'flex';
                         checkResponseDiv.className = 'response error';
                         checkResponseDiv.textContent = MESSAGES.CHECK.UNEXPECTED_RESPONSE;
                         console.error('Unexpected result value:', data.result);
                     }
                 } else {
+                    checkResponseDiv.style.display = 'flex';
                     checkResponseDiv.className = 'response error';
                     checkResponseDiv.textContent = data.error || MESSAGES.CHECK.CHECK_FAILED;
                     console.error('Check codename failed:', data);
@@ -417,17 +435,13 @@
         });
 
         // Connect
-        const workerForm = document.getElementById('workerForm');
-        const connectResponseDiv = document.getElementById('connectResponse');
-        const submitButton = workerForm.querySelector('button[type="submit"]');
-
         workerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const id = document.getElementById('id').value;
-            const token = document.getElementById('token').value;
-            const region = document.getElementById('region').value;
-            const access = document.getElementById('access').value;
+            const id = idInput.value;
+            const token = tokenInput.value;
+            const region = regionSelect.value;
+            const access = accessSelect.value;
             const url = new URL(API_URLS.CONNECT);
             url.searchParams.append('id', id);
             url.searchParams.append('token', token);
