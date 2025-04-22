@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="The place where the account is registered does not match the place where the phone is sold.(Code 20045)">
-    <meta property="og:description" content="How to bypass Xiaomi's bootloader unlock restriction: The place where the account is registered does not match the place where the phone is sold.(Code 20045)">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Bypass Xiaomi Bootloader Unlock Restriction (Code 20045)">
+    <meta property="og:description" content="Step-by-step guide to bypass Xiaomi's bootloader unlock restriction for Chinese devices outside China (Code 20045).">
     <meta property="og:image" content="https://offici5l.github.io/Articles/thumbnail.jpg">
     <meta property="og:type" content="article">
-    <title>The place where the account is registered does not match the place where the phone is sold.(Code 20045)</title>
+    <title>Bypass Xiaomi Bootloader Unlock Restriction (Code 20045)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -15,143 +16,422 @@
             padding: 0;
         }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
+            background: linear-gradient(135deg, #e6f0fa 0%, #f0f4f8 100%);
+            color: #4a5a74;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .container {
             width: 100%;
-            max-width: 800px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            word-wrap: break-word;
-            overflow: hidden;
+            max-width: 900px;
+            background: #fff;
+            padding: 20px 30px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            margin: 20px;
+            animation: fadeIn 0.6s ease;
         }
-        h1, h2 {
-            color: #0056b3;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            font-size: 1.6rem;
+            color: #1a2a44;
+            margin: 30px 0 15px;
+            font-weight: 600;
             text-align: center;
         }
-        h1 {
-            font-size: 24px;
-        }
-        h2 {
-            font-size: 20px;
+        .step-title {
+            font-size: 1.3rem;
+            color: #1a2a44;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: block;
         }
         p, li {
-            font-size: 16px;
+            font-size: 1.1rem;
+            color: #4a5a74;
         }
         a {
-            color: #007bff;
+            color: #ff6200;
             text-decoration: none;
-            word-break: break-word;
+            transition: color 0.3s ease;
         }
         a:hover {
-            text-decoration: underline;
+            color: #e55a00;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6200 0%, #ff8c00 100%) !important;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
+            background-size: 10px;
+            color: #ffffff;
+            padding: 14px 35px;
+            border-radius: 35px;
+            border: 1px solid #ff8c00 !important;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 0.03em;
+            margin: 15px 0;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(255, 98, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transition: all 0.5s ease-in-out;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%) !important;
+            border-color: #ff4500 !important;
+            transform: scale(1.15) translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255, 98, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+        .btn:active {
+            transform: scale(0.92) translateY(1px);
+            box-shadow: 0 3px 10px rgba(255, 98, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .btn:focus {
+            outline: 3px solid #ff8c00;
+            outline-offset: 2px;
+        }
+        .btn-inline {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6200 0%, #ff8c00 100%) !important;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
+            background-size: 10px;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 1px solid #ff8c00 !important;
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            margin: 0 5px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(255, 98, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease-in-out;
+            vertical-align: middle;
+            line-height: 1.4;
+        }
+        .btn-inline:hover {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%) !important;
+            border-color: #ff4500 !important;
+            transform: scale(1.12) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 98, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+        .btn-inline:active {
+            transform: scale(0.92) translateY(1px);
+            box-shadow: 0 2px 8px rgba(255, 98, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .btn-inline:focus {
+            outline: 3px solid #ff8c00;
+            outline-offset: 2px;
+        }
+        .btn-footer.telegram {
+            display: inline-block;
+            background: linear-gradient(135deg, #0088cc 0%, #006699 100%) !important;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
+            background-size: 10px;
+            color: #ffffff;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid #006699 !important;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            margin: 10px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transition: all 0.5s ease-in-out;
+        }
+        .btn-footer.telegram:hover {
+            background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%) !important;
+            border-color: #00aaff !important;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+        .btn-footer.telegram:active {
+            transform: scale(0.92) translateY(1px);
+            box-shadow: 0 2px 8px rgba(0, 136, 204, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .btn-footer.telegram:focus {
+            outline: 3px solid #0088cc;
+            outline-offset: 2px;
+        }
+        .btn-footer.github {
+            display: inline-block;
+            background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%) !important;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
+            background-size: 10px;
+            color: #ffffff;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid #1a1e22 !important;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            margin: 10px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(36, 41, 46, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transition: all 0.5s ease-in-out;
+        }
+        .btn-footer.github:hover {
+            background: linear-gradient(135deg, #3a3f44 0%, #24292e 100%) !important;
+            border-color: #3a3f44 !important;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(36, 41, 46, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+        .btn-footer.github:active {
+            transform: scale(0.92) translateY(1px);
+            box-shadow: 0 2px 8px rgba(36, 41, 46, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .btn-footer.github:focus {
+            outline: 3px solid #3a3f44;
+            outline-offset: 2px;
         }
         code {
-            background-color: #e8e8e8;
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-family: monospace;
-            display: inline-block;
-            word-break: break-word;
+            background: #f8f8f8;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ff6200;
         }
-        hr {
-            border: 1px solid #ddd;
-            margin: 20px 0;
+        .solution-header {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff6200;
         }
-        ol, ul {
-            padding-left: 20px;
+        .solution-header p {
+            color: #4a5a74;
+            font-size: 1.1rem;
         }
-        ul {
-            list-style-type: none;
+        .steps {
+            padding-left: 0;
+            counter-reset: step;
+            margin-bottom: 20px;
         }
-        li {
+        .step {
+            list-style: none;
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #e8ecef;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s ease;
+        }
+        .step:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        .step::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: -55px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            background: #ff6200;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .note {
+            background: #fff3e0;
+            border-left: 5px solid #ff6200;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #4a5a74;
+        }
+        .note p {
+            line-height: 1.8;
+        }
+        .notes {
+            background: #fff3e0;
+            border-left: 5px solid #ff6200;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .notes li {
             margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1rem;
+        }
+        .notes li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ff6200;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+        .warning {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            color: #d35400;
+            margin: 30px 0;
+            border-left: 5px solid #ff6200;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e8ecef;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px 20px 20px;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .step-title {
+                font-size: 1.2rem;
+            }
+            p, li {
+                font-size: 1rem;
+            }
+            .step::before {
+                left: 10px;
+                top: 15px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            .step {
+                padding-left: 50px;
+            }
+            .note {
+                font-size: 0.95rem;
+            }
+            .btn {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+            }
+            .btn-inline {
+                padding: 7px 18px;
+                font-size: 0.9rem;
+            }
+            .btn-footer {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px 15px 15px;
+                margin: 10px;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .step-title {
+                font-size: 1.1rem;
+            }
+            p, li {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            .btn-inline {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+            .btn-footer {
+                padding: 7px 18px;
+                font-size: 0.85rem;
+            }
+            .solution-header {
+                padding: 10px;
+            }
+            .note {
+                font-size: 0.85rem;
+            }
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Xiaomi Bootloader Unlock Restriction:</h1>Code 20045 = "The place where the account is registered does not match the place where the phone is sold."</h1>
-
-        <h2>Description</h2>
-        <p>On October 20, 2024, Xiaomi introduced a new restriction for bootloader unlocking.<br>
-        Users who own a Chinese device with a global Xiaomi account or vice versa (a global device with a Chinese Xiaomi account) will encounter the following restriction when attempting to unlock the bootloader:</p>
-
-        <p><code>Code 20045</code> = "The place where the account is registered does not match the place where the phone is sold."</p>
-
-        <p>For users outside China who own Chinese devices, this is a major obstacle. Creating a Chinese Xiaomi account outside of China is nearly impossible, as the official website requires a Chinese phone number for registration.</p>
-
-        <h2>Is there a solution?</h2>
-        <p>On December 4, I successfully created a Chinese Xiaomi account using an email via the following link:<br>
-        <a href="https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN" target="_blank">https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN</a></p>
-
-        <p>However, this method alone is not sufficient. During the final step of unlocking the bootloader, the following error appears:</p>
-
-        <p><code>Code 20041</code> = "sorry, your mi id is not associated with a phone number"</p>
-
-        <p>This happens because a phone number is required in the final step. Unfortunately, the account does not allow adding a non-Chinese phone number.</p>
-
-        <p>After spending days searching for another method, I discovered a glitch on February 28, 2025, which allows creating a Chinese Xiaomi account using an international phone number successfully.</p>
-
-        <hr>
-
-        <h2>Solution: Step-by-Step Bootloader Unlock for Chinese Devices (For Users Outside China)</h2>
-        <ol>
-            <li>
-                <strong>Create a Chinese Xiaomi Account:</strong>
-                <p>Clear cookies from your browser.</p>
-                <p>Open the following link in a browser to register an account with the China region:<br>
-                <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN" target="_blank">https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN</a></p>
-
-                <strong>Important Notes:</strong>
-                <ul>
-                    <li>The following international phone numbers are not supported:<br>
-                    +91 (India), +62 (Indonesia), +1 (all phone with +1)</li>
-                    <li>You can use free online services to obtain a temporary phone number.</li>
-                    <li>If you do not receive the verification code via SMS, try opening WhatsApp (if the number is linked to WhatsApp, the code may arrive there instead).</li>
-                    <li>If you still don't receive the code, try adding your region to the registration link:<br>
-                    &uRegion=&lt;Your Region&gt;</li>
-                    <li>Example for Russia:<br>
-                    <a href="https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN&uRegion=RU" target="_blank">https://cn.account.xiaomi.com/pass/register?sid=unlockApi&_locale=en_CN&uRegion=RU</a></li>
-                    <li>You can find your region code by visiting:<br>
-                    <a href="https://account.xiaomi.com/pass2/config?key=areaConfig" target="_blank">https://account.xiaomi.com/pass2/config?key=areaConfig</a></li>
-                </ul>
+        <div class="section-title">Solution: Step-by-Step Unlock Bootloader Xiaomi for Chinese Devices (For Users Outside China)</div>
+        <div class="solution-header">
+            <p><code>Code 20045</code> = "The place where the account is registered does not match the place where the phone is sold."</p>
+        </div>
+        <ol class="steps">
+            <li class="step">
+                <strong class="step-title">Create a Chinese Xiaomi Account</strong>
+                <a href="https://offici5l.github.io/micnregister" class="btn" target="_blank">Register Chinese Xiaomi Account</a>
             </li>
 
-            <li>
-                <strong>Get Permission from the Xiaomi Community App:</strong>
-                <p><em>Note: (Skip this step for MIUI users)</em></p>
-                <p>For HyperOS devices that support bypassing via <a href="https://github.com/offici5l/MiBypassTool" target="_blank">https://github.com/offici5l/MiBypassTool</a>, skip steps (2 + 3).</p>
-                <p>Log in to the Mi Community app and request unlocking permission.</p>
+            <li class="step">
+                <strong class="step-title">Get Permission from the Xiaomi Community App</strong>
+                <div class="note">
+                    <p>Note: Skip this step for MIUI users.<br>For HyperOS devices that support bypassing via <a href="https://github.com/offici5l/MiBypassTool" class="btn-inline" target="_blank">MiBypassTool</a>, Skip this step + step 3.</p>
+                </div>
+                <p style="margin-top: 10px;">Log in to the Mi Community app and request unlocking permission.</p>
             </li>
 
-            <li><strong>Link the Account in Developer Options</strong></li>
-            <li>
-                <strong>Run the Unlock Tool:</strong><br>
-                <a href="https://github.com/offici5l/MiUnlockTool" target="_blank">https://github.com/offici5l/MiUnlockTool</a>
+            <li class="step">
+                <strong class="step-title">Link the Account in Developer Options</strong>
+            </li>
+
+            <li class="step">
+                <strong class="step-title">Run MiUnlockTool</strong>
+                <p>Download and run MiUnlockTool:</p>
+                <a href="https://github.com/offici5l/MiUnlockTool" class="btn" target="_blank">MiUnlockTool</a>
             </li>
         </ol>
 
-        <h2>Warning:</h2>
-        <p>This method might be patched by Xiaomi at any time.<br>
-        Last verified: February 28, 2025.</p>
+        <div class="warning">
+            <div class="section-title">Warning</div>
+            <p>This method might be patched by Xiaomi at any time.<br>
+            Last verified: February 28, 2025.</p>
+        </div>
 
-        <h2>GitHub & Telegram:</h2>
-        <ul>
-            <li>GitHub: <a href="https://github.com/offici5l" target="_blank">https://github.com/offici5l</a></li>
-            <li>Telegram (Channel): <a href="https://t.me/Offici5l_Channel" target="_blank">https://t.me/Offici5l_Channel</a></li>
-            <li>Telegram (Group): <a href="https://t.me/Offici5l_Group" target="_blank">https://t.me/Offici5l_Group</a></li>
-        </ul>
+        <div class="footer">
+            <div class="footer-links">
+                <a href="https://t.me/Offici5l_Group" class="btn-footer telegram" target="_blank" aria-label="Join Our Telegram Group">Join Our Telegram Group</a>
+                <a href="https://t.me/Offici5l_Channel" class="btn-footer telegram" target="_blank" aria-label="Follow Our Telegram Channel">Follow Our Telegram Channel</a>
+                <a href="https://github.com/offici5l" class="btn-footer github" target="_blank" aria-label="Visit Our GitHub">Visit Our GitHub</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
