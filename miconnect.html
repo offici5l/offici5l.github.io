@@ -173,6 +173,23 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
         }
 
+        select#access.mandatory {
+            background-color: #f97316;
+            color: white;
+            border-color: #f97316;
+        }
+
+        select#access.not-mandatory {
+            background-color: #22c55e;
+            color: white;
+            border-color: #22c55e;
+        }
+
+        select#access.mandatory:focus,
+        select#access.not-mandatory:focus {
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+
         .region-label {
             color: #6366f1;
             font-size: clamp(0.85rem, 3.5vw, 0.9rem);
@@ -486,6 +503,27 @@
                 idInput.disabled = true;
             }
         });
+
+        const updateAccessColor = () => {
+            accessSelect.classList.remove('mandatory', 'not-mandatory');
+            if (accessSelect.value === 'mandatory') {
+                accessSelect.classList.add('mandatory');
+            } else if (accessSelect.value === 'not_mandatory') {
+                accessSelect.classList.add('not-mandatory');
+            }
+        };
+
+        accessSelect.addEventListener('change', updateAccessColor);
+
+        const originalSetAccessValue = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value').set;
+        Object.defineProperty(accessSelect, 'value', {
+            set: function (val) {
+                originalSetAccessValue.call(this, val);
+                updateAccessColor();
+            }
+        });
+
+        updateAccessColor();
 
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
