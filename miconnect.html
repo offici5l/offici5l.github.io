@@ -267,11 +267,11 @@
             <div class="form-section">
                 <form id="workerForm">
                     <div class="form-group">
-                        <label for="access">Account ID Apply for authorization | Xiaomi Community Requirement:</label>
+                        <label for="access">Account ID Apply for authorization | Xiaomi Community:</label>
                         <select id="access" name="access" required disabled>
                             <option value="" disabled selected>?</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
+                            <option value="mandatory">Mandatory</option>
+                            <option value="not_mandatory">Not Mandatory</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -394,10 +394,10 @@
                 if (response.ok && 'result' in data) {
                     if (data.result === 0) {
                         enableConnectForm();
-                        setAccessValue('no');
+                        setAccessValue('not_mandatory');
                     } else if (data.result === 1) {
                         enableConnectForm();
-                        setAccessValue('yes');
+                        setAccessValue('mandatory');
                     } else {
                         showResponse(elements.checkResponse, MESSAGES.CHECK.UNEXPECTED_RESPONSE, 'error');
                     }
@@ -416,11 +416,14 @@
         elements.workerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
+            // Map access values: mandatory -> yes, not_mandatory -> no
+            const accessValue = elements.accessSelect.value === 'mandatory' ? 'yes' : 'no';
+
             const params = {
                 id: elements.idInput.value,
                 token: elements.tokenInput.value,
                 region: elements.regionSelect.value,
-                access: elements.accessSelect.value
+                access: accessValue
             };
 
             const url = new URL(API_CONFIG.CONNECT);
