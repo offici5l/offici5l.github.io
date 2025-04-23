@@ -598,7 +598,7 @@
 
                 showResponse(
                     elements.connectResponse,
-                    response.ok ? (data.message || MESSAGES.CONNECT.SUCCESS) : (data.message || MESSAGES.CONNECT.FAILED),
+                    response.ok ? (data.message || MESSAGES.CONNECT.SUCCESS) : (data.message || 'Unknown error occurred'),
                     response.ok ? 'success' : 'error'
                 );
             } catch (error) {
