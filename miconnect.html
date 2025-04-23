@@ -301,7 +301,7 @@
                 padding: 0 0.5rem;
             }
 
-            .card {
+            .card  {
                 padding: 1rem;
             }
 
@@ -457,7 +457,7 @@
             CONNECT: {
                 SUCCESS: 'Device connected successfully!',
                 CONNECTION_ERROR: (msg) => `Connection error: ${msg}`,
-                FAILED: 'Failed to connect the device.',
+                FAILED: 'Failed to connect the device. No specific error provided.',
                 MISSING_FIELDS: 'Please fill all required fields.'
             },
             BUTTON: {
@@ -593,19 +593,40 @@
                     body: JSON.stringify(params)
                 });
 
-                const data = await response.json();
-                console.log('API Response:', data); // Debug the response
+                // Log the raw response status and headers for debugging
+                console.log('API Response Status:', response.status, response.statusText);
+                console.log('API Response Headers:', [...response.headers.entries()]);
 
-                if (response.ok && data.success) {
+                let data;
+                try {
+                    data = await response.json();
+                    console.log('API Response Body:', data); // Log the parsed JSON body
+                } catch (jsonError) {
+                    console.error('JSON Parse Error:', jsonError);
+                    // If JSON parsing fails, get the raw text response
+                    const text = await response.text();
+                    console.log('Raw Response Text:', text);
+                    showResponse(elements.connectResponse, `Server returned non-JSON response: ${text}`, 'error');
+                    return;
+                }
+
+                // Check for success (assuming success is indicated by a specific field or status)
+                if (response.ok && data && (data.success || data.status === 'success')) {
                     showResponse(elements.connectResponse, MESSAGES.CONNECT.SUCCESS, 'success');
                 } else {
-                    // Display the full error message from the API response
-                    const errorMessage = data.error || data.message || JSON.stringify(data) || MESSAGES.CONNECT.FAILED;
+                    // Extract error message from common fields or stringify the entire response
+                    const errorMessage = data.error || 
+                                        data.message || 
+                                        data.errorMessage || 
+                                        data.reason || 
+                                        JSON.stringify(data, null, 2) || 
+                                        MESSAGES.CONNECT.FAILED;
                     showResponse(elements.connectResponse, errorMessage, 'error');
                 }
             } catch (error) {
-                // Display the full error message from the catch block
-                showResponse(elements.connectResponse, MESSAGES.CONNECT.CONNECTION_ERROR(error.message), 'error');
+                // Handle network or other fetch errors
+                console.error('Fetch Error:', error);
+                showResponse(elements.connectResponse, MESSAGES.CONNECT.CONNECTION_ERROR(error.message || error.toString()), 'error');
             } finally {
                 elements.submitButton.disabled = false;
                 elements.submitButton.textContent = MESSAGES.BUTTON.CONNECT.DEFAULT;
