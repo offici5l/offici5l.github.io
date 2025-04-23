@@ -150,21 +150,28 @@
 
         /* تخصيص select#access ليكون صغيرًا وبدون سهم */
         select#access {
-            font-size: 0.75rem; /* حجم الخط الصغير */
-            padding: 0.25rem 0.5rem; /* تقليل الحشوة */
-            height: 1.75rem; /* تقليل الارتفاع */
-            background-image: none; /* إزالة السهم */
-            -webkit-appearance: none; /* إزالة تنسيق المتصفح الافتراضي */
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            height: 1.75rem;
+            background-image: none;
+            -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            border-radius: 0.375rem; /* زوايا دائرية صغيرة */
-            width: auto; /* جعل العرض تلقائي بناءً على المحتوى */
-            min-width: 100px; /* الحد الأدنى للعرض */
+            border-radius: 0.375rem;
+            width: auto;
+            min-width: 100px;
         }
 
         select#access:focus {
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px var(--shadow-accent);
+        }
+
+        /* تنسيق النص الديناميكي بجانب Account ID */
+        .region-label {
+            color: var(--accent-color);
+            font-size: clamp(0.8rem, 3.5vw, 0.85rem);
+            margin-left: 0.5rem;
         }
 
         button {
@@ -403,20 +410,20 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="id">Account ID</label>
+                        <label for="region">Device Region</label>
+                        <select id="region" name="region" required aria-required="true">
+                            <option value="" disabled selected>Select device region</option>
+                            <option value="cn">China</option>
+                            <option value="g">Global</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id">Account ID <span class="region-label" id="regionLabel"></span></label>
                         <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled autocomplete="off" aria-required="true">
                     </div>
                     <div class="form-group">
                         <label for="token">Device Token</label>
                         <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled autocomplete="off" aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <label for="region">Device Region</label>
-                        <select id="region" name="region" required disabled aria-required="true">
-                            <option value="" disabled selected>Select device region</option>
-                            <option value="cn">China</option>
-                            <option value="g">Global</option>
-                        </select>
                     </div>
                     <button type="submit" disabled>Connect Device</button>
                 </form>
@@ -472,7 +479,8 @@
             accessSelect: document.getElementById('access'),
             idInput: document.getElementById('id'),
             tokenInput: document.getElementById('token'),
-            regionSelect: document.getElementById('region')
+            regionSelect: document.getElementById('region'),
+            regionLabel: document.getElementById('regionLabel')
         };
 
         // Utility Functions
@@ -484,9 +492,7 @@
         };
 
         const enableConnectForm = () => {
-            elements.idInput.disabled = false;
             elements.tokenInput.disabled = false;
-            elements.regionSelect.disabled = false;
             elements.submitButton.disabled = false;
         };
 
@@ -495,6 +501,21 @@
             elements.accessSelect.value = value;
             elements.accessSelect.disabled = true;
         };
+
+        // Handle Region Selection
+        elements.regionSelect.addEventListener('change', () => {
+            const region = elements.regionSelect.value;
+            if (region === 'cn') {
+                elements.regionLabel.textContent = '(China)';
+                elements.idInput.disabled = false;
+            } else if (region === 'g') {
+                elements.regionLabel.textContent = '(Global)';
+                elements.idInput.disabled = false;
+            } else {
+                elements.regionLabel.textContent = '';
+                elements.idInput.disabled = true;
+            }
+        });
 
         // Codename Checker
         elements.checkButton.addEventListener('click', async () => {
@@ -523,9 +544,11 @@
                 if (response.ok && 'result' in data) {
                     if (data.result === 0) {
                         enableConnectForm();
+                        elements.regionSelect.disabled = false;
                         setAccessValue('not_mandatory');
                     } else if (data.result === 1) {
                         enableConnectForm();
+                        elements.regionSelect.disabled = false;
                         setAccessValue('mandatory');
                     } else {
                         showResponse(elements.checkResponse, MESSAGES.CHECK.UNEXPECTED_RESPONSE, 'error');
