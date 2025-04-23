@@ -596,12 +596,15 @@
                 const data = await response.json();
                 console.log('API Response:', data); // Debug the response
 
-                showResponse(
-                    elements.connectResponse,
-                    response.ok ? (data.message || MESSAGES.CONNECT.SUCCESS) : (data.message || 'Unknown error occurred'),
-                    response.ok ? 'success' : 'error'
-                );
+                if (response.ok && data.success) {
+                    showResponse(elements.connectResponse, MESSAGES.CONNECT.SUCCESS, 'success');
+                } else {
+                    // Display the full error message from the API response
+                    const errorMessage = data.error || data.message || JSON.stringify(data) || MESSAGES.CONNECT.FAILED;
+                    showResponse(elements.connectResponse, errorMessage, 'error');
+                }
             } catch (error) {
+                // Display the full error message from the catch block
                 showResponse(elements.connectResponse, MESSAGES.CONNECT.CONNECTION_ERROR(error.message), 'error');
             } finally {
                 elements.submitButton.disabled = false;
