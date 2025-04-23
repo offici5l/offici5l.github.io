@@ -457,7 +457,8 @@
             CONNECT: {
                 SUCCESS: 'Device connected successfully!',
                 CONNECTION_ERROR: (msg) => `Connection error: ${msg}`,
-                FAILED: 'Failed to connect the device.'
+                FAILED: 'Failed to connect the device.',
+                MISSING_FIELDS: 'Please fill all required fields.'
             },
             BUTTON: {
                 CHECK: { DEFAULT: 'Check Codename', LOADING: 'Checking...' },
@@ -569,26 +570,31 @@
             const accessValue = elements.accessSelect.value === 'mandatory' ? 'yes' : 'no';
 
             const params = {
-                id: elements.idInput.value,
-                token: elements.tokenInput.value,
+                id: elements.idInput.value.trim(),
+                token: elements.tokenInput.value.trim(),
                 region: elements.regionSelect.value,
                 access: accessValue
             };
 
-            const url = new URL(API_CONFIG.CONNECT);
-            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+            // Validate inputs
+            if (!params.id || !params.token || !params.region) {
+                showResponse(elements.connectResponse, MESSAGES.CONNECT.MISSING_FIELDS, 'error');
+                return;
+            }
 
             try {
                 elements.connectResponse.style.display = 'none';
                 elements.submitButton.disabled = true;
                 elements.submitButton.textContent = MESSAGES.BUTTON.CONNECT.LOADING;
 
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: API_CONFIG.HEADERS
+                const response = await fetch(API_CONFIG.CONNECT, {
+                    method: 'POST',
+                    headers: API_CONFIG.HEADERS,
+                    body: JSON.stringify(params)
                 });
 
                 const data = await response.json();
+                console.log('API Response:', data); // Debug the response
 
                 showResponse(
                     elements.connectResponse,
