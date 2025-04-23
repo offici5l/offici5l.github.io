@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>MiConnect - Unlock Xiaomi Bootloader</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -33,6 +33,12 @@
             box-sizing: border-box;
         }
 
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
@@ -40,20 +46,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            padding: 1rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1200px;
             width: 100%;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .card {
             background: var(--card-bg);
             border-radius: 1rem;
             box-shadow: 0 10px 30px var(--shadow-color);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
             position: relative;
         }
@@ -61,7 +70,7 @@
         h1 {
             color: var(--primary-color);
             text-align: center;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 5vw, 1.75rem);
             font-weight: 600;
             margin-bottom: 1rem;
         }
@@ -69,9 +78,9 @@
         .description {
             text-align: center;
             color: var(--text-color);
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 4vw, 0.95rem);
             line-height: 1.6;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .description ul {
@@ -97,36 +106,46 @@
         }
 
         .form-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         label {
             display: block;
             color: var(--primary-color);
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 3.5vw, 0.9rem);
             margin-bottom: 0.5rem;
         }
 
         input, select {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.75rem;
             border: 1px solid var(--border-color);
             border-radius: 0.5rem;
             background: var(--input-bg);
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 4vw, 0.95rem);
             color: var(--primary-color);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px var(--shadow-accent);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
         }
 
         button {
@@ -136,10 +155,11 @@
             color: white;
             border: none;
             border-radius: 0.5rem;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 4vw, 1rem);
             font-weight: 500;
             cursor: pointer;
             transition: background 0.3s ease, transform 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         button:hover:not(:disabled) {
@@ -156,7 +176,7 @@
             margin-top: 1rem;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 3.5vw, 0.9rem);
             display: none;
             align-items: center;
             gap: 0.5rem;
@@ -189,14 +209,14 @@
         .divider {
             border: 0;
             border-top: 1px solid var(--border-color);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .footer {
             text-align: center;
             color: var(--text-color);
-            font-size: 0.85rem;
-            margin-top: 2rem;
+            font-size: clamp(0.75rem, 3vw, 0.85rem);
+            margin-top: 1.5rem;
         }
 
         .footer a {
@@ -211,6 +231,77 @@
             text-decoration: underline;
         }
 
+        /* Desktop Layout */
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+
+            .card {
+                padding: 2rem;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .form-section {
+                flex: 1;
+                min-width: 300px;
+            }
+
+            .description {
+                flex: 1;
+                min-width: 300px;
+            }
+
+            h1 {
+                flex: 100%;
+            }
+
+            .divider {
+                display: none;
+            }
+
+            .footer {
+                flex: 100%;
+            }
+        }
+
+        /* Mobile Layout */
+        @media (max-width: 767px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .form-section, .description {
+                width: 100%;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+
+            .card {
+                padding: 0.75rem;
+            }
+
+            button {
+                padding: 0.65rem;
+            }
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -221,17 +312,36 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        @media (max-width: 480px) {
-            .card {
-                padding: 1.5rem;
+        /* Cross-Browser Fixes */
+        input, select, button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        button:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #000000;
+                --card-bg: #ffffff;
+                --border-color: #000000;
             }
 
-            h1 {
-                font-size: 1.5rem;
+            button {
+                border: 1px solid #000000;
             }
+        }
 
-            .description {
-                font-size: 0.9rem;
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
             }
         }
     </style>
@@ -241,7 +351,7 @@
         <div class="card">
             <h1>MiConnect</h1>
             <div class="description">
-                <p>sevice allows to unlock the bootloader for Xiaomi devices:</p>
+                <p>Service allows to unlock the bootloader for Xiaomi devices:</p>
                 <ul>
                     <li>Devices operating normally</li>
                     <li>Damaged devices unable to enter normal mode</li>
@@ -252,24 +362,22 @@
 
             <!-- Codename Checker Form -->
             <div class="form-section">
-                <form id="checkerForm">
+                <form id="checkerForm" aria-label="Check Device Codename">
                     <div class="form-group">
                         <label for="codename">Device Codename</label>
-                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off">
+                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off" aria-required="true">
                     </div>
-                    <button type="button" id="checkCodename">Check Codename</button>
+                    <button type="button" id="checkCodename">Check</button>
                 </form>
-                <div id="checkResponse" class="response"></div>
+                <div id="checkResponse" class="response" role="alert"></div>
             </div>
-
-            <div class="divider"></div>
 
             <!-- Connect Form -->
             <div class="form-section">
-                <form id="workerForm">
+                <form id="workerForm" aria-label="Connect Device">
                     <div class="form-group">
                         <label for="access">Account ID Apply for authorization | Xiaomi Community:</label>
-                        <select id="access" name="access" required disabled>
+                        <select id="access" name="access" required disabled aria-required="true">
                             <option value="" disabled selected>?</option>
                             <option value="mandatory">Mandatory</option>
                             <option value="not_mandatory">Not Mandatory</option>
@@ -277,15 +385,15 @@
                     </div>
                     <div class="form-group">
                         <label for="id">Account ID</label>
-                        <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled autocomplete="off">
+                        <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled autocomplete="off" aria-required="true">
                     </div>
                     <div class="form-group">
                         <label for="token">Device Token</label>
-                        <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled autocomplete="off">
+                        <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled autocomplete="off" aria-required="true">
                     </div>
                     <div class="form-group">
                         <label for="region">Device Region</label>
-                        <select id="region" name="region" required disabled>
+                        <select id="region" name="region" required disabled aria-required="true">
                             <option value="" disabled selected>Select device region</option>
                             <option value="cn">China</option>
                             <option value="g">Global</option>
@@ -293,7 +401,7 @@
                     </div>
                     <button type="submit" disabled>Connect Device</button>
                 </form>
-                <div id="connectResponse" class="response"></div>
+                <div id="connectResponse" class="response" role="alert"></div>
             </div>
 
             <div class="footer">
@@ -353,6 +461,7 @@
             element.style.display = 'flex';
             element.className = `response ${type}`;
             element.textContent = message;
+            element.setAttribute('aria-live', 'assertive');
         };
 
         const enableConnectForm = () => {
@@ -417,7 +526,6 @@
         elements.workerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            // Map access values: mandatory -> yes, not_mandatory -> no
             const accessValue = elements.accessSelect.value === 'mandatory' ? 'yes' : 'no';
 
             const params = {
