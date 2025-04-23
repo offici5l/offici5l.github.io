@@ -4,29 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>MiConnect - Unlock Xiaomi Bootloader</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Theme Variables */
-        :root {
-            --primary-color: #1f2937;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --success-color: #22c55e;
-            --error-color: #ef4444;
-            --bg-color: #f9fafb;
-            --card-bg: #ffffff;
-            --text-color: #6b7280;
-            --input-bg: #f9fafb;
-            --border-color: #d1d5db;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --shadow-accent: rgba(99, 102, 241, 0.3);
-            --success-bg: #f0fdf4;
-            --error-bg: #fef2f2;
-            --success-text: #15803d;
-            --error-text: #b91c1c;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -59,26 +40,49 @@
         }
 
         .card {
-            background: var(--card-bg);
+            background: #ffffff;
             border-radius: 1rem;
-            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
             position: relative;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
         }
 
         h1 {
-            color: var(--primary-color);
+            color: #1f2937;
             text-align: center;
-            font-size: clamp(1.5rem, 5vw, 1.75rem);
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: clamp(1.75rem, 5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background: #6366f1;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        h1:hover::after {
+            width: 100px;
         }
 
         .description {
             text-align: center;
-            color: var(--text-color);
-            font-size: clamp(0.85rem, 4vw, 0.95rem);
+            color: #6b7280;
+            font-size: clamp(0.9rem, 4vw, 1rem);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
@@ -99,7 +103,7 @@
         .description li::before {
             content: '\f058';
             font-family: 'FontAwesome';
-            color: var(--accent-color);
+            color: #6366f1;
             position: absolute;
             left: 0;
             top: 2px;
@@ -110,26 +114,27 @@
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            position: relative;
         }
 
         label {
             display: block;
-            color: var(--primary-color);
+            color: #1f2937;
             font-weight: 500;
-            font-size: clamp(0.85rem, 3.5vw, 0.9rem);
+            font-size: clamp(0.9rem, 3.5vw, 0.95rem);
             margin-bottom: 0.5rem;
         }
 
         input, select {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
+            padding: 0.85rem;
+            border: 1px solid #d1d5db;
             border-radius: 0.5rem;
-            background: var(--input-bg);
-            font-size: clamp(0.85rem, 4vw, 0.95rem);
-            color: var(--primary-color);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: #f9fafb;
+            font-size: clamp(0.9rem, 4vw, 1rem);
+            color: #1f2937;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -137,58 +142,65 @@
 
         input:focus, select:focus {
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px var(--shadow-accent);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            border-color: #ef4444;
         }
 
         select {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 0.75rem center;
+            background-position: right 0.85rem center;
             background-size: 1rem;
         }
 
         select#access {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            height: 1.75rem;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            height: 2rem;
             background-image: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
             border-radius: 0.375rem;
             width: auto;
-            min-width: 100px;
+            min-width: 120px;
         }
 
         select#access:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px var(--shadow-accent);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
         }
 
         .region-label {
-            color: var(--accent-color);
-            font-size: clamp(0.8rem, 3.5vw, 0.85rem);
+            color: #6366f1;
+            font-size: clamp(0.85rem, 3.5vw, 0.9rem);
             margin-left: 0.5rem;
         }
 
         button {
             width: 100%;
-            padding: 0.75rem;
-            background: var(--accent-color);
+            padding: 0.85rem;
+            background: linear-gradient(90deg, #6366f1, #4f46e5);
             color: white;
             border: none;
             border-radius: 0.5rem;
-            font-size: clamp(0.9rem, 4vw, 1rem);
+            font-size: clamp(0.95rem, 4vw, 1.1rem);
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             -webkit-tap-highlight-color: transparent;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         button:hover:not(:disabled) {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
+            background: linear-gradient(90deg, #4f46e5, #4338ca);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
         }
 
         button:disabled {
@@ -196,11 +208,23 @@
             cursor: not-allowed;
         }
 
+        button.loading::after {
+            content: '';
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+        }
+
         .response {
             margin-top: 1rem;
-            padding: 0.75rem 1rem;
+            padding: 0.85rem 1rem;
             border-radius: 0.5rem;
-            font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
             display: none;
             align-items: center;
             gap: 0.5rem;
@@ -208,13 +232,13 @@
         }
 
         .success {
-            background: var(--success-bg);
-            color: var(--success-text);
+            background: #f0fdf4;
+            color: #15803d;
         }
 
         .error {
-            background: var(--error-bg);
-            color: var(--error-text);
+            background: #fef2f2;
+            color: #b91c1c;
         }
 
         .response::before {
@@ -232,30 +256,29 @@
 
         .divider {
             border: 0;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid #d1d5db;
             margin: 1.5rem 0;
         }
 
         .footer {
             text-align: center;
-            color: var(--text-color);
-            font-size: clamp(0.75rem, 3vw, 0.85rem);
+            color: #6b7280;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
             margin-top: 1.5rem;
         }
 
         .footer a {
-            color: var(--accent-color);
+            color: #6366f1;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .footer a:hover {
-            color: var(--accent-hover);
+            color: #4f46e5;
             text-decoration: underline;
         }
 
-        /* Desktop Layout */
         @media (min-width: 768px) {
             .container {
                 padding: 0 2rem;
@@ -263,23 +286,21 @@
 
             .card {
                 padding: 2rem;
-                display: flex;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 gap: 2rem;
             }
 
             .form-section {
-                flex: 1;
                 min-width: 300px;
             }
 
             .description {
-                flex: 1;
                 min-width: 300px;
             }
 
             h1 {
-                flex: 100%;
+                grid-column: 1 / -1;
             }
 
             .divider {
@@ -287,11 +308,10 @@
             }
 
             .footer {
-                flex: 100%;
+                grid-column: 1 / -1;
             }
         }
 
-        /* Mobile Layout */
         @media (max-width: 767px) {
             body {
                 padding: 0.5rem;
@@ -301,16 +321,20 @@
                 padding: 0 0.5rem;
             }
 
-            .card  {
+            .card {
                 padding: 1rem;
             }
 
             .form-section, .description {
                 width: 100%;
             }
+
+            button {
+                position: sticky;
+                bottom: 1rem;
+            }
         }
 
-        /* Small Mobile Devices */
         @media (max-width: 480px) {
             html {
                 font-size: 14px;
@@ -321,11 +345,10 @@
             }
 
             button {
-                padding: 0.65rem;
+                padding: 0.75rem;
             }
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -336,7 +359,10 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* Cross-Browser Fixes */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         input, select, button {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -344,16 +370,14 @@
         }
 
         button:focus {
-            outline: 2px solid var(--accent-color);
+            outline: 2px solid #6366f1;
             outline-offset: 2px;
         }
 
-        /* High Contrast Mode */
         @media (prefers-contrast: high) {
-            :root {
-                --primary-color: #000000;
-                --card-bg: #ffffff;
-                --border-color: #000000;
+            .card {
+                background: #ffffff;
+                border-color: #000000;
             }
 
             button {
@@ -361,11 +385,10 @@
             }
         }
 
-        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             * {
-                animation: none !important;
-                transition: none !important;
+                animation: none;
+                transition: none;
             }
         }
     </style>
@@ -383,20 +406,16 @@
                     <li>Errors while binding account in developer options</li>
                 </ul>
             </div>
-
-            <!-- Codename Checker Form -->
             <div class="form-section">
                 <form id="checkerForm" aria-label="Check Device Codename">
                     <div class="form-group">
                         <label for="codename">Device Codename</label>
-                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off" aria-required="true">
+                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off" aria-required="true" required>
                     </div>
                     <button type="button" id="checkCodename">Check</button>
                 </form>
                 <div id="checkResponse" class="response" role="alert"></div>
             </div>
-
-            <!-- Connect Form -->
             <div class="form-section">
                 <form id="workerForm" aria-label="Connect Device">
                     <div class="form-group">
@@ -427,62 +446,13 @@
                 </form>
                 <div id="connectResponse" class="response" role="alert"></div>
             </div>
-
             <div class="footer">
                 <p>Version: 1.0.0</p>
                 <p>Contact: <a href="mailto:offici5lcontact@proton.me">offici5lcontact@proton.me</a></p>
             </div>
         </div>
     </div>
-
     <script>
-        // API Configuration
-        const API_CONFIG = {
-            CHECK: 'https://check.offici5l.workers.dev',
-            CONNECT: 'https://miconnect.offici5l.workers.dev',
-            HEADERS: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        };
-
-        // Message Constants
-        const MESSAGES = {
-            CHECK: {
-                EMPTY_CODENAME: 'Please enter a device codename.',
-                UNEXPECTED_RESPONSE: 'Unexpected response from the server.',
-                CONNECTION_ERROR: 'Unable to connect to the server. Please try again.',
-                CHECK_FAILED: 'Failed to verify codename.'
-            },
-            CONNECT: {
-                SUCCESS: 'Device connected successfully!',
-                CONNECTION_ERROR: (msg) => `Connection error: ${msg}`,
-                FAILED: 'Failed to connect the device. No specific error provided.',
-                MISSING_FIELDS: 'Please fill all required fields.'
-            },
-            BUTTON: {
-                CHECK: { DEFAULT: 'Check Codename', LOADING: 'Checking...' },
-                CONNECT: { DEFAULT: 'Connect Device', LOADING: 'Connecting...' }
-            }
-        };
-
-        // DOM Elements
-        const elements = {
-            checkerForm: document.getElementById('checkerForm'),
-            checkResponse: document.getElementById('checkResponse'),
-            checkButton: document.getElementById('checkCodename'),
-            codenameInput: document.getElementById('codename'),
-            workerForm: document.getElementById('workerForm'),
-            connectResponse: document.getElementById('connectResponse'),
-            submitButton: document.querySelector('#workerForm button[type="submit"]'),
-            accessSelect: document.getElementById('access'),
-            idInput: document.getElementById('id'),
-            tokenInput: document.getElementById('token'),
-            regionSelect: document.getElementById('region'),
-            regionLabel: document.getElementById('regionLabel')
-        };
-
-        // Utility Functions
         const showResponse = (element, message, type) => {
             element.style.display = 'flex';
             element.className = `response ${type}`;
@@ -490,51 +460,55 @@
             element.setAttribute('aria-live', 'assertive');
         };
 
-        const enableConnectForm = () => {
-            elements.tokenInput.disabled = false;
-            elements.submitButton.disabled = false;
-        };
+        const checkerForm = document.getElementById('checkerForm');
+        const checkResponse = document.getElementById('checkResponse');
+        const checkButton = document.getElementById('checkCodename');
+        const codenameInput = document.getElementById('codename');
+        const workerForm = document.getElementById('workerForm');
+        const connectResponse = document.getElementById('connectResponse');
+        const submitButton = workerForm.querySelector('button[type="submit"]');
+        const accessSelect = document.getElementById('access');
+        const idInput = document.getElementById('id');
+        const tokenInput = document.getElementById('token');
+        const regionSelect = document.getElementById('region');
+        const regionLabel = document.getElementById('regionLabel');
 
-        const setAccessValue = (value) => {
-            elements.accessSelect.disabled = false;
-            elements.accessSelect.value = value;
-            elements.accessSelect.disabled = true;
-        };
-
-        // Handle Region Selection
-        elements.regionSelect.addEventListener('change', () => {
-            const region = elements.regionSelect.value;
+        regionSelect.addEventListener('change', () => {
+            const region = regionSelect.value;
             if (region === 'cn') {
-                elements.regionLabel.textContent = '(China)';
-                elements.idInput.disabled = false;
+                regionLabel.textContent = '(China)';
+                idInput.disabled = false;
             } else if (region === 'g') {
-                elements.regionLabel.textContent = '(Global)';
-                elements.idInput.disabled = false;
+                regionLabel.textContent = '(Global)';
+                idInput.disabled = false;
             } else {
-                elements.regionLabel.textContent = '';
-                elements.idInput.disabled = true;
+                regionLabel.textContent = '';
+                idInput.disabled = true;
             }
         });
 
-        // Codename Checker
-        elements.checkButton.addEventListener('click', async () => {
-            const codename = elements.codenameInput.value.trim();
+        checkButton.addEventListener('click', async () => {
+            const codename = codenameInput.value.trim();
             if (!codename) {
-                showResponse(elements.checkResponse, MESSAGES.CHECK.EMPTY_CODENAME, 'error');
+                showResponse(checkResponse, 'Please enter a device codename.', 'error');
                 return;
             }
 
-            const url = new URL(API_CONFIG.CHECK);
+            const url = new URL('https://check.offici5l.workers.dev');
             url.searchParams.append('codename', codename);
 
             try {
-                elements.checkResponse.style.display = 'none';
-                elements.checkButton.disabled = true;
-                elements.checkButton.textContent = MESSAGES.BUTTON.CHECK.LOADING;
+                checkResponse.style.display = 'none';
+                checkButton.disabled = true;
+                checkButton.classList.add('loading');
+                checkButton.textContent = 'Checking';
 
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: API_CONFIG.HEADERS,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     mode: 'cors'
                 });
 
@@ -542,94 +516,86 @@
 
                 if (response.ok && 'result' in data) {
                     if (data.result === 0) {
-                        enableConnectForm();
-                        elements.regionSelect.disabled = false;
-                        setAccessValue('not_mandatory');
+                        tokenInput.disabled = false;
+                        submitButton.disabled = false;
+                        regionSelect.disabled = false;
+                        accessSelect.disabled = false;
+                        accessSelect.value = 'not_mandatory';
+                        accessSelect.disabled = true;
                     } else if (data.result === 1) {
-                        enableConnectForm();
-                        elements.regionSelect.disabled = false;
-                        setAccessValue('mandatory');
+                        tokenInput.disabled = false;
+                        submitButton.disabled = false;
+                        regionSelect.disabled = false;
+                        accessSelect.disabled = false;
+                        accessSelect.value = 'mandatory';
+                        accessSelect.disabled = true;
                     } else {
-                        showResponse(elements.checkResponse, MESSAGES.CHECK.UNEXPECTED_RESPONSE, 'error');
+                        showResponse(checkResponse, 'Unexpected response from the server.', 'error');
                     }
                 } else {
-                    showResponse(elements.checkResponse, data.error || MESSAGES.CHECK.CHECK_FAILED, 'error');
+                    showResponse(checkResponse, data.error || 'Failed to verify codename.', 'error');
                 }
-            } catch (error) {
-                showResponse(elements.checkResponse, MESSAGES.CHECK.CONNECTION_ERROR, 'error');
+            } catch {
+                showResponse(checkResponse, 'Unable to connect to the server. Please try again.', 'error');
             } finally {
-                elements.checkButton.disabled = false;
-                elements.checkButton.textContent = MESSAGES.BUTTON.CHECK.DEFAULT;
+                checkButton.disabled = false;
+                checkButton.classList.remove('loading');
+                checkButton.textContent = 'Check';
             }
         });
 
-        // Connect Form Submission
-        elements.workerForm.addEventListener('submit', async (event) => {
+        workerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const accessValue = elements.accessSelect.value === 'mandatory' ? 'yes' : 'no';
-
+            const accessValue = accessSelect.value === 'mandatory' ? 'yes' : 'no';
             const params = {
-                id: elements.idInput.value.trim(),
-                token: elements.tokenInput.value.trim(),
-                region: elements.regionSelect.value,
+                id: idInput.value.trim(),
+                token: tokenInput.value.trim(),
+                region: regionSelect.value,
                 access: accessValue
             };
 
-            // Validate inputs
             if (!params.id || !params.token || !params.region) {
-                showResponse(elements.connectResponse, MESSAGES.CONNECT.MISSING_FIELDS, 'error');
+                showResponse(connectResponse, 'Please fill all required fields.', 'error');
                 return;
             }
 
             try {
-                elements.connectResponse.style.display = 'none';
-                elements.submitButton.disabled = true;
-                elements.submitButton.textContent = MESSAGES.BUTTON.CONNECT.LOADING;
+                connectResponse.style.display = 'none';
+                submitButton.disabled = true;
+                submitButton.classList.add('loading');
+                submitButton.textContent = 'Connecting';
 
-                const response = await fetch(API_CONFIG.CONNECT, {
+                const response = await fetch('https://miconnect.offici5l.workers.dev', {
                     method: 'POST',
-                    headers: API_CONFIG.HEADERS,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     body: JSON.stringify(params)
                 });
-
-                // Log the raw response status and headers for debugging
-                console.log('API Response Status:', response.status, response.statusText);
-                console.log('API Response Headers:', [...response.headers.entries()]);
 
                 let data;
                 try {
                     data = await response.json();
-                    console.log('API Response Body:', data); // Log the parsed JSON body
-                } catch (jsonError) {
-                    console.error('JSON Parse Error:', jsonError);
-                    // If JSON parsing fails, get the raw text response
+                } catch {
                     const text = await response.text();
-                    console.log('Raw Response Text:', text);
-                    showResponse(elements.connectResponse, `Server returned non-JSON response: ${text}`, 'error');
+                    showResponse(connectResponse, `Server returned non-JSON response: ${text}`, 'error');
                     return;
                 }
 
-                // Check for success (assuming success is indicated by a specific field or status)
-                if (response.ok && data && (data.success || data.status === 'success')) {
-                    showResponse(elements.connectResponse, MESSAGES.CONNECT.SUCCESS, 'success');
+                if (response.ok && (data.success || data.status === 'success')) {
+                    showResponse(connectResponse, 'Device connected successfully!', 'success');
                 } else {
-                    // Extract error message from common fields or stringify the entire response
-                    const errorMessage = data.error || 
-                                        data.message || 
-                                        data.errorMessage || 
-                                        data.reason || 
-                                        JSON.stringify(data, null, 2) || 
-                                        MESSAGES.CONNECT.FAILED;
-                    showResponse(elements.connectResponse, errorMessage, 'error');
+                    const errorMessage = data.error || data.message || data.errorMessage || data.reason || 'Failed to connect the device.';
+                    showResponse(connectResponse, errorMessage, 'error');
                 }
             } catch (error) {
-                // Handle network or other fetch errors
-                console.error('Fetch Error:', error);
-                showResponse(elements.connectResponse, MESSAGES.CONNECT.CONNECTION_ERROR(error.message || error.toString()), 'error');
+                showResponse(connectResponse, `Connection error: ${error.message}`, 'error');
             } finally {
-                elements.submitButton.disabled = false;
-                elements.submitButton.textContent = MESSAGES.BUTTON.CONNECT.DEFAULT;
+                submitButton.disabled = false;
+                submitButton.classList.remove('loading');
+                submitButton.textContent = 'Connect Device';
             }
         });
     </script>
