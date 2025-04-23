@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiConnect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>MiConnect - Unlock Xiaomi Bootloader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Theme Variables */
         :root {
-            --primary-color: #1a1a2e;
-            --accent-color: #4f46e5;
-            --accent-hover: #4338ca;
-            --success-color: #10b981;
+            --primary-color: #1f2937;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --success-color: #22c55e;
             --error-color: #ef4444;
-            --bg-color: #f3f4f6;
+            --bg-color: #f9fafb;
             --card-bg: #ffffff;
-            --text-color: #4b5563;
-            --input-bg: #fafafa;
-            --border-color: #e5e7eb;
-            --shadow-color: rgba(0, 0, 0, 0.15);
-            --shadow-accent: rgba(79, 70, 229, 0.4);
-            --shadow-input: rgba(79, 70, 229, 0.1);
-            --success-bg: #ecfdf5;
+            --text-color: #6b7280;
+            --input-bg: #f9fafb;
+            --border-color: #d1d5db;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-accent: rgba(99, 102, 241, 0.3);
+            --success-bg: #f0fdf4;
             --error-bg: #fef2f2;
-            --success-text: #065f46;
-            --error-text: #991b1b;
+            --success-text: #15803d;
+            --error-text: #b91c1c;
         }
 
         * {
@@ -34,115 +34,117 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 1.5rem;
         }
 
         .container {
-            max-width: 550px;
+            max-width: 600px;
             width: 100%;
             margin: 0 auto;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 1.5rem;
-            box-shadow: 0 15px 40px var(--shadow-color);
-            padding: 2.5rem;
-            animation: fadeIn 0.6s ease-out;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-out;
             position: relative;
-            overflow: hidden;
         }
 
         h1 {
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 600;
-            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
         }
 
-        /* Contact and Description Styles */
-        .contact-description {
-            text-align: left;
-            margin-bottom: 2rem;
+        .description {
+            text-align: center;
             color: var(--text-color);
             font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 2rem;
         }
 
-        .contact-description p {
-            margin-bottom: 0.75rem;
+        .description ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 1rem;
+            padding-left: 1rem;
         }
 
-        .contact-description a {
+        .description li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .description li::before {
+            content: '\f058';
+            font-family: 'FontAwesome';
             color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 2px;
         }
 
-        .contact-description a:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
+        .form-section {
+            margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-bottom: 1.75rem;
-            position: relative;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
             color: var(--primary-color);
             font-weight: 500;
+            font-size: 0.9rem;
             margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            text-align: left;
         }
 
         input, select {
             width: 100%;
-            padding: 0.9rem 1rem;
+            padding: 0.75rem 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            font-size: 1rem;
+            border-radius: 0.5rem;
             background: var(--input-bg);
-            transition: all 0.3s ease;
-            text-align: left;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 4px var(--shadow-input);
+            box-shadow: 0 0 0 3px var(--shadow-accent);
         }
 
         button {
             width: 100%;
-            padding: 1rem;
+            padding: 0.75rem;
             background: var(--accent-color);
             color: white;
             border: none;
-            border-radius: 0.75rem;
-            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
 
         button:hover:not(:disabled) {
             background: var(--accent-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px var(--shadow-accent);
+            transform: translateY(-2px);
         }
 
         button:disabled {
@@ -151,16 +153,14 @@
         }
 
         .response {
-            margin-top: 1.5rem;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            display: none;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
             font-size: 0.9rem;
-            animation: slideIn 0.4s ease;
-            display: flex;
+            display: none;
             align-items: center;
-            gap: 0.75rem;
-            text-align: left;
+            gap: 0.5rem;
+            animation: slideIn 0.4s ease;
         }
 
         .success {
@@ -175,7 +175,7 @@
 
         .response::before {
             font-family: 'FontAwesome';
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .success::before {
@@ -186,298 +186,268 @@
             content: '\f06a';
         }
 
-        .version {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--text-color);
-            font-size: 0.85rem;
-            opacity: 0.7;
-            line-height: 1.5;
+        .divider {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
         }
 
-        .version a {
+        .footer {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        .footer a {
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
-        .version a:hover {
+        .footer a:hover {
             color: var(--accent-hover);
             text-decoration: underline;
         }
 
-        .version p {
-            margin-bottom: 0.5rem; /* Added to space out lines */
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid var(--border-color);
-            margin: 2rem 0;
-        }
-
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
+            from { opacity: 0; transform: translateX(20px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
         @media (max-width: 480px) {
             .card {
-                padding: 1.75rem;
+                padding: 1.5rem;
             }
 
             h1 {
                 font-size: 1.5rem;
             }
 
-            .contact-description {
+            .description {
                 font-size: 0.9rem;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="card">
             <h1>MiConnect</h1>
-
-            <!-- Contact and Description Section with Full English Description -->
-            <div class="contact-description">
-                <p>service allows to unlock the bootloader for Xiaomi devices:</p>
-                <p>- Devices that operate normally</p>
-                <p>- Damaged devices unable to enter normal mode</p>
-                <p>- Devices that cannot connect via SIM card or have other issues</p>
+            <div class="description">
+                <p>sevice allows to unlock the bootloader for Xiaomi devices:</p>
+                <ul>
+                    <li>Devices operating normally</li>
+                    <li>Damaged devices unable to enter normal mode</li>
+                    <li>Devices with SIM card or connectivity issues</li>
+                </ul>
             </div>
 
             <!-- Codename Checker Form -->
-            <form id="checkerForm">
-                <div class="form-group">
-                    <label for="codename">Codename:</label>
-                    <input type="text" id="codename" name="codename" placeholder="Enter Codename">
-                </div>
-                <button type="button" id="checkCodename">Check</button>
-            </form>
-            <div id="checkResponse" class="response"></div>
+            <div class="form-section">
+                <form id="checkerForm">
+                    <div class="form-group">
+                        <label for="codename">Device Codename</label>
+                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off">
+                    </div>
+                    <button type="button" id="checkCodename">Check Codename</button>
+                </form>
+                <div id="checkResponse" class="response"></div>
+            </div>
 
-            <hr>
+            <div class="divider"></div>
 
             <!-- Connect Form -->
-            <form id="workerForm">
-                <div class="form-group">
-                    <label for="access">Account ID Apply for authorization | Xiaomi Community Requirement:</label>
-                    <select id="access" name="access" required disabled>
-                        <option value=""></option>
-                        <option value="yes">yes</option>
-                        <option value="no">no</option>
-                    </select>
-                </div>
+            <div class="form-section">
+                <form id="workerForm">
+                    <div class="form-group">
+                        <label for="access">Account ID Apply for authorization | Xiaomi Community Requirement:</label>
+                        <select id="access" name="access" required disabled>
+                            <option value="" disabled selected>?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id">Account ID</label>
+                        <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="token">Device Token</label>
+                        <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="region">Device Region</label>
+                        <select id="region" name="region" required disabled>
+                            <option value="" disabled selected>Select device region</option>
+                            <option value="cn">China</option>
+                            <option value="g">Global</option>
+                        </select>
+                    </div>
+                    <button type="submit" disabled>Connect Device</button>
+                </form>
+                <div id="connectResponse" class="response"></div>
+            </div>
 
-                <div class="form-group">
-                    <label for="id">Account ID:</label>
-                    <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="token">Device Token:</label>
-                    <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="region">Device Region:</label>
-                    <select id="region" name="region" required disabled>
-                        <option value="">Select Device Region</option>
-                        <option value="cn">China</option>
-                        <option value="g">Global</option>
-                    </select>
-                </div>
-
-                <button type="submit" disabled>Connect</button>
-            </form>
-            <div id="connectResponse" class="response"></div>
-
-            <!-- Updated Version Section with Separate Lines -->
-            <div class="version">
-                <p>Version: 1</p>
+            <div class="footer">
+                <p>Version: 1.0.0</p>
                 <p>Contact: <a href="mailto:offici5lcontact@proton.me">offici5lcontact@proton.me</a></p>
             </div>
         </div>
     </div>
 
     <script>
-        // Constants
-        const API_URLS = {
+        // API Configuration
+        const API_CONFIG = {
             CHECK: 'https://check.offici5l.workers.dev',
-            CONNECT: 'https://miconnect.offici5l.workers.dev'
-        };
-
-        const MESSAGES = {
-            CHECK: {
-                EMPTY_CODENAME: 'Please enter a codename',
-                UNEXPECTED_RESPONSE: 'Unexpected response from server',
-                CONNECTION_ERROR: 'Connection error: Unable to reach the server',
-                CHECK_FAILED: 'Failed to check codename'
-            },
-            CONNECT: {
-                SUCCESS: 'Connected successfully!',
-                CONNECTION_ERROR: message => `Connection error: ${message}`,
-                FAILED: 'Failed to connect'
-            },
-            BUTTON: {
-                CHECK: {
-                    DEFAULT: 'Check',
-                    LOADING: 'Checking...'
-                },
-                CONNECT: {
-                    DEFAULT: 'Connect',
-                    LOADING: 'Connecting...'
-                }
+            CONNECT: 'https://miconnect.offici5l.workers.dev',
+            HEADERS: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
         };
 
-        const REQUEST_HEADERS = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        // Message Constants
+        const MESSAGES = {
+            CHECK: {
+                EMPTY_CODENAME: 'Please enter a device codename.',
+                UNEXPECTED_RESPONSE: 'Unexpected response from the server.',
+                CONNECTION_ERROR: 'Unable to connect to the server. Please try again.',
+                CHECK_FAILED: 'Failed to verify codename.'
+            },
+            CONNECT: {
+                SUCCESS: 'Device connected successfully!',
+                CONNECTION_ERROR: (msg) => `Connection error: ${msg}`,
+                FAILED: 'Failed to connect the device.'
+            },
+            BUTTON: {
+                CHECK: { DEFAULT: 'Check Codename', LOADING: 'Checking...' },
+                CONNECT: { DEFAULT: 'Connect Device', LOADING: 'Connecting...' }
+            }
+        };
+
+        // DOM Elements
+        const elements = {
+            checkerForm: document.getElementById('checkerForm'),
+            checkResponse: document.getElementById('checkResponse'),
+            checkButton: document.getElementById('checkCodename'),
+            codenameInput: document.getElementById('codename'),
+            workerForm: document.getElementById('workerForm'),
+            connectResponse: document.getElementById('connectResponse'),
+            submitButton: document.querySelector('#workerForm button[type="submit"]'),
+            accessSelect: document.getElementById('access'),
+            idInput: document.getElementById('id'),
+            tokenInput: document.getElementById('token'),
+            regionSelect: document.getElementById('region')
+        };
+
+        // Utility Functions
+        const showResponse = (element, message, type) => {
+            element.style.display = 'flex';
+            element.className = `response ${type}`;
+            element.textContent = message;
+        };
+
+        const enableConnectForm = () => {
+            elements.idInput.disabled = false;
+            elements.tokenInput.disabled = false;
+            elements.regionSelect.disabled = false;
+            elements.submitButton.disabled = false;
+        };
+
+        const setAccessValue = (value) => {
+            elements.accessSelect.disabled = false;
+            elements.accessSelect.value = value;
+            elements.accessSelect.disabled = true;
         };
 
         // Codename Checker
-        const checkerForm = document.getElementById('checkerForm');
-        const checkResponseDiv = document.getElementById('checkResponse');
-        const checkButton = document.getElementById('checkCodename');
-        const codenameInput = document.getElementById('codename');
-        const workerForm = document.getElementById('workerForm');
-        const connectResponseDiv = document.getElementById('connectResponse');
-        const submitButton = workerForm.querySelector('button[type="submit"]');
-        const accessSelect = document.getElementById('access');
-        const idInput = document.getElementById('id');
-        const tokenInput = document.getElementById('token');
-        const regionSelect = document.getElementById('region');
-
-        // Function to enable Connect Form fields
-        function enableConnectForm() {
-            idInput.disabled = false;
-            tokenInput.disabled = false;
-            regionSelect.disabled = false;
-            submitButton.disabled = false;
-        }
-
-        // Function to set Account granted access to a fixed value
-        function setAccessValue(value) {
-            accessSelect.disabled = false; // Enable temporarily to set value
-            accessSelect.value = value;
-            accessSelect.disabled = true; // Disable to make it unchangeable
-        }
-
-        checkButton.addEventListener('click', async () => {
-            const codename = codenameInput.value.trim();
-
+        elements.checkButton.addEventListener('click', async () => {
+            const codename = elements.codenameInput.value.trim();
             if (!codename) {
-                checkResponseDiv.style.display = 'flex';
-                checkResponseDiv.className = 'response error';
-                checkResponseDiv.textContent = MESSAGES.CHECK.EMPTY_CODENAME;
+                showResponse(elements.checkResponse, MESSAGES.CHECK.EMPTY_CODENAME, 'error');
                 return;
             }
 
-            const url = new URL(API_URLS.CHECK);
+            const url = new URL(API_CONFIG.CHECK);
             url.searchParams.append('codename', codename);
 
             try {
-                checkResponseDiv.style.display = 'none';
-                checkResponseDiv.className = 'response';
-                checkButton.disabled = true;
-                checkButton.textContent = MESSAGES.BUTTON.CHECK.LOADING;
+                elements.checkResponse.style.display = 'none';
+                elements.checkButton.disabled = true;
+                elements.checkButton.textContent = MESSAGES.BUTTON.CHECK.LOADING;
 
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: REQUEST_HEADERS,
+                    headers: API_CONFIG.HEADERS,
                     mode: 'cors'
                 });
 
                 const data = await response.json();
-                console.log('Check API response:', data);
 
-                checkResponseDiv.style.display = 'none'; // No response message displayed
                 if (response.ok && 'result' in data) {
                     if (data.result === 0) {
                         enableConnectForm();
-                        setAccessValue('no'); // Fixed to 'no' for supported codenames
+                        setAccessValue('no');
                     } else if (data.result === 1) {
                         enableConnectForm();
-                        setAccessValue('yes'); // Fixed to 'yes' for unsupported codenames
+                        setAccessValue('yes');
                     } else {
-                        checkResponseDiv.style.display = 'flex';
-                        checkResponseDiv.className = 'response error';
-                        checkResponseDiv.textContent = MESSAGES.CHECK.UNEXPECTED_RESPONSE;
-                        console.error('Unexpected result value:', data.result);
+                        showResponse(elements.checkResponse, MESSAGES.CHECK.UNEXPECTED_RESPONSE, 'error');
                     }
                 } else {
-                    checkResponseDiv.style.display = 'flex';
-                    checkResponseDiv.className = 'response error';
-                    checkResponseDiv.textContent = data.error || MESSAGES.CHECK.CHECK_FAILED;
-                    console.error('Check codename failed:', data);
+                    showResponse(elements.checkResponse, data.error || MESSAGES.CHECK.CHECK_FAILED, 'error');
                 }
             } catch (error) {
-                checkResponseDiv.style.display = 'flex';
-                checkResponseDiv.className = 'response error';
-                checkResponseDiv.textContent = MESSAGES.CHECK.CONNECTION_ERROR;
-                console.error('Check codename error:', error.message, error);
+                showResponse(elements.checkResponse, MESSAGES.CHECK.CONNECTION_ERROR, 'error');
             } finally {
-                checkButton.disabled = false;
-                checkButton.textContent = MESSAGES.BUTTON.CHECK.DEFAULT;
+                elements.checkButton.disabled = false;
+                elements.checkButton.textContent = MESSAGES.BUTTON.CHECK.DEFAULT;
             }
         });
 
-        // Connect
-        workerForm.addEventListener('submit', async (event) => {
+        // Connect Form Submission
+        elements.workerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const id = idInput.value;
-            const token = tokenInput.value;
-            const region = regionSelect.value;
-            const access = accessSelect.value;
-            const url = new URL(API_URLS.CONNECT);
-            url.searchParams.append('id', id);
-            url.searchParams.append('token', token);
-            url.searchParams.append('region', region);
-            url.searchParams.append('access', access);
+            const params = {
+                id: elements.idInput.value,
+                token: elements.tokenInput.value,
+                region: elements.regionSelect.value,
+                access: elements.accessSelect.value
+            };
+
+            const url = new URL(API_CONFIG.CONNECT);
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
             try {
-                connectResponseDiv.style.display = 'none';
-                connectResponseDiv.className = 'response';
-                submitButton.disabled = true;
-                submitButton.textContent = MESSAGES.BUTTON.CONNECT.LOADING;
+                elements.connectResponse.style.display = 'none';
+                elements.submitButton.disabled = true;
+                elements.submitButton.textContent = MESSAGES.BUTTON.CONNECT.LOADING;
 
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: REQUEST_HEADERS
+                    headers: API_CONFIG.HEADERS
                 });
 
                 const data = await response.json();
-                console.log('Connect API response:', data);
 
-                connectResponseDiv.style.display = 'flex';
-                if (response.ok) {
-                    connectResponseDiv.className = 'response success';
-                    connectResponseDiv.textContent = data.message || MESSAGES.CONNECT.SUCCESS;
-                } else {
-                    connectResponseDiv.className = 'response error';
-                    connectResponseDiv.textContent = data.message || data.error || MESSAGES.CONNECT.FAILED;
-                    console.error('Connect failed:', data);
-                }
+                showResponse(
+                    elements.connectResponse,
+                    response.ok ? (data.message || MESSAGES.CONNECT.SUCCESS) : (data.message || MESSAGES.CONNECT.FAILED),
+                    response.ok ? 'success' : 'error'
+                );
             } catch (error) {
-                connectResponseDiv.style.display = 'flex';
-                connectResponseDiv.className = 'response error';
-                connectResponseDiv.textContent = MESSAGES.CONNECT.CONNECTION_ERROR(error.message);
-                console.error('Connect error:', error.message, error);
+                showResponse(elements.connectResponse, MESSAGES.CONNECT.CONNECTION_ERROR(error.message), 'error');
             } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = MESSAGES.BUTTON.CONNECT.DEFAULT;
+                elements.submitButton.disabled = false;
+                elements.submitButton.textContent = MESSAGES.BUTTON.CONNECT.DEFAULT;
             }
         });
     </script>
