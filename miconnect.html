@@ -166,6 +166,7 @@
             border-radius: 0.375rem;
             width: auto;
             min-width: 120px;
+            color: #1f2937;
         }
 
         select#access:focus {
@@ -175,19 +176,12 @@
 
         select#access.mandatory {
             background-color: #f97316;
-            color: white;
-            border-color: #f97316;
+            color: #ffffff;
         }
 
         select#access.not-mandatory {
             background-color: #22c55e;
-            color: white;
-            border-color: #22c55e;
-        }
-
-        select#access.mandatory:focus,
-        select#access.not-mandatory:focus {
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
         }
 
         .region-label {
@@ -490,6 +484,22 @@
         const regionSelect = document.getElementById('region');
         const regionLabel = document.getElementById('regionLabel');
 
+        // Function to update access select color
+        const updateAccessColor = () => {
+            if (accessSelect.value === 'mandatory') {
+                accessSelect.classList.remove('not-mandatory');
+                accessSelect.classList.add('mandatory');
+            } else if (accessSelect.value === 'not_mandatory') {
+                accessSelect.classList.remove('mandatory');
+                accessSelect.classList.add('not-mandatory');
+            } else {
+                accessSelect.classList.remove('mandatory', 'not-mandatory');
+            }
+        };
+
+        // Update color when access value changes
+        accessSelect.addEventListener('change', updateAccessColor);
+
         regionSelect.addEventListener('change', () => {
             const region = regionSelect.value;
             if (region === 'cn') {
@@ -503,27 +513,6 @@
                 idInput.disabled = true;
             }
         });
-
-        const updateAccessColor = () => {
-            accessSelect.classList.remove('mandatory', 'not-mandatory');
-            if (accessSelect.value === 'mandatory') {
-                accessSelect.classList.add('mandatory');
-            } else if (accessSelect.value === 'not_mandatory') {
-                accessSelect.classList.add('not-mandatory');
-            }
-        };
-
-        accessSelect.addEventListener('change', updateAccessColor);
-
-        const originalSetAccessValue = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value').set;
-        Object.defineProperty(accessSelect, 'value', {
-            set: function (val) {
-                originalSetAccessValue.call(this, val);
-                updateAccessColor();
-            }
-        });
-
-        updateAccessColor();
 
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
@@ -560,6 +549,7 @@
                         accessSelect.disabled = false;
                         accessSelect.value = 'not_mandatory';
                         accessSelect.disabled = true;
+                        updateAccessColor();
                     } else if (data.result === 1) {
                         tokenInput.disabled = false;
                         submitButton.disabled = false;
@@ -567,6 +557,7 @@
                         accessSelect.disabled = false;
                         accessSelect.value = 'mandatory';
                         accessSelect.disabled = true;
+                        updateAccessColor();
                     } else {
                         showResponse(checkResponse, 'Unexpected response from the server.', 'error');
                     }
