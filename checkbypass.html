@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Bypass Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #e0e7ff, #f9fafb);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            transform: translateY(0);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background: white;
+        }
+
+        input[type="text"]::placeholder {
+            color: #9ca3af;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #2563eb, #1d4ed8);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .result.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .supported {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .not-supported {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .loader {
+            display: none;
+            border: 3px solid #e5e7eb;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input[type="text"], button {
+                font-size: 0.95rem;
+                padding: 12px;
+            }
+        }
+
+        /* Accessibility */
+        button:focus, input:focus {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Device Bypass Checker</h1>
+        <div class="input-group">
+            <input type="text" id="codename" placeholder="Enter device codename" required aria-label="Device codename">
+        </div>
+        <button onclick="checkSupport()">Check Now</button>
+        <div id="loader" class="loader"></div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function checkSupport() {
+            const codename = document.getElementById('codename').value.trim();
+            const resultDiv = document.getElementById('result');
+            const loader = document.getElementById('loader');
+            const button = document.querySelector('button');
+
+            resultDiv.style.display = 'none';
+            resultDiv.className = 'result';
+            button.disabled = true;
+            loader.style.display = 'block';
+
+            if (!codename) {
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result not-supported show';
+                resultDiv.textContent = 'Please enter a codename';
+                loader.style.display = 'none';
+                button.disabled = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://checkbypass.offici5l.workers.dev/?codename=${encodeURIComponent(codename)}`);
+                const data = await response.json();
+
+                resultDiv.style.display = 'block';
+                if (data.result === 1) {
+                    resultDiv.className = 'result not-supported show';
+                    resultDiv.textContent = 'Device not supported';
+                } else if (data.result === 0) {
+                    resultDiv.className = 'result supported show';
+                    resultDiv.textContent = 'Device supported';
+                } else {
+                    resultDiv.className = 'result not-supported show';
+                    resultDiv.textContent = 'Unexpected response from server';
+                }
+            } catch (error) {
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result not-supported show';
+                resultDiv.textContent = 'Error checking support. Try again later.';
+            } finally {
+                loader.style.display = 'none';
+                button.disabled = false;
+            }
+        }
+
+        document.getElementById('codename').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkSupport();
+            }
+        });
+    </script>
+</body>
+</html>
