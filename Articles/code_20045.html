@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://offici5l.github.io/Articles/thumbnail.jpg">
     <meta property="og:type" content="article">
     <title>Bypass Xiaomi Bootloader Unlock Restriction (Code 20045)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -18,367 +18,224 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #e6f0fa 0%, #f0f4f8 100%);
-            color: #4a5a74;
+            background: #f5f5f5;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 800px;
             background: #fff;
-            padding: 20px 30px 30px;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
             margin: 20px;
-            animation: fadeIn 0.6s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .section-title {
-            font-size: 1.6rem;
-            color: #1a2a44;
-            margin: 30px 0 15px;
-            font-weight: 600;
+            font-size: 1.8rem;
+            color: #ff6700;
+            margin: 20px 0;
+            font-weight: 700;
             text-align: center;
         }
         .step-title {
-            font-size: 1.3rem;
-            color: #1a2a44;
-            margin-bottom: 12px;
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 10px;
             font-weight: 600;
-            display: block;
         }
         p, li {
-            font-size: 1.1rem;
-            color: #4a5a74;
+            font-size: 1rem;
+            color: #555;
         }
         a {
-            color: #ff6200;
+            color: #ff6700;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
         a:hover {
             color: #e55a00;
         }
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6200 0%, #ff8c00 100%) !important;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
-            background-size: 10px;
-            color: #ffffff;
-            padding: 14px 35px;
-            border-radius: 35px;
-            border: 1px solid #ff8c00 !important;
-            text-align: center;
-            font-weight: 800;
+            background: #ff6700;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 1rem;
-            letter-spacing: 0.03em;
-            margin: 15px 0;
-            text-decoration: none;
-            box-shadow: 0 6px 18px rgba(255, 98, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-            transition: all 0.5s ease-in-out;
+            margin: 10px 0;
+            text-align: center;
+            transition: background 0.3s ease;
         }
         .btn:hover {
-            background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%) !important;
-            border-color: #ff4500 !important;
-            transform: scale(1.15) translateY(-4px);
-            box-shadow: 0 12px 30px rgba(255, 98, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-        }
-        .btn:active {
-            transform: scale(0.92) translateY(1px);
-            box-shadow: 0 3px 10px rgba(255, 98, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-        }
-        .btn:focus {
-            outline: 3px solid #ff8c00;
-            outline-offset: 2px;
+            background: #e55a00;
         }
         .btn-inline {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6200 0%, #ff8c00 100%) !important;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
-            background-size: 10px;
-            color: #ffffff;
+            background: #ff6700;
+            color: #fff;
             padding: 8px 20px;
-            border-radius: 25px;
-            border: 1px solid #ff8c00 !important;
-            text-align: center;
-            font-weight: 800;
-            font-size: 0.95rem;
-            letter-spacing: 0.03em;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
             margin: 0 5px;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(255, 98, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-            transition: all 0.4s ease-in-out;
-            vertical-align: middle;
-            line-height: 1.4;
+            transition: background 0.3s ease;
         }
         .btn-inline:hover {
-            background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%) !important;
-            border-color: #ff4500 !important;
-            transform: scale(1.12) translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 98, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-        }
-        .btn-inline:active {
-            transform: scale(0.92) translateY(1px);
-            box-shadow: 0 2px 8px rgba(255, 98, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-        }
-        .btn-inline:focus {
-            outline: 3px solid #ff8c00;
-            outline-offset: 2px;
+            background: #e55a00;
         }
         .btn-footer.telegram {
             display: inline-block;
-            background: linear-gradient(135deg, #0088cc 0%, #006699 100%) !important;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
-            background-size: 10px;
-            color: #ffffff;
+            background: #0088cc;
+            color: #fff;
             padding: 10px 25px;
-            border-radius: 30px;
-            border: 1px solid #006699 !important;
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
             margin: 10px;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-            transition: all 0.5s ease-in-out;
+            transition: background 0.3s ease;
         }
         .btn-footer.telegram:hover {
-            background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%) !important;
-            border-color: #00aaff !important;
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-        }
-        .btn-footer.telegram:active {
-            transform: scale(0.92) translateY(1px);
-            box-shadow: 0 2px 8px rgba(0, 136, 204, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-        }
-        .btn-footer.telegram:focus {
-            outline: 3px solid #0088cc;
-            outline-offset: 2px;
+            background: #00aaff;
         }
         .btn-footer.github {
             display: inline-block;
-            background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%) !important;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJElEQVQYV2NkIAIwEqH6f4bP/2cYGBhK0QAGaE5qYGBg2AEAUewG/4Qe5eMAAAAASUVORK5CYII=');
-            background-size: 10px;
-            color: #ffffff;
+            background: #24292e;
+            color: #fff;
             padding: 10px 25px;
-            border-radius: 30px;
-            border: 1px solid #1a1e22 !important;
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
             margin: 10px;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(36, 41, 46, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-            transition: all 0.5s ease-in-out;
+            transition: background 0.3s ease;
         }
         .btn-footer.github:hover {
-            background: linear-gradient(135deg, #3a3f44 0%, #24292e 100%) !important;
-            border-color: #3a3f44 !important;
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 8px 20px rgba(36, 41, 46, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
-        }
-        .btn-footer.github:active {
-            transform: scale(0.92) translateY(1px);
-            box-shadow: 0 2px 8px rgba(36, 41, 46, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-        }
-        .btn-footer.github:focus {
-            outline: 3px solid #3a3f44;
-            outline-offset: 2px;
+            background: #3a3f44;
         }
         code {
             background: #f8f8f8;
             padding: 4px 8px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
-            color: #ff6200;
+            color: #ff6700;
         }
         .solution-header {
             background: #f8f8f8;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 5px solid #ff6200;
-        }
-        .solution-header p {
-            color: #4a5a74;
-            font-size: 1.1rem;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff6700;
         }
         .steps {
             padding-left: 0;
             counter-reset: step;
-            margin-bottom: 20px;
         }
         .step {
             list-style: none;
-            margin: 30px 0;
+            margin: 20px 0;
             padding: 20px;
             background: #fff;
-            border: 1px solid #e8ecef;
-            border-radius: 10px;
+            border-radius: 8px;
             position: relative;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease;
-        }
-        .step:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         .step::before {
             content: counter(step);
             counter-increment: step;
             position: absolute;
-            left: -55px;
+            left: -40px;
             top: 20px;
-            width: 40px;
-            height: 40px;
-            background: #ff6200;
+            width: 30px;
+            height: 30px;
+            background: #ff6700;
             color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1rem;
         }
         .note {
-            background: #fff3e0;
-            border-left: 5px solid #ff6200;
+            background: #fff7e6;
+            border-left: 4px solid #ff6700;
             padding: 10px 15px;
             border-radius: 8px;
             margin: 10px 0;
-            font-size: 1rem;
-            color: #4a5a74;
-        }
-        .note p {
-            line-height: 1.8;
-        }
-        .notes {
-            background: #fff3e0;
-            border-left: 5px solid #ff6200;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-        .notes ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .notes li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-            font-size: 1rem;
-        }
-        .notes li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #ff6200;
-            font-size: 1.5rem;
-            line-height: 1.2;
+            font-size: 0.95rem;
         }
         .warning {
-            background: #fff3e0;
-            padding: 20px;
+            background: #fff7e6;
+            padding: 15px;
             border-radius: 8px;
             color: #d35400;
-            margin: 30px 0;
-            border-left: 5px solid #ff6200;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+            margin: 20px 0;
+            border-left: 4px solid #ff6700;
         }
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #e8ecef;
+            border-top: 1px solid #eee;
         }
         .footer-links {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
         }
         @media (max-width: 768px) {
             .container {
-                padding: 15px 20px 20px;
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .step-title {
+                font-size: 1.2rem;
+            }
+            p, li {
+                font-size: 0.95rem;
+            }
+            .step::before {
+                left: 10px;
+                top: 15px;
+                width: 25px;
+                height: 25px;
+                font-size: 0.9rem;
+            }
+            .step {
+                padding-left: 40px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
             }
             .section-title {
                 font-size: 1.4rem;
             }
             .step-title {
-                font-size: 1.2rem;
-            }
-            p, li {
-                font-size: 1rem;
-            }
-            .step::before {
-                left: 10px;
-                top: 15px;
-                width: 35px;
-                height: 35px;
                 font-size: 1.1rem;
             }
-            .step {
-                padding-left: 50px;
-            }
-            .note {
-                font-size: 0.95rem;
+            p, li {
+                font-size: 0.9rem;
             }
             .btn {
-                padding: 12px 30px;
-                font-size: 0.95rem;
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
             .btn-inline {
-                padding: 7px 18px;
-                font-size: 0.9rem;
+                padding: 6px 15px;
+                font-size: 0.85rem;
             }
             .btn-footer {
                 padding: 8px 20px;
-                font-size: 0.9rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 10px 15px 15px;
-                margin: 10px;
-            }
-            .section-title {
-                font-size: 1.2rem;
-            }
-            .step-title {
-                font-size: 1.1rem;
-            }
-            p, li {
-                font-size: 0.9rem;
-            }
-            .btn {
-                padding: 10px 25px;
-                font-size: 0.9rem;
-            }
-            .btn-inline {
-                padding: 6px 16px;
-                font-size: 0.85rem;
-            }
-            .btn-footer {
-                padding: 7px 18px;
-                font-size: 0.85rem;
-            }
-            .solution-header {
-                padding: 10px;
-            }
-            .note {
                 font-size: 0.85rem;
             }
             .footer-links {
@@ -424,7 +281,7 @@
             <p>I discovered the glitch, on February 28, 2025, This method might be patched by Xiaomi at any time.<br>
             Last verified: April 22 2025.</p>
         </div>
- 
+
         <div class="footer">
             <div class="footer-links">
                 <a href="https://t.me/Offici5l_Group" class="btn-footer telegram" target="_blank" aria-label="Join Our Telegram Group">Join Our Telegram Group</a>
