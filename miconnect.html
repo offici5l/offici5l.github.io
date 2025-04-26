@@ -427,8 +427,10 @@
                     body: JSON.stringify(params)
                 });
                 const data = await response.json();
-                if (response.ok && (data.success || data.status === 'success')) {
-                    showResponse(connectResponse, 'Successfully', 'success');
+                console.log('Response status:', response.status);
+                console.log('Response data:', data);
+                if (response.ok && (data.success || data.status === 'success') || (data.message === 'Successfully, Now run bootloader unlock tool')) {
+                    showResponse(connectResponse, 'Successfully, Now run bootloader unlock tool', 'success');
                 } else {
                     const errorMessage = data.error || data.message || 'Failed';
                     showResponse(connectResponse, errorMessage, 'error');
