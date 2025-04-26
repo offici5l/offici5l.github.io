@@ -21,7 +21,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #121212 0%, #2a2a2a 100%); /* Updated to premium black-gray gradient */
+            background: linear-gradient(135deg, #121212 0%, #2a2a2a 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -38,7 +38,7 @@
         }
 
         .card {
-            background-color: #1c1c1c; /* Updated to premium black */
+            background-color: #1c1c1c;
             border-radius: 1rem;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             padding: 2.5rem;
@@ -52,7 +52,7 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            color: #FF6700; /* Xiaomi Orange */
+            color: #FF6700;
             text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
@@ -60,7 +60,7 @@
         }
 
         .description {
-            color: #b0b0b0; /* Softer gray for premium contrast */
+            color: #b0b0b0;
             text-align: left;
             font-size: 1rem;
             line-height: 1.5;
@@ -97,8 +97,8 @@
         select {
             width: 100%;
             padding: 0.75rem 1rem;
-            background-color: #2a2a2a; /* Darker input background */
-            border: 1px solid #4A4A4A; /* Updated border color */
+            background-color: #2a2a2a;
+            border: 1px solid #4A4A4A;
             border-radius: 0.5rem;
             font-size: 1rem;
             color: #e5e7eb;
@@ -108,8 +108,8 @@
         input[type="text"]:focus,
         select:focus {
             outline: none;
-            border-color: #FF6700; /* Xiaomi Orange on focus */
-            box-shadow: 0 0 8px rgba(255, 103, 0, 0.3); /* Orange shadow */
+            border-color: #FF6700;
+            box-shadow: 0 0 8px rgba(255, 103, 0, 0.3);
         }
 
         select {
@@ -125,13 +125,13 @@
             position: absolute;
             right: 0.5rem;
             top: 2.5rem;
-            color: #b0b0b0; /* Match description color */
+            color: #b0b0b0;
             font-size: 0.75rem;
             cursor: pointer;
         }
 
         .access-text {
-            color: #FF6700; /* Xiaomi Orange */
+            color: #FF6700;
             font-size: 0.9rem;
             font-weight: 500;
             margin-bottom: 1.5rem;
@@ -148,7 +148,7 @@
         button {
             width: 100%;
             padding: 0.875rem;
-            background-color: #FF6700; /* Xiaomi Orange */
+            background-color: #FF6700;
             color: #1a1a1a;
             border: none;
             border-radius: 0.5rem;
@@ -159,13 +159,13 @@
         }
 
         button:hover:not(:disabled) {
-            background-color: #E55C00; /* Darker orange on hover */
-            box-shadow: 0 0 12px rgba(255, 103, 0, 0.5); /* Orange shadow */
+            background-color: #E55C00;
+            box-shadow: 0 0 12px rgba(255, 103, 0, 0.5);
             transform: translateY(-2px);
         }
 
         button:disabled {
-            background-color: #666666; /* Muted gray for disabled state */
+            background-color: #666666;
             cursor: not-allowed;
         }
 
@@ -186,6 +186,12 @@
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
+        }
+
+        .form-group label input[type="checkbox"] {
+            margin-right: 0.5rem;
+            accent-color: #FF6700;
+            vertical-align: middle;
         }
 
         .response {
@@ -224,13 +230,13 @@
 
         .footer {
             text-align: center;
-            color: #b0b0b0; /* Softer gray for premium contrast */
+            color: #b0b0b0;
             font-size: 0.8rem;
             margin-top: 2rem;
         }
 
         .footer a {
-            color: #FF6700; /* Xiaomi Orange */
+            color: #FF6700;
             text-decoration: none;
             font-weight: 500;
         }
@@ -293,6 +299,12 @@
                     <input type="text" id="token" name="token" placeholder="Enter your Device Token" autocomplete="off" required>
                     <span class="tooltip" title="Obtain your token via fastboot commands"><i class="fas fa-info-circle"></i></span>
                 </div>
+                <div class="form-group" id="termsField" style="display: none;">
+                    <label for="terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        I agree to store my Account ID, Device Token, and request outcome to enhance service quality and ensure accurate processing.
+                    </label>
+                </div>
                 <button type="submit" id="submitButton" style="display: none;">Connect</button>
                 <div id="connectResponse" class="response" style="display: none;" role="alert" aria-live="polite"></div>
             </form>
@@ -322,10 +334,12 @@
         const accessText = document.getElementById('accessText');
         const idField = document.getElementById('idField');
         const tokenField = document.getElementById('tokenField');
+        const termsField = document.getElementById('termsField');
         const submitButton = document.getElementById('submitButton');
         const regionSelect = document.getElementById('region');
         const idInput = document.getElementById('id');
         const tokenInput = document.getElementById('token');
+        const termsCheckbox = document.getElementById('terms');
         let accessValue = '';
 
         checkButton.addEventListener('click', async () => {
@@ -351,7 +365,6 @@
                 if (response.ok && 'result' in data) {
                     accessValue = data.result === 1 ? 'yes' : 'no';
                     showField(regionField);
-                    // Update accessText if region is already selected
                     if (regionSelect.value) {
                         const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
                         accessText.textContent = `Account ID (${regionName}) Authorization | Xiaomi Community: ${accessValue === 'yes' ? 'Mandatory' : 'Not Mandatory'}`;
@@ -385,6 +398,7 @@
         tokenInput.addEventListener('input', () => {
             const token = tokenInput.value.trim();
             if (token) {
+                showField(termsField);
                 showField(submitButton);
             }
         });
@@ -403,6 +417,10 @@
             }
             if (!params.token || !params.region) {
                 showResponse(connectResponse, 'Please fill all required fields.', 'error');
+                return;
+            }
+            if (!termsCheckbox.checked) {
+                showResponse(connectResponse, 'You must agree to the terms to proceed.', 'error');
                 return;
             }
             try {
