@@ -421,7 +421,7 @@
                 connectResponse.style.display = 'none';
                 submitButton.disabled = true;
                 submitButton.classList.add('loading');
-                submitButton.textContent = 'Unlocking...';
+                submitButton.textContent = 'Connecting...';
                 const response = await fetch('https://miconnect.offici5l.workers.dev', {
                     method: 'POST',
                     headers: {
