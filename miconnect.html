@@ -21,7 +21,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #121212 0%, #2a2a2a 100%); /* Updated to premium black-gray gradient */
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -38,7 +38,7 @@
         }
 
         .card {
-            background-color: #262626;
+            background-color: #1c1c1c; /* Updated to premium black */
             border-radius: 1rem;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             padding: 2.5rem;
@@ -52,7 +52,7 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            color: #d4af37;
+            color: #FF6700; /* Xiaomi Orange */
             text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
@@ -60,7 +60,7 @@
         }
 
         .description {
-            color: #a1a1aa;
+            color: #b0b0b0; /* Softer gray for premium contrast */
             text-align: left;
             font-size: 1rem;
             line-height: 1.5;
@@ -97,8 +97,8 @@
         select {
             width: 100%;
             padding: 0.75rem 1rem;
-            background-color: #333333;
-            border: 1px solid #444444;
+            background-color: #2a2a2a; /* Darker input background */
+            border: 1px solid #4A4A4A; /* Updated border color */
             border-radius: 0.5rem;
             font-size: 1rem;
             color: #e5e7eb;
@@ -108,8 +108,8 @@
         input[type="text"]:focus,
         select:focus {
             outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            border-color: #FF6700; /* Xiaomi Orange on focus */
+            box-shadow: 0 0 8px rgba(255, 103, 0, 0.3); /* Orange shadow */
         }
 
         select {
@@ -125,13 +125,13 @@
             position: absolute;
             right: 0.5rem;
             top: 2.5rem;
-            color: #a1a1aa;
+            color: #b0b0b0; /* Match description color */
             font-size: 0.75rem;
             cursor: pointer;
         }
 
         .access-text {
-            color: #d4af37;
+            color: #FF6700; /* Xiaomi Orange */
             font-size: 0.9rem;
             font-weight: 500;
             margin-bottom: 1.5rem;
@@ -148,7 +148,7 @@
         button {
             width: 100%;
             padding: 0.875rem;
-            background-color: #d4af37;
+            background-color: #FF6700; /* Xiaomi Orange */
             color: #1a1a1a;
             border: none;
             border-radius: 0.5rem;
@@ -159,13 +159,13 @@
         }
 
         button:hover:not(:disabled) {
-            background-color: #b8972f;
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+            background-color: #E55C00; /* Darker orange on hover */
+            box-shadow: 0 0 12px rgba(255, 103, 0, 0.5); /* Orange shadow */
             transform: translateY(-2px);
         }
 
         button:disabled {
-            background-color: #4b5563;
+            background-color: #666666; /* Muted gray for disabled state */
             cursor: not-allowed;
         }
 
@@ -224,13 +224,13 @@
 
         .footer {
             text-align: center;
-            color: #a1a1aa;
+            color: #b0b0b0; /* Softer gray for premium contrast */
             font-size: 0.8rem;
             margin-top: 2rem;
         }
 
         .footer a {
-            color: #d4af37;
+            color: #FF6700; /* Xiaomi Orange */
             text-decoration: none;
             font-weight: 500;
         }
@@ -303,20 +303,17 @@
         </div>
     </div>
     <script>
-        // Utility to show response messages
         const showResponse = (element, message, type) => {
             element.style.display = 'flex';
             element.className = `response ${type}`;
             element.textContent = message;
         };
 
-        // Utility to show fields or text with animation
         const showField = (element) => {
             element.style.display = element.tagName === 'P' ? 'block' : 'block';
             setTimeout(() => element.classList.add('visible'), 10);
         };
 
-        // Form and element references
         const connectForm = document.getElementById('connectForm');
         const connectResponse = document.getElementById('connectResponse');
         const checkButton = document.getElementById('checkCodename');
@@ -331,7 +328,6 @@
         const tokenInput = document.getElementById('token');
         let accessValue = '';
 
-        // Handle codename verification
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
             if (!codename || !/^[a-zA-Z0-9_]+$/.test(codename)) {
@@ -370,7 +366,6 @@
             }
         });
 
-        // Show next fields after region selection
         regionSelect.addEventListener('change', () => {
             if (regionSelect.value) {
                 const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
@@ -380,7 +375,6 @@
             }
         });
 
-        // Show token field after valid Account ID
         idInput.addEventListener('input', () => {
             const id = idInput.value.trim();
             if (id && /^\d+$/.test(id)) {
@@ -388,7 +382,6 @@
             }
         });
 
-        // Show submit button after valid Device Token
         tokenInput.addEventListener('input', () => {
             const token = tokenInput.value.trim();
             if (token) {
@@ -396,7 +389,6 @@
             }
         });
 
-        // Handle device unlocking
         connectForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const params = {
