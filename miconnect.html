@@ -22,76 +22,51 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 2rem;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             width: 100%;
             margin: 0 auto;
-            padding: 0 1rem;
         }
 
         .card {
-            background: #ffffff;
-            border-radius: 1rem;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            animation: fadeIn 0.5s ease-out;
-            position: relative;
-            transition: box-shadow 0.3s ease;
+            background-color: #fff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: box-shadow 0.3s ease-in-out;
         }
 
         .card:hover {
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
-            color: #1f2937;
+            color: #1e293b;
             text-align: center;
-            font-size: clamp(1.75rem, 5vw, 2rem);
+            font-size: 2.25rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 50%;
-            width: 50px;
-            height: 3px;
-            background: #6366f1;
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-
-        h1:hover::after {
-            width: 100px;
         }
 
         .description {
-            text-align: center;
-            color: #6b7280;
-            font-size: clamp(0.9rem, 4vw, 1rem);
+            color: #4b5563;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
         }
 
         .description ul {
             list-style: none;
-            text-align: left;
-            margin-top: 1rem;
-            padding-left: 1rem;
+            padding-left: 0;
         }
 
         .description li {
@@ -109,147 +84,120 @@
             top: 2px;
         }
 
-        .form-section {
-            margin-bottom: 1.5rem;
-        }
-
         .form-group {
-            margin-bottom: 1.25rem;
-            position: relative;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
-            color: #1f2937;
+            color: #374151;
             font-weight: 500;
-            font-size: clamp(0.9rem, 3.5vw, 0.95rem);
             margin-bottom: 0.5rem;
         }
 
-        input, select {
+        input[type="text"],
+        select {
             width: 100%;
-            padding: 0.85rem;
+            padding: 0.75rem;
             border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            background: #f9fafb;
-            font-size: clamp(0.9rem, 4vw, 1rem);
-            color: #1f2937;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            color: #1e293b;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease-in-out;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
         }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
-            transform: translateY(-2px);
-        }
-
-        input:invalid:not(:placeholder-shown) {
-            border-color: #ef4444;
-        }
-
-        select {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 0.85rem center;
-            background-size: 1rem;
-        }
-
         select#access {
-            font-size: 0.85rem;
-            padding: 0.5rem;
-            height: 2rem;
-            background-image: none;
-            border-radius: 0.375rem;
             width: auto;
-            min-width: 120px;
-            color: #1f2937;
-        }
-
-        select#access:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
-        }
-
-        select#access.mandatory {
-            background-color: #f97316;
-            color: #ffffff;
-        }
-
-        select#access.not-mandatory {
-            background-color: #22c55e;
-            color: #ffffff;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
         }
 
         .region-label {
             color: #6366f1;
-            font-size: clamp(0.85rem, 3.5vw, 0.9rem);
-            margin-left: 0.5rem;
+            font-size: 0.875rem;
+            margin-left: 0.25rem;
         }
 
         button {
+            display: block;
             width: 100%;
-            padding: 0.85rem;
-            background: linear-gradient(90deg, #6366f1, #4f46e5);
-            color: white;
+            padding: 0.875rem;
+            background-color: #6366f1;
+            color: #fff;
             border: none;
-            border-radius: 0.5rem;
-            font-size: clamp(0.95rem, 4vw, 1.1rem);
+            border-radius: 0.375rem;
+            font-size: 1.125rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
         }
 
         button:hover:not(:disabled) {
-            background: linear-gradient(90deg, #4f46e5, #4338ca);
+            background-color: #4f46e5;
             transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
         }
 
         button:disabled {
-            background: #9ca3af;
+            background-color: #9ca3af;
             cursor: not-allowed;
+        }
+
+        button.loading {
+            position: relative;
+            padding-right: 2.5rem;
         }
 
         button.loading::after {
             content: '';
-            display: inline-block;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            margin-top: -0.5rem;
             width: 1rem;
             height: 1rem;
-            border: 2px solid white;
+            border: 2px solid #fff;
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin-left: 0.5rem;
         }
 
         .response {
             margin-top: 1rem;
-            padding: 0.85rem 1rem;
-            border-radius: 0.5rem;
-            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
-            display: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.9rem;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            animation: slideIn 0.4s ease;
         }
 
         .success {
-            background: #f0fdf4;
-            color: #15803d;
+            background-color: #dcfce7;
+            color: #16a34a;
         }
 
         .error {
-            background: #fef2f2;
-            color: #b91c1c;
+            background-color: #fee2e2;
+            color: #dc2626;
         }
 
         .response::before {
@@ -265,142 +213,25 @@
             content: '\f06a';
         }
 
-        .divider {
-            border: 0;
-            border-top: 1px solid #d1d5db;
-            margin: 1.5rem 0;
-        }
-
         .footer {
             text-align: center;
-            color: #6b7280;
-            font-size: clamp(0.8rem, 3vw, 0.9rem);
-            margin-top: 1.5rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+            margin-top: 2rem;
         }
 
         .footer a {
             color: #6366f1;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
         }
 
         .footer a:hover {
-            color: #4f46e5;
             text-decoration: underline;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: 0 2rem;
-            }
-
-            .card {
-                padding: 2rem;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-
-            .form-section {
-                min-width: 300px;
-            }
-
-            .description {
-                min-width: 300px;
-            }
-
-            h1 {
-                grid-column: 1 / -1;
-            }
-
-            .divider {
-                display: none;
-            }
-
-            .footer {
-                grid-column: 1 / -1;
-            }
-        }
-
-        @media (max-width: 767px) {
-            body {
-                padding: 0.5rem;
-            }
-
-            .container {
-                padding: 0 0.5rem;
-            }
-
-            .card {
-                padding: 1rem;
-            }
-
-            .form-section, .description {
-                width: 100%;
-            }
-
-            button {
-                position: sticky;
-                bottom: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            html {
-                font-size: 14px;
-            }
-
-            .card {
-                padding: 0.75rem;
-            }
-
-            button {
-                padding: 0.75rem;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-
-        input, select, button {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        button:focus {
-            outline: 2px solid #6366f1;
-            outline-offset: 2px;
-        }
-
-        @media (prefers-contrast: high) {
-            .card {
-                background: #ffffff;
-                border-color: #000000;
-            }
-
-            button {
-                border: 1px solid #000000;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none;
-                transition: none;
-            }
         }
     </style>
 </head>
@@ -409,37 +240,37 @@
         <div class="card">
             <h1>MiConnect</h1>
             <div class="description">
-                <p>Service allows to unlock the bootloader for Xiaomi devices:</p>
+                <p>This service facilitates the unlocking of the bootloader on Xiaomi devices, addressing various scenarios like:</p>
                 <ul>
-                    <li>Devices operating normally</li>
-                    <li>Damaged devices unable to enter normal mode</li>
-                    <li>SIM does not work, for several reasons</li>
-                    <li>Errors while binding account in developer options</li>
+                    <li>Functioning devices in normal operating mode.</li>
+                    <li>Damaged devices unable to boot into normal mode.</li>
+                    <li>Issues with SIM card functionality.</li>
+                    <li>Errors encountered while binding a Mi Account in developer options.</li>
                 </ul>
             </div>
             <div class="form-section">
                 <form id="checkerForm" aria-label="Check Device Codename">
                     <div class="form-group">
                         <label for="codename">Device Codename</label>
-                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off" aria-required="true" required>
+                        <input type="text" id="codename" name="codename" placeholder="Enter device codename" autocomplete="off" required>
                     </div>
-                    <button type="button" id="checkCodename">Check</button>
+                    <button type="button" id="checkCodename">Check Codename</button>
                 </form>
-                <div id="checkResponse" class="response" role="alert"></div>
+                <div id="checkResponse" class="response" style="display: none;" role="alert"></div>
             </div>
             <div class="form-section">
                 <form id="workerForm" aria-label="Connect Device">
                     <div class="form-group">
-                        <label for="access">Account ID Apply for authorization | Xiaomi Community:</label>
-                        <select id="access" name="access" required disabled aria-required="true">
-                            <option value="" disabled selected>?</option>
+                        <label for="access">Account ID Authorization | Xiaomi Community:</label>
+                        <select id="access" name="access" required disabled>
+                            <option value="" disabled selected>Select</option>
                             <option value="mandatory">Mandatory</option>
                             <option value="not_mandatory">Not Mandatory</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="region">Device Region</label>
-                        <select id="region" name="region" required aria-required="true">
+                        <select id="region" name="region" required>
                             <option value="" disabled selected>Select device region</option>
                             <option value="cn">China</option>
                             <option value="g">Global</option>
@@ -447,15 +278,15 @@
                     </div>
                     <div class="form-group">
                         <label for="id">Account ID <span class="region-label" id="regionLabel"></span></label>
-                        <input type="text" id="id" name="id" required placeholder="Enter your Account ID" disabled autocomplete="off" aria-required="true">
+                        <input type="text" id="id" name="id" required placeholder="Enter your Account ID" autocomplete="off" disabled>
                     </div>
                     <div class="form-group">
                         <label for="token">Device Token</label>
-                        <input type="text" id="token" name="token" required placeholder="Enter your Device Token" disabled autocomplete="off" aria-required="true">
+                        <input type="text" id="token" name="token" required placeholder="Enter your Device Token" autocomplete="off" disabled>
                     </div>
                     <button type="submit" disabled>Connect Device</button>
                 </form>
-                <div id="connectResponse" class="response" role="alert"></div>
+                <div id="connectResponse" class="response" style="display: none;" role="alert"></div>
             </div>
             <div class="footer">
                 <p>Version: 1.0.0</p>
@@ -468,7 +299,6 @@
             element.style.display = 'flex';
             element.className = `response ${type}`;
             element.textContent = message;
-            element.setAttribute('aria-live', 'assertive');
         };
 
         const checkerForm = document.getElementById('checkerForm');
@@ -484,34 +314,21 @@
         const regionSelect = document.getElementById('region');
         const regionLabel = document.getElementById('regionLabel');
 
-        // Function to update access select color
         const updateAccessColor = () => {
+            accessSelect.classList.remove('mandatory', 'not-mandatory');
             if (accessSelect.value === 'mandatory') {
-                accessSelect.classList.remove('not-mandatory');
                 accessSelect.classList.add('mandatory');
             } else if (accessSelect.value === 'not_mandatory') {
-                accessSelect.classList.remove('mandatory');
                 accessSelect.classList.add('not-mandatory');
-            } else {
-                accessSelect.classList.remove('mandatory', 'not-mandatory');
             }
         };
 
-        // Update color when access value changes
         accessSelect.addEventListener('change', updateAccessColor);
 
         regionSelect.addEventListener('change', () => {
             const region = regionSelect.value;
-            if (region === 'cn') {
-                regionLabel.textContent = '(China)';
-                idInput.disabled = false;
-            } else if (region === 'g') {
-                regionLabel.textContent = '(Global)';
-                idInput.disabled = false;
-            } else {
-                regionLabel.textContent = '';
-                idInput.disabled = true;
-            }
+            regionLabel.textContent = region === 'cn' ? '(China)' : region === 'g' ? '(Global)' : '';
+            idInput.disabled = !region;
         });
 
         checkButton.addEventListener('click', async () => {
@@ -542,25 +359,12 @@
                 const data = await response.json();
 
                 if (response.ok && 'result' in data) {
-                    if (data.result === 0) {
-                        tokenInput.disabled = false;
-                        submitButton.disabled = false;
-                        regionSelect.disabled = false;
-                        accessSelect.disabled = false;
-                        accessSelect.value = 'not_mandatory';
-                        accessSelect.disabled = true;
-                        updateAccessColor();
-                    } else if (data.result === 1) {
-                        tokenInput.disabled = false;
-                        submitButton.disabled = false;
-                        regionSelect.disabled = false;
-                        accessSelect.disabled = false;
-                        accessSelect.value = 'mandatory';
-                        accessSelect.disabled = true;
-                        updateAccessColor();
-                    } else {
-                        showResponse(checkResponse, 'Unexpected response from the server.', 'error');
-                    }
+                    tokenInput.disabled = false;
+                    submitButton.disabled = false;
+                    regionSelect.disabled = false;
+                    accessSelect.disabled = false;
+                    accessSelect.value = data.result === 1 ? 'mandatory' : 'not_mandatory';
+                    updateAccessColor();
                 } else {
                     showResponse(checkResponse, data.error || 'Failed to verify codename.', 'error');
                 }
@@ -569,7 +373,7 @@
             } finally {
                 checkButton.disabled = false;
                 checkButton.classList.remove('loading');
-                checkButton.textContent = 'Check';
+                checkButton.textContent = 'Check Codename';
             }
         });
 
@@ -604,19 +408,12 @@
                     body: JSON.stringify(params)
                 });
 
-                let data;
-                try {
-                    data = await response.json();
-                } catch {
-                    const text = await response.text();
-                    showResponse(connectResponse, `Server returned non-JSON response: ${text}`, 'error');
-                    return;
-                }
+                const data = await response.json();
 
                 if (response.ok && (data.success || data.status === 'success')) {
                     showResponse(connectResponse, 'Device connected successfully!', 'success');
                 } else {
-                    const errorMessage = data.error || data.message || data.errorMessage || data.reason || 'Failed to connect the device.';
+                    const errorMessage = data.error || data.message || 'Failed to connect the device.';
                     showResponse(connectResponse, errorMessage, 'error');
                 }
             } catch (error) {
@@ -630,3 +427,4 @@
     </script>
 </body>
 </html>
+
