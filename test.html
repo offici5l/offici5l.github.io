@@ -295,9 +295,9 @@
                 <div id="tokenField" class="form-group" style="display: none;">
                     <label for="token">Device Token</label>
                     <input type="text" id="token" name="token" placeholder="Enter your Device Token" autocomplete="off" required>
-                    <span class="tooltip" title="Obtain your token via developer options"><i class="fas fa-info-circle"></i></span>
+                    <span class="tooltip" title="Obtain your token via fastboot commands"><i class="fas fa-info-circle"></i></span>
                 </div>
-                <button type="submit" id="submitButton" style="display: none;">Unlock Device</button>
+                <button type="submit" id="submitButton" style="display: none;">Connect</button>
                 <div id="connectResponse" class="response" style="display: none;" role="alert" aria-live="polite"></div>
             </form>
             <div class="footer">
@@ -307,17 +307,20 @@
         </div>
     </div>
     <script>
+        // Utility to show response messages
         const showResponse = (element, message, type) => {
             element.style.display = 'flex';
             element.className = `response ${type}`;
             element.textContent = message;
         };
 
+        // Utility to show fields or text with animation
         const showField = (element) => {
             element.style.display = element.tagName === 'P' ? 'block' : 'block';
             setTimeout(() => element.classList.add('visible'), 10);
         };
 
+        // Form and element references
         const connectForm = document.getElementById('connectForm');
         const connectResponse = document.getElementById('connectResponse');
         const checkButton = document.getElementById('checkCodename');
@@ -332,6 +335,7 @@
         const tokenInput = document.getElementById('token');
         let accessValue = '';
 
+        // Handle codename verification
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
             if (!codename || !/^[a-zA-Z0-9_]+$/.test(codename)) {
@@ -353,8 +357,14 @@
                 });
                 const data = await response.json();
                 if (response.ok && 'result' in data) {
-                    showField(regionField);
                     accessValue = data.result === 1 ? 'yes' : 'no';
+                    showField(regionField);
+                    // Update accessText if region is already selected
+                    if (regionSelect.value) {
+                        const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
+                        accessText.textContent = `Account ID (${regionName}) Authorization | Xiaomi Community: ${accessValue === 'yes' ? 'Mandatory' : 'Not Mandatory'}`;
+                        showField(accessText);
+                    }
                 }
             } catch (error) {
             } finally {
@@ -364,6 +374,7 @@
             }
         });
 
+        // Show next fields after region selection
         regionSelect.addEventListener('change', () => {
             if (regionSelect.value) {
                 const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
@@ -373,6 +384,7 @@
             }
         });
 
+        // Show token field after valid Account ID
         idInput.addEventListener('input', () => {
             const id = idInput.value.trim();
             if (id && /^\d+$/.test(id)) {
@@ -380,6 +392,7 @@
             }
         });
 
+        // Show submit button after valid Device Token
         tokenInput.addEventListener('input', () => {
             const token = tokenInput.value.trim();
             if (token) {
@@ -387,6 +400,7 @@
             }
         });
 
+        // Handle device unlocking
         connectForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const params = {
@@ -428,7 +442,7 @@
             } finally {
                 submitButton.disabled = false;
                 submitButton.classList.remove('loading');
-                submitButton.textContent = 'Unlock Device';
+                submitButton.textContent = 'Connect';
             }
         });
     </script>
