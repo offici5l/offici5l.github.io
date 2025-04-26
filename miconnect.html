@@ -271,15 +271,15 @@
                     <li>Errors encountered while binding a Mi Account in developer options.</li>
                 </ul>
             </div>
-            <form id="connectForm" aria-label="Unlock Device">
+            <form id="connectForm" aria-label="Connect Device">
                 <div class="form-group visible">
                     <input type="text" id="codename" name="codename" placeholder="codename" autocomplete="off" required>
-                    <span class="tooltip" title="Find your codename in device settings or online"><i class="fas fa-info-circle"></i></span>
+                    <span class="tooltip" title="fastboot getvar product"><i class="fas fa-info-circle"></i></span>
                 </div>
                 <button type="button" id="checkCodename">Start</button>
                 <div id="regionField" class="form-group" style="display: none;">
                     <select id="region" name="region" required>
-                        <option value="" disabled selected>Select region</option>
+                        <option value="" disabled selected>Select device region</option>
                         <option value="cn">China</option>
                         <option value="g">Global</option>
                     </select>
@@ -287,7 +287,7 @@
                 <p id="accessText" class="access-text" style="display: none;"></p>
                 <div id="idField" class="form-group" style="display: none;">
                     <input type="text" id="id" name="id" placeholder="Enter your Account ID" autocomplete="off" required>
-                    <span class="tooltip" title="Find your Account ID in Mi Account settings"><i class="fas fa-info-circle"></i></span>
+                    <span class="tooltip" title="Find your Account ID in Mi Account settings or account.xiaomi.com"><i class="fas fa-info-circle"></i></span>
                 </div>
                 <div id="tokenField" class="form-group" style="display: none;">
                     <input type="text" id="token" name="token" placeholder="Enter your Device Token" autocomplete="off" required>
