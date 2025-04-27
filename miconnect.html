@@ -136,6 +136,14 @@
             transform: translateY(0);
         }
 
+        .authorization-status.mandatory {
+            color: #FF0000;
+        }
+
+        .authorization-status.not-mandatory {
+            color: #00FF00;
+        }
+
         button {
             width: 100%;
             padding: 0.875rem;
@@ -162,7 +170,6 @@
 
         button.loading {
             position: relative;
-            padding部分
             padding-right: 2.5rem;
         }
 
@@ -237,6 +244,98 @@
             text-decoration: underline;
         }
 
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #1c1c1c;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            color: #e5e7eb;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: #FF6700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content pre {
+            background-color: #2a2a2a;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            color: #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.75rem;
+            font-size: 1.5rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #FF6700;
+        }
+
+        .input-with-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-with-button input[type="text"] {
+            flex: 1;
+        }
+
+        .input-with-button button {
+            width: auto;
+            padding: 0.5rem;
+            background: none;
+            border: 1px solid #4A4A4A;
+            border-radius: 0.5rem;
+            color: #FF6700;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .input-with-button button:hover:not(:disabled) {
+            background-color: #2a2a2a;
+            color: #E55C00;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -281,12 +380,19 @@
                         <option value="g">Global</option>
                     </select>
                 </div>
-                <p id="accessText" class="access-text" style="display: none;"></p>
+                <p id="accessText" class="access-text" style="display: none;">
+                    <span class="authorization-label">Account ID (Global) Authorization | Xiaomi Community: </span>
+                    <span class="authorization-status"></span>
+                </p>
                 <div id="idField" class="form-group" style="display: none;">
                     <input type="text" id="id" name="id" placeholder="Enter Account ID" autocomplete="off" required>
                 </div>
                 <div id="tokenField" class="form-group" style="display: none;">
-                    <input type="text" id="token" name="token" placeholder="Enter Token" autocomplete="off" required>
+                    <label for="token">Token</label>
+                    <div class="input-with-button">
+                        <input type="text" id="token" name="token" placeholder="Enter Token" autocomplete="off" required>
+                        <button type="button" id="tokenHelpButton"><i class="fas fa-question-circle"></i></button>
+                    </div>
                 </div>
                 <div class="form-group" id="termsField" style="display: none;">
                     <label for="terms">
@@ -301,6 +407,19 @@
                 <p>Version: 1.0.0</p>
                 <p>Contact: <a href="mailto:offici5lcontact@proton.me">offici5lcontact@proton.me</a></p>
             </div>
+        </div>
+    </div>
+    <div id="tokenModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close">×</span>
+            <h2>How to Get the Token</h2>
+            <p>To obtain the token, use one of the following commands in fastboot mode:</p>
+            <pre>
+fastboot getvar token
+or
+fastboot oem get_token
+            </pre>
+            <p>If the token appears in multiple parts, copy them and join them into one single line — no spaces or breaks.</p>
         </div>
     </div>
     <script>
@@ -329,6 +448,10 @@
         const idInput = document.getElementById('id');
         const tokenInput = document.getElementById('token');
         const termsCheckbox = document.getElementById('terms');
+        const tokenHelpButton = document.getElementById('tokenHelpButton');
+        const tokenModal = document.getElementById('tokenModal');
+        const closeModal = document.getElementById('closeModal');
+        const authorizationStatus = document.querySelector('.authorization-status');
         let accessValue = '';
 
         checkButton.addEventListener('click', async () => {
@@ -356,7 +479,11 @@
                     showField(regionField);
                     if (regionSelect.value) {
                         const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
-                        accessText.textContent = `Account ID (${regionName}) Authorization | Xiaomi Community: ${accessValue === 'yes' ? 'Mandatory' : 'Not Mandatory'}`;
+                        const statusText = accessValue === 'yes' ? 'Mandatory' : 'Not Mandatory';
+                        const statusClass = accessValue === 'yes' ? 'mandatory' : 'not-mandatory';
+                        document.querySelector('.authorization-label').textContent = `Account ID (${regionName}) Authorization | Xiaomi Community: `;
+                        authorizationStatus.textContent = statusText;
+                        authorizationStatus.className = `authorization-status ${statusClass}`;
                         showField(accessText);
                     }
                 }
@@ -371,7 +498,11 @@
         regionSelect.addEventListener('change', () => {
             if (regionSelect.value) {
                 const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
-                accessText.textContent = `Account ID (${regionName}) Authorization | Xiaomi Community: ${accessValue === 'yes' ? 'Mandatory' : 'Not Mandatory'}`;
+                const statusText = accessValue === 'yes' ? 'Mandatory' : 'Not Mandatory';
+                const statusClass = accessValue === 'yes' ? 'mandatory' : 'not-mandatory';
+                document.querySelector('.authorization-label').textContent = `Account ID (${regionName}) Authorization | Xiaomi Community: `;
+                authorizationStatus.textContent = statusText;
+                authorizationStatus.className = `authorization-status ${statusClass}`;
                 showField(accessText);
                 showField(idField);
             }
@@ -389,6 +520,23 @@
             if (token) {
                 showField(termsField);
                 showField(submitButton);
+            }
+        });
+
+        tokenHelpButton.addEventListener('click', () => {
+            tokenModal.style.display = 'flex';
+            setTimeout(() => tokenModal.classList.add('show'), 10);
+        });
+
+        closeModal.addEventListener('click', () => {
+            tokenModal.classList.remove('show');
+            setTimeout(() => tokenModal.style.display = 'none', 300);
+        });
+
+        tokenModal.addEventListener('click', (event) => {
+            if (event.target === tokenModal) {
+                tokenModal.classList.remove('show');
+                setTimeout(() => tokenModal.style.display = 'none', 300);
             }
         });
 
