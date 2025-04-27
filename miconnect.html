@@ -121,15 +121,6 @@
             appearance: none;
         }
 
-        .tooltip {
-            position: absolute;
-            right: 0.5rem;
-            top: 2.5rem;
-            color: #b0b0b0;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-
         .access-text {
             color: #FF6700;
             font-size: 0.9rem;
@@ -171,6 +162,7 @@
 
         button.loading {
             position: relative;
+            padding部分
             padding-right: 2.5rem;
         }
 
@@ -280,7 +272,6 @@
             <form id="connectForm" aria-label="Connect Device">
                 <div class="form-group visible">
                     <input type="text" id="codename" name="codename" placeholder="codename" autocomplete="off" required>
-                    <span class="tooltip" title="fastboot getvar product"><i class="fas fa-info-circle"></i></span>
                 </div>
                 <button type="button" id="checkCodename">Start</button>
                 <div id="regionField" class="form-group" style="display: none;">
@@ -293,11 +284,9 @@
                 <p id="accessText" class="access-text" style="display: none;"></p>
                 <div id="idField" class="form-group" style="display: none;">
                     <input type="text" id="id" name="id" placeholder="Enter your Account ID" autocomplete="off" required>
-                    <span class="tooltip" title="Find your Account ID in Mi Account settings or account.xiaomi.com"><i class="fas fa-info-circle"></i></span>
                 </div>
                 <div id="tokenField" class="form-group" style="display: none;">
                     <input type="text" id="token" name="token" placeholder="Enter your Device Token" autocomplete="off" required>
-                    <span class="tooltip" title="Obtain your token via fastboot commands"><i class="fas fa-info-circle"></i></span>
                 </div>
                 <div class="form-group" id="termsField" style="display: none;">
                     <label for="terms">
