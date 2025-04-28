@@ -248,6 +248,41 @@
             text-decoration: underline;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #1E90FF;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #4682B4;
+            filter: brightness(1.2);
+            text-decoration: underline;
+        }
+
+        .social-link i {
+            font-size: 0.9rem;
+            color: #1E90FF;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-link:hover i {
+            transform: translateX(3px);
+            color: #4682B4;
+        }
+
         .modal {
             position: fixed;
             top: 0;
@@ -399,6 +434,15 @@
             #regionField {
                 margin-top: 0.75rem;
             }
+            .social-links {
+                gap: 1rem;
+            }
+            .social-link {
+                font-size: 0.8rem;
+            }
+            .social-link i {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -455,6 +499,14 @@
             <div class="footer">
                 <p>Version: 1.0.0</p>
                 <p>Contact: <a href="mailto:offici5lcontact@proton.me">offici5lcontact@proton.me</a></p>
+                <div class="social-links">
+                    <a href="https://x.com/offici5l" class="social-link" target="_blank">
+                        <i class="fab fa-x-twitter"></i> Follow us on X
+                    </a>
+                    <a href="https://github.com/offici5l" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i> Check our GitHub
+                    </a>
+                </div>
             </div>
         </div>
     </div>
