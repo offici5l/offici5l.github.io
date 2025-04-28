@@ -85,6 +85,10 @@
             transform: translateY(0);
         }
 
+        #regionField {
+            margin-top: 1rem;
+        }
+
         label {
             color: #e5e7eb;
             font-size: 0.9rem;
@@ -125,7 +129,7 @@
             color: #FF6700;
             font-size: 0.9rem;
             font-weight: 500;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
@@ -336,6 +340,43 @@
             color: #E55C00;
         }
 
+        .china-account-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.3rem;
+            color: #1E90FF;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            cursor: pointer;
+        }
+
+        .china-account-link.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .china-account-link:hover {
+            color: #4682B4;
+            filter: brightness(1.2);
+            text-decoration: underline;
+        }
+
+        .china-account-link i {
+            font-size: 0.8rem;
+            color: #1E90FF;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .china-account-link:hover i {
+            transform: translateX(3px);
+            color: #4682B4;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -351,6 +392,12 @@
             }
             h1 {
                 font-size: 2rem;
+            }
+            .china-account-link {
+                font-size: 0.8rem;
+            }
+            #regionField {
+                margin-top: 0.75rem;
             }
         }
     </style>
@@ -384,6 +431,9 @@
                     <span class="authorization-label">Account ID (Global) Authorization | Xiaomi Community: </span>
                     <span class="authorization-status"></span>
                 </p>
+                <a id="chinaAccountButton" class="china-account-link" href="https://offici5l.github.io/micnregister" target="_blank" style="display: none;">
+                    <i class="fas fa-link"></i> Create a Chinese account for free
+                </a>
                 <div id="idField" class="form-group" style="display: none;">
                     <input type="text" id="id" name="id" placeholder="Enter Account ID" autocomplete="off" required>
                 </div>
@@ -452,7 +502,18 @@ fastboot oem get_token
         const tokenModal = document.getElementById('tokenModal');
         const closeModal = document.getElementById('closeModal');
         const authorizationStatus = document.querySelector('.authorization-status');
+        const chinaAccountButton = document.getElementById('chinaAccountButton');
         let accessValue = '';
+
+        const toggleChinaAccountButton = () => {
+            if (regionSelect.value === 'cn') {
+                chinaAccountButton.style.display = 'inline-flex';
+                setTimeout(() => chinaAccountButton.classList.add('visible'), 10);
+            } else {
+                chinaAccountButton.style.display = 'none';
+                chinaAccountButton.classList.remove('visible');
+            }
+        };
 
         checkButton.addEventListener('click', async () => {
             const codename = codenameInput.value.trim();
@@ -476,6 +537,8 @@ fastboot oem get_token
                 const data = await response.json();
                 if (response.ok && 'result' in data) {
                     accessValue = data.result === 1 ? 'yes' : 'no';
+                    chinaAccountButton.style.display = 'none';
+                    chinaAccountButton.classList.remove('visible');
                     showField(regionField);
                     if (regionSelect.value) {
                         const regionName = regionSelect.value === 'cn' ? 'China' : 'Global';
@@ -505,6 +568,7 @@ fastboot oem get_token
                 authorizationStatus.className = `authorization-status ${statusClass}`;
                 showField(accessText);
                 showField(idField);
+                toggleChinaAccountButton();
             }
         });
 
