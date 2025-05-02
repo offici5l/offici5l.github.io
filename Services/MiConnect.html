@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MiConnect</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #121212 0%, #2a2a2a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            color: #e5e7eb;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"%3E%3Ccircle cx="100" cy="100" r="3" fill="%23FF6700" opacity="0.3"/%3E%3Ccircle cx="800" cy="200" r="4" fill="%23FF6700" opacity="0.4"/%3E%3Ccircle cx="300" cy="700" r="3" fill="%23FF6700" opacity="0.3"/%3E%3Ccircle cx="900" cy="900" r="4" fill="%23FF6700" opacity="0.4"/%3E%3Ccircle cx="500" cy="500" r="3" fill="%23FF6700" opacity="0.3"/%3E%3C/svg%3E') repeat;
+            animation: float 15s infinite linear;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            background: rgba(28, 28, 28, 0.95);
+            border-radius: 1.5rem;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 103, 0, 0.1);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 103, 0, 0.2);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #FF6700;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 103, 0, 0.15), rgba(255, 103, 0, 0.05));
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 103, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(255, 103, 0, 0.2);
+            max-width: 450px;
+            position: relative;
+        }
+
+        .countdown-container.expired {
+            background: linear-gradient(135deg, rgba(100, 100, 100, 0.15), rgba(100, 100, 100, 0.05));
+            border: 1px solid rgba(100, 100, 100, 0.4);
+            animation: fadeExpired 0.5s ease forwards;
+        }
+
+        .countdown-container.expired::after {
+            content: 'EXPIRED';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 1rem;
+            font-weight: 700;
+            color: #FF6700;
+            opacity: 0.7;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: stampAppear 0.8s ease forwards;
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e5e7eb;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.2s ease;
+        }
+
+        .countdown-title.expired {
+            font-size: 1.4rem;
+            color: #e5e7eb;
+            animation: none;
+        }
+
+        .countdown-items {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .countdown-item {
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(255, 103, 0, 0.1);
+            border-radius: 0.6rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            flex: 1;
+        }
+
+        .countdown-item:hover {
+            transform: scale(1.05);
+        }
+
+        .countdown-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #FF6700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            line-height: 1.2;
+            animation: pulse 2s infinite;
+        }
+
+        .countdown-container.expired .countdown-value {
+            animation: none;
+            color: #b0b0b0;
+        }
+
+        .countdown-label {
+            font-size: 0.7rem;
+            color: #e5e7eb;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .countdown-container.expired .countdown-label {
+            color: #b0b0b0;
+        }
+
+        .service-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.875rem;
+            background-color: #FF6700;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .service-button:hover {
+            background-color: #E55C00;
+            box-shadow: 0 0 12px rgba(255, 103, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .service-button i {
+            font-size: 0.9rem;
+        }
+
+        .description {
+            color: #b0b0b0;
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            padding: 0 0.5rem;
+        }
+
+        .description h2 {
+            font-family: 'Playfair Display', serif;
+            color: #FF6700;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .description p {
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .description ul {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .description ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .description strong {
+            color: #e5e7eb;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        @keyframes fadeExpired {
+            from { opacity: 1; }
+            to { opacity: 0.7; }
+        }
+
+        @keyframes stampAppear {
+            from { opacity: 0; transform: translate(-50%, -50%) rotate(-15deg) scale(0.5); }
+            to { opacity: 0.7; transform: translate(-50%, -50%) rotate(-15deg) scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .countdown-container {
+                gap: 0.6rem;
+                padding: 1rem;
+                max-width: 100%;
+            }
+            .countdown-title {
+                font-size: 1.4rem;
+            }
+            .countdown-title.expired {
+                font-size: 1.2rem;
+            }
+            .countdown-items {
+                gap: 0.6rem;
+            }
+            .countdown-item {
+                padding: 0.6rem;
+                min-width: 50px;
+            }
+            .countdown-value {
+                font-size: 1.4rem;
+            }
+            .countdown-label {
+                font-size: 0.6rem;
+            }
+            .service-button {
+                font-size: 0.9rem;
+                padding: 0.75rem;
+            }
+            .description {
+                font-size: 0.9rem;
+                padding: 0 0.25rem;
+            }
+            .description h2 {
+                font-size: 1.3rem;
+            }
+            .description ul {
+                padding-left: 1rem;
+            }
+            .description ul li {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+            }
+            .countdown-container.expired::after {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .countdown-item {
+                min-width: 45px;
+                padding: 0.5rem;
+            }
+            .countdown-value {
+                font-size: 1.2rem;
+            }
+            .countdown-label {
+                font-size: 0.55rem;
+            }
+        }
+
+        .card {
+            -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
+            -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+            -ms-transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .countdown-item {
+            -webkit-transition: transform 0.3s ease;
+            -moz-transition: transform 0.3s ease;
+            -ms-transition: transform 0.3s ease;
+        }
+
+        .particles {
+            -webkit-animation: float 15s infinite linear;
+            -moz-animation: float 15s infinite linear;
+            -ms-animation: float 15s infinite linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    <div class="container">
+        <div class="card">
+            <h1>MiConnect</h1>
+            <div class="countdown-container" id="countdown">
+                <div class="countdown-title" id="countdown-title">Free trial starts May 2, 2025, 16:00 UTC!</div>
+                <div class="countdown-items" id="countdown-items">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <h2>About MiConnect Service</h2>
+                <p>MiConnect is a service that enables you to link your Xiaomi device to servers, allowing you to immediately use the bootloader unlocking tool.</p>
+                <h2>Purpose of the Service</h2>
+                <ul>
+                    <li>Devices unable to enter normal mode due to any issue (non-bootable).</li>
+                    <li>Devices with SIM card issues, such as inability to connect to the internet, damaged SIM slots, or similar problems.</li>
+                    <li>Other issues affecting device functionality.</li>
+                    <li>Devices operating in normal mode.</li>
+                </ul>
+                <h2>Supported Devices</h2>
+                <p>MIUI, HyperOS 1, HyperOS 2.</p>
+                <h2>Account ID Authorization (?) | Xiaomi Community</h2>
+                <p><strong>Not Mandatory:</strong> If the status is "Not Mandatory," a Xiaomi account does not require authorization from the Mi Community. Even if the device is HyperOS 1, HyperOS 2.</p>
+                <p><strong>Mandatory:</strong> If the status is "Mandatory," a Xiaomi account must have authorization from the Mi Community.</p>
+                <a href="https://offici5l.github.io/miconnect" class="service-button" target="_blank">
+                    <i class="fas fa-arrow-right"></i> Go to MiConnect
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const startDate = new Date('2025-05-02T16:00:00Z').getTime();
+        const freePeriodEnd = startDate + 5 * 24 * 60 * 60 * 1000;
+
+        const countdownContainer = document.getElementById('countdown');
+        const countdownTitle = document.getElementById('countdown-title');
+        const countdownItems = document.getElementById('countdown-items');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            let distance;
+
+            if (now < startDate) {
+                distance = startDate - now;
+                countdownTitle.textContent = "Free trial starts May 2, 2025, 16:00 UTC!";
+                countdownTitle.classList.remove('expired');
+                countdownItems.style.display = 'flex';
+                countdownContainer.classList.remove('expired');
+            } else if (now < freePeriodEnd) {
+                distance = freePeriodEnd - now;
+                countdownTitle.textContent = "MiConnect is free now!";
+                countdownTitle.classList.remove('expired');
+                countdownItems.style.display = 'flex';
+                countdownContainer.classList.remove('expired');
+            } else {
+                countdownTitle.textContent = "5 days free trial ended";
+                countdownTitle.classList.add('expired');
+                countdownItems.style.display = 'none';
+                countdownContainer.classList.add('expired');
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            daysEl.textContent = days.toString().padStart(2, '0');
+            hoursEl.textContent = hours.toString().padStart(2, '0');
+            minutesEl.textContent = minutes.toString().padStart(2, '0');
+            secondsEl.textContent = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
