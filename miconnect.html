@@ -74,29 +74,27 @@
         }
 
         .description {
-            color: #b0b0b0;
-            text-align: left;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            text-align: center;
             margin-bottom: 1.5rem;
-            padding: 0 0.5rem;
         }
 
-        .description p {
-            margin-bottom: 0.75rem;
-            font-weight: 400;
+        .info-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #FF6700;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-align: center;
         }
 
-        .description ul {
-            list-style-type: disc;
-            padding-left: 1.25rem;
-            margin-top: 0;
-        }
-
-        .description ul li {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .info-button:hover {
+            background-color: #E55C00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 103, 0, 0.3);
         }
 
         .form-group {
@@ -260,7 +258,7 @@
 
         .footer {
             text-align: center;
-            color: #b0b0b0;
+            color: #b0b0b    				color: #b0b0b0;
             font-size: 0.8rem;
             margin-top: 2rem;
         }
@@ -391,7 +389,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .Replacinput-with-button button:hover:not(:disabled) {
+        .input-with-button button:hover:not(:disabled) {
             background-color: #2a2a2a;
             color: #E55C00;
         }
@@ -465,16 +463,9 @@
                 font-size: 0.7rem;
                 padding: 0.2rem 0.4rem;
             }
-            .description {
-                font-size: 0.9rem;
-                padding: 0 0.25rem;
-            }
-            .description ul {
-                padding-left: 1rem;
-            }
-            .description ul li {
-                font-size: 0.9rem;
-                margin-bottom: 0.4rem;
+            .info-button {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
             }
         }
     </style>
@@ -485,12 +476,7 @@
             <span class="version">V.1</span>
             <h1>MiConnect</h1>
             <div class="description">
-                <p>is a service that links your Xiaomi device (Global or China) to servers, allowing you to use the bootloader unlocking tool. It addresses scenarios such as:</p>
-                <ul>
-                    <li>Devices that cannot enter normal mode (non-bootable).</li>
-                    <li>Damaged SIM card slots (or similar issues).</li>
-                    <li>Other</li>
-                </ul>
+                <a href="https://offici5l.github.io/Services/MiConnect" target="_blank" class="info-button">What is MiConnect Service?</a>
             </div>
             <form id="connectForm" aria-label="Connect Device">
                 <div class="form-group visible">
