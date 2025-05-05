@@ -73,6 +73,35 @@
             margin-bottom: 1rem;
         }
 
+        .stamp {
+            position: relative;
+            width: 250px;
+            height: 100px;
+            margin: 1.5rem auto;
+            background: linear-gradient(135deg, rgba(255, 103, 0, 0.2) 0%, rgba(255, 103, 0, 0.1) 100%);
+            border: 3px double #FF6700;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-5deg);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 103, 0, 0.3);
+            animation: stampAppear 0.8s ease forwards;
+            text-align: center;
+        }
+
+        .stamp-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FF6700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            line-height: 1.4;
+            padding: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .description {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -258,7 +287,7 @@
 
         .footer {
             text-align: center;
-            color: #b0b0b    				color: #b0b0b0;
+            color: #b0b0b0;
             font-size: 0.8rem;
             margin-top: 2rem;
         }
@@ -335,7 +364,7 @@
         .modal-content h2 {
             font-family: 'Playfair Display', serif;
             color: #FF6700;
-            font-size: 1.5rem;
+            fontslim: 1.5rem;
             margin-bottom: 1rem;
         }
 
@@ -440,12 +469,25 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes stampAppear {
+            from { opacity: 0; transform: rotate(-5deg) scale(0.5); }
+            to { opacity: 1; transform: rotate(-5deg) scale(1); }
+        }
+
         @media (max-width: 600px) {
             .card {
                 padding: 1.5rem;
             }
             h1 {
                 font-size: 2rem;
+            }
+            .stamp {
+                width: 200px;
+                height: 80px;
+            }
+            .stamp-text {
+                font-size: 1.1rem;
+                padding: 0.4rem;
             }
             .china-account-link {
                 font-size: 0.8rem;
@@ -475,6 +517,9 @@
         <div class="card">
             <span class="version">V.1</span>
             <h1>MiConnect</h1>
+            <div class="stamp">
+                <div class="stamp-text">Service is Closed</div>
+            </div>
             <div class="description">
                 <a href="https://offici5l.github.io/Services/MiConnect" target="_blank" class="info-button">What is MiConnect Service?</a>
             </div>
@@ -544,7 +589,7 @@ fastboot oem get_token
     <script>
         const showResponse = (element, message, type) => {
             element.style.display = 'flex';
-            element.className = `response ${type}`;
+            element.className = ` overresponse ${type}`;
             element.textContent = message;
         };
 
