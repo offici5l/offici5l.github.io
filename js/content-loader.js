@@ -16,7 +16,8 @@ async function loadMarkdownFile(filePath) {
     }
 
     try {
-        const loadPromise = fetch(filePath).then(async response => {
+        // MODIFICATION CLÉ ICI : Utilisation d'un chemin absolu pour filePath
+        const loadPromise = fetch(`/${filePath}`).then(async response => {
             if (!response.ok) {
                 throw new Error(`Failed to load ${filePath}: ${response.status}`);
             }
@@ -134,7 +135,8 @@ function markdownToHtml(markdown) {
 // Optimized directory scanning with better error handling
 async function scanDirectoryForMarkdown(directory, basePath = "") {
     try {
-        const response = await fetch("content_index.json");
+        // MODIFICATION CLÉ ICI : Utilisation d'un chemin absolu pour content_index.json
+        const response = await fetch("/content_index.json");
         if (!response.ok) {
             throw new Error(`Failed to load content_index.json: ${response.status}`);
         }
@@ -178,8 +180,8 @@ function showLoadingState(container, message = "Loading...") {
 // Function to update statistics
 function updateStats(type, totalItems, categories) {
     const totalElement = document.getElementById(`total-${type}`);
-    const categoriesElement = document.getElementById('total-categories');
-    const latestElement = document.getElementById('latest-update');
+    const categoriesElement = document.getElementById("total-categories");
+    const latestElement = document.getElementById("latest-update");
     
     if (totalElement) totalElement.textContent = totalItems;
     if (categoriesElement) categoriesElement.textContent = Object.keys(categories).length;
@@ -234,7 +236,7 @@ async function loadArticles() {
             groupedArticles[article.category].push(article);
         });
         
-        updateStats('articles', articles.length, groupedArticles);
+        updateStats("articles", articles.length, groupedArticles);
         
         let articlesHtml = "";
         
@@ -336,7 +338,7 @@ async function loadProjects() {
             groupedProjects[project.category].push(project);
         });
         
-        updateStats('projects', projects.length, groupedProjects);
+        updateStats("projects", projects.length, groupedProjects);
         
         let projectsHtml = "";
         
@@ -385,7 +387,12 @@ async function loadProjects() {
             <div class="empty-state">
                 <h3>Error loading projects</h3>
                 <p>Please try refreshing the page.</p>
-            </    // Enhanced single item loading
+            </div>
+        `;
+    }
+}
+
+// Enhanced single item loading
 async function loadSingleItem() {
     const urlParams = new URLSearchParams(window.location.search);
     const encodedFilePath = urlParams.get("file");
@@ -421,68 +428,10 @@ async function loadSingleItem() {
         return;
     }
 
-    const itemContentContainer = document.getElementById("item-content");
-    showLoadingState(itemContentContainer, `Loading ${type}...`);
+    showLoadingState(document.getElementById("item-content"), "Loading content...");
 
     try {
-        const content = await loadMarkdownFile(filePath);
-        if (!content) {
-            itemContentContainer.innerHTML = `
-                <div class="empty-state">
-                    <h3>Item not found</h3>
-                    <p>The requested ${type} could not be found at ${filePath}.</p>
-                    <a href="${backLink}" class="back-link">${backText}</a>
-                </div>
-            `;
-            return;
-        }
-
-        let htmlContent;
-        if (type === "project") {
-            const projectData = parseProjectMarkdown(content);
-            htmlContent = `
-                <h1>${projectData.title}</h1>
-                <p>${projectData.description}</p>
-                <p><a href="${projectData.link}" target="_blank" rel="noopener noreferrer">View Project</a></p>
-            `;
-        } else {
-            htmlContent = markdownToHtml(content);
-        }
-
-        itemContentContainer.innerHTML = `
-            <div class="item-header">
-                <a href="${backLink}" class="back-link">${backText}</a>
-            </div>
-            <div class="item-body">
-                ${htmlContent}
-            </div>
-        `;
-
-    } catch (error) {
-        console.error(`Error loading single ${type}:`, error);
-        itemContentContainer.innerHTML = `
-            <div class="empty-state">
-                <h3>Error loading ${type}</h3>
-                <p>An error occurred while trying to load the ${type}.</p>
-                <a href="${backLink}" class="back-link">${backText}</a>
-            </div>
-        `;
-    }
-};
-    }
-    
-    // Set back button
-    const backButton = document.getElementById("back-link");
-    if (backButton) {
-        backButton.href = backLink;
-        backButton.textContent = backText;
-    }
-    
-    const filePath = `${baseDir}/${fileName}.md`;
-    
-    try {
-        const content = await loadMarkdownFile(filePath);
-        
+        const content = await loadMarkdownFile(filePath + ".md"); // Append .md for direct file access
         if (!content) {
             document.getElementById("item-content").innerHTML = `
                 <div class="empty-state">
@@ -492,77 +441,50 @@ async function loadSingleItem() {
             `;
             return;
         }
+
+        let title = "";
+        let htmlContent = "";
         
-        const title = parseMarkdownTitle(content);
-        document.title = `${title} - Tech Odyssey`;
-        const titleElement = document.getElementById("item-title");
-        if (titleElement) {
-            titleElement.textContent = title;
-        }
-        
-        if (type === "project") {
-            // For projects, parse and display with special formatting
+        if (type === "article") {
+            title = parseMarkdownTitle(content);
+            htmlContent = markdownToHtml(content);
+        } else if (type === "project") {
             const projectData = parseProjectMarkdown(content);
-            const projectHtml = `
-                <div class="project-detail">
-                    <h1>${projectData.title}</h1>
-                    <div class="project-description">
-                        <h2>Description</h2>
-                        <p>${projectData.description}</p>
-                    </div>
-                    ${projectData.link !== "#" ? `
-                        <div class="project-actions">
-                            <a href="${projectData.link}" target="_blank" rel="noopener noreferrer" class="project-link">
-                                View Project
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M7 17L17 7"/>
-                                    <path d="M7 7h10v10"/>
-                                </svg>
-                            </a>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-            document.getElementById("item-content").innerHTML = projectHtml;
-        } else {
-            // For articles, convert markdown to HTML
-            const htmlContent = markdownToHtml(content);
-            document.getElementById("item-content").innerHTML = `<div class="article-content">${htmlContent}</div>`;
+            title = projectData.title;
+            htmlContent = markdownToHtml(projectData.description);
+            // Add project link if available
+            if (projectData.link && projectData.link !== "#") {
+                htmlContent += `<p><a href="${projectData.link}" target="_blank" rel="noopener noreferrer" class="project-link-full">View Project</a></p>`;
+            }
         }
+
+        document.getElementById("item-content").innerHTML = `
+            <div class="item-header">
+                <a href="${backLink}" class="back-link">${backText}</a>
+                <h1>${title}</h1>
+            </div>
+            <div class="item-body">
+                ${htmlContent}
+            </div>
+        `;
     } catch (error) {
-        console.error("Error loading item:", error);
+        console.error("Error loading single item:", error);
         document.getElementById("item-content").innerHTML = `
             <div class="empty-state">
-                <h3>Error loading ${type}</h3>
+                <h3>Error loading content</h3>
                 <p>Please try refreshing the page.</p>
             </div>
         `;
     }
 }
 
-// Optimized initialization with better performance
-document.addEventListener("DOMContentLoaded", function() {
-    const currentPage = window.location.pathname.split("/").pop();
-    
-    // Use requestAnimationFrame for smoother initialization
-    requestAnimationFrame(() => {
-        if (currentPage === "articles.html") {
-            loadArticles();
-        } else if (currentPage === "projects.html") {
-            loadProjects();
-        } else if (currentPage === "item.html") {
-            loadSingleItem();
-        }
-    });
+// Initialize loading based on page
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("articles-container")) {
+        loadArticles();
+    } else if (document.getElementById("projects-container")) {
+        loadProjects();
+    } else if (document.getElementById("item-content")) {
+        loadSingleItem();
+    }
 });
-
-// Add performance monitoring
-if ('performance' in window) {
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const perfData = performance.getEntriesByType('navigation')[0];
-            console.log(`Page load time: ${perfData.loadEventEnd - perfData.loadEventStart}ms`);
-        }, 0);
-    });
-}
-
