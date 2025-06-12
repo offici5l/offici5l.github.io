@@ -133,48 +133,36 @@ function markdownToHtml(markdown) {
 
 // Optimized directory scanning with better error handling
 async function scanDirectoryForMarkdown(directory, basePath = "") {
-    const files = [];
     try {
-        const response = await fetch(directory);
+        const response = await fetch("content_index.json");
         if (!response.ok) {
-            console.warn(`Could not fetch directory listing for ${directory}. Status: ${response.status}`);
-            return files;
+            throw new Error(`Failed to load content_index.json: ${response.status}`);
         }
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
-        const links = doc.querySelectorAll("a");
+        const contentIndex = await response.json();
         
-        // Process links in parallel for better performance
-        const promises = Array.from(links).map(async (link) => {
-            const href = link.getAttribute("href");
-            if (href && href !== "../" && !href.startsWith("http")) {
-                const fullPath = `${directory}${href}`;
-                const relativePath = basePath ? `${basePath}/${href}` : href;
-                
-                if (href.endsWith("/")) {
-                    // It's a subdirectory, scan recursively
-                    const subFiles = await scanDirectoryForMarkdown(fullPath, relativePath.slice(0, -1));
-                    return subFiles;
-                } else if (href.endsWith(".md")) {
-                    // It's a markdown file
-                    return [{
-                        path: fullPath,
-                        relativePath: relativePath,
-                        fileName: href.replace(".md", ""),
-                        category: basePath || "root"
-                    }];
-                }
-            }
-            return [];
+        let files = [];
+        if (directory.includes("Articles")) {
+            files = contentIndex.articles;
+        } else if (directory.includes("Projects")) {
+            files = contentIndex.projects;
+        }
+
+        return files.map(file => {
+            const parts = file.path.split("/");
+            const fileName = parts[parts.length - 1].replace(".md", "");
+            const category = parts.length > 2 ? parts[parts.length - 2] : "root";
+            return {
+                path: file.path,
+                relativePath: file.path,
+                fileName: fileName,
+                category: category
+            };
         });
-        
-        const results = await Promise.all(promises);
-        files.push(...results.flat());
+
     } catch (error) {
-        console.error(`Error scanning directory ${directory}:`, error);
+        console.error(`Error loading content_index.json:`, error);
+        return [];
     }
-    return files;
 }
 
 // Enhanced loading function with better UX

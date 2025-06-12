@@ -1,0 +1,27 @@
+{
+    "articles": [
+        {
+            "path": "Articles/xiaomi/mi-cn-register.md"
+        },
+        {
+            "path": "Articles/xiaomi/mi-code-20045.md"
+        },
+        {
+            "path": "Articles/xiaomi/mi-error-codes.md"
+        },
+        {
+            "path": "Articles/xiaomi/mi-unlock-using-termux.md"
+        }
+    ],
+    "projects": [
+        {
+            "path": "Projects/xiaomi/MiAssistantTool.md"
+        },
+        {
+            "path": "Projects/xiaomi/MiUnlockTool.md"
+        },
+        {
+            "path": "Projects/xiaomi/MiTool.md"
+        }
+    ]
+}
