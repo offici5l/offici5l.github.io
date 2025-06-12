@@ -135,7 +135,6 @@ function markdownToHtml(markdown) {
 // Optimized directory scanning with better error handling
 async function scanDirectoryForMarkdown(directory, basePath = "") {
     try {
-        // MODIFICATION CLÉ ICI : Utilisation d'un chemin absolu pour content_index.json
         const response = await fetch("/content_index.json");
         if (!response.ok) {
             throw new Error(`Failed to load content_index.json: ${response.status}`);
@@ -428,18 +427,13 @@ async function loadSingleItem() {
         return;
     }
 
-    showLoadingState(document.getElementById("item-content"), "Loading content...");
+    const itemContentDiv = document.getElementById("item-content");
+    showLoadingState(itemContentDiv, `Loading ${type}...`);
 
     try {
-        const content = await loadMarkdownFile(filePath + ".md"); // Append .md for direct file access
+        const content = await loadMarkdownFile(filePath + ".md"); // Append .md here
         if (!content) {
-            document.getElementById("item-content").innerHTML = `
-                <div class="empty-state">
-                    <h3>Item not found</h3>
-                    <p>The requested ${type} could not be found.</p>
-                </div>
-            `;
-            return;
+            throw new Error("Content not found");
         }
 
         let title = "";
@@ -447,32 +441,39 @@ async function loadSingleItem() {
         
         if (type === "article") {
             title = parseMarkdownTitle(content);
-            htmlContent = markdownToHtml(content);
+            // MODIFICATION CLÉ ICI : Supprimer le premier H1 du contenu pour éviter la duplication
+            const contentWithoutH1 = content.replace(/^# .*\n/, "");
+            htmlContent = markdownToHtml(contentWithoutH1);
         } else if (type === "project") {
             const projectData = parseProjectMarkdown(content);
             title = projectData.title;
-            htmlContent = markdownToHtml(projectData.description);
-            // Add project link if available
-            if (projectData.link && projectData.link !== "#") {
-                htmlContent += `<p><a href="${projectData.link}" target="_blank" rel="noopener noreferrer" class="project-link-full">View Project</a></p>`;
-            }
+            // Pour les projets, nous voulons afficher la description et le lien
+            // Nous allons donc créer le HTML manuellement pour éviter la duplication
+            htmlContent = `
+                <h2>${projectData.description}</h2>
+                <p><a href="${projectData.link}" target="_blank" rel="noopener noreferrer">${projectData.link}</a></p>
+            `;
         }
 
-        document.getElementById("item-content").innerHTML = `
+        itemContentDiv.innerHTML = `
             <div class="item-header">
                 <a href="${backLink}" class="back-link">${backText}</a>
-                <h1>${title}</h1>
+                <h1 id="item-title">${title}</h1>
             </div>
             <div class="item-body">
                 ${htmlContent}
             </div>
         `;
+
+        // Update the actual title element after it's in the DOM
+        document.getElementById("item-title").textContent = title;
+
     } catch (error) {
-        console.error("Error loading single item:", error);
-        document.getElementById("item-content").innerHTML = `
+        console.error(`Error loading ${type}:`, error);
+        itemContentDiv.innerHTML = `
             <div class="empty-state">
-                <h3>Error loading content</h3>
-                <p>Please try refreshing the page.</p>
+                <h3>Item not found</h3>
+                <p>The requested ${type} could not be found.</p>
             </div>
         `;
     }
