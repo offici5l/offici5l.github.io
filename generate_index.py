@@ -31,6 +31,6 @@ def generate_content_index(base_path="."):
         json.dump(content_index, f, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
-    generate_content_index("/home/ubuntu/offici5l.github.io_debug")
+    generate_content_index(os.getcwd())
 
 

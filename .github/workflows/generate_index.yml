@@ -1,0 +1,35 @@
+name: Generate Content Index
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  generate_index:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install PyYAML markdown
+
+    - name: Generate content_index.json
+      run: python generate_index.py
+
+    - name: Commit and push if changes
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add content_index.json
+        git diff --quiet --exit-code || git commit -m "Generate content_index.json"
+        git push
+

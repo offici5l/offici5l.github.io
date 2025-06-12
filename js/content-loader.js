@@ -385,18 +385,13 @@ async function loadProjects() {
             <div class="empty-state">
                 <h3>Error loading projects</h3>
                 <p>Please try refreshing the page.</p>
-            </div>
-        `;
-    }
-}
-
-// Enhanced single item loading
+            </    // Enhanced single item loading
 async function loadSingleItem() {
     const urlParams = new URLSearchParams(window.location.search);
-    const fileName = urlParams.get("file");
+    const encodedFilePath = urlParams.get("file");
     const type = urlParams.get("type");
     
-    if (!fileName || !type) {
+    if (!encodedFilePath || !type) {
         document.getElementById("item-content").innerHTML = `
             <div class="empty-state">
                 <h3>No item specified</h3>
@@ -405,15 +400,15 @@ async function loadSingleItem() {
         `;
         return;
     }
-    
+
+    const filePath = decodeURIComponent(encodedFilePath);
+
     // Determine the base directory and back link
-    let baseDir, backLink, backText;
+    let backLink, backText;
     if (type === "article") {
-        baseDir = "Articles";
         backLink = "articles.html";
         backText = "← Back to Articles";
     } else if (type === "project") {
-        baseDir = "Projects";
         backLink = "projects.html";
         backText = "← Back to Projects";
     } else {
@@ -424,6 +419,56 @@ async function loadSingleItem() {
             </div>
         `;
         return;
+    }
+
+    const itemContentContainer = document.getElementById("item-content");
+    showLoadingState(itemContentContainer, `Loading ${type}...`);
+
+    try {
+        const content = await loadMarkdownFile(filePath);
+        if (!content) {
+            itemContentContainer.innerHTML = `
+                <div class="empty-state">
+                    <h3>Item not found</h3>
+                    <p>The requested ${type} could not be found at ${filePath}.</p>
+                    <a href="${backLink}" class="back-link">${backText}</a>
+                </div>
+            `;
+            return;
+        }
+
+        let htmlContent;
+        if (type === "project") {
+            const projectData = parseProjectMarkdown(content);
+            htmlContent = `
+                <h1>${projectData.title}</h1>
+                <p>${projectData.description}</p>
+                <p><a href="${projectData.link}" target="_blank" rel="noopener noreferrer">View Project</a></p>
+            `;
+        } else {
+            htmlContent = markdownToHtml(content);
+        }
+
+        itemContentContainer.innerHTML = `
+            <div class="item-header">
+                <a href="${backLink}" class="back-link">${backText}</a>
+            </div>
+            <div class="item-body">
+                ${htmlContent}
+            </div>
+        `;
+
+    } catch (error) {
+        console.error(`Error loading single ${type}:`, error);
+        itemContentContainer.innerHTML = `
+            <div class="empty-state">
+                <h3>Error loading ${type}</h3>
+                <p>An error occurred while trying to load the ${type}.</p>
+                <a href="${backLink}" class="back-link">${backText}</a>
+            </div>
+        `;
+    }
+};
     }
     
     // Set back button
