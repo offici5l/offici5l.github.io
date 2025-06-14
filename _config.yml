@@ -21,10 +21,10 @@ plugins:
 collections:
   projects:
     output: true
-    permalink: /:collection/:name/
+    permalink: /:collection/:name.html
   articles:
     output: true
-    permalink: /:collection/:name/
+    permalink: /:collection/:name.html
 
 # Exclude from processing
 exclude:
