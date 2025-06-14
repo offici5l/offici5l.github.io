@@ -7,9 +7,8 @@ layout: default
         <!-- Breadcrumb Navigation -->
         <nav class="breadcrumb">
             <a href="{{ '/' | relative_url }}">Home</a>
-            <span class="separator">/</span>
-            <a href="{{ '/projects/' | relative_url }}">Projects</a>
-            <span class="separator">/</span>
+            <span class="separator">/</span><a href="{{ 
+            '/projects' | relative_url }}">Projects</a>           <span class="separator">/</span>
             <span class="current">{{ page.title }}</span>
         </nav>
         
@@ -48,8 +47,8 @@ layout: default
         
         <!-- Navigation -->
         <nav class="content-navigation">
-            <a href="{{ '/projects/' | relative_url }}" class="nav-back">
-                <svg viewBox="0 0 24 24" fill="currentColor">
+            <a href="{{ 
+                '/projects.html' | relative_url }}" class="nav-back">               <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
                 </svg>
                 Back to Projects
@@ -57,4 +56,3 @@ layout: default
         </nav>
     </div>
 </main>
-
