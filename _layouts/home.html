@@ -16,21 +16,15 @@ layout: default
                 
                 <!-- Navigation -->
                 <nav class="main-nav">
-                    <a href="{{ 
-    '/projects' | relative_url }}" class="nav-button">
-                        <span class="btn-text">Projects</span>
-                    </a>
-                    <a href="{{ 
-    '/articles' | relative_url }}" class="nav-button">
-                        <span class="btn-text">Articles</span>
-                    </a>
+                    <a href="{{ '/projects' | relative_url }}" class="nav-button">Projects</a>
+                    <a href="{{ '/articles' | relative_url }}" class="nav-button">Articles</a>
                 </nav>
                 
                 <!-- Social Links -->
                 <div class="social-links">
                     {% if site.twitter_username %}
                     <a href="https://twitter.com/{{ site.twitter_username }}" class="social-link" aria-label="Follow on X (Twitter)" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
                     </a>
@@ -38,7 +32,7 @@ layout: default
                     
                     {% if site.telegram_username %}
                     <a href="https://t.me/{{ site.telegram_username }}" class="social-link" aria-label="Join Telegram channel" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon">
                             <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                         </svg>
                     </a>
@@ -46,7 +40,7 @@ layout: default
                     
                     {% if site.github_username %}
                     <a href="https://github.com/{{ site.github_username }}" class="social-link" aria-label="View GitHub profile" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="social-icon">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </a>
@@ -55,17 +49,184 @@ layout: default
                 
                 <!-- Contact -->
                 <div class="contact-section">
-                    <div class="email-container">
+                    <a href="mailto:{{ site.email }}" class="email-link" title="إرسال بريد إلكتروني">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="email-icon">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
                         <span class="email-text">{{ site.email }}</span>
-                        <button class="copy-email-btn" aria-label="Copy email to clipboard">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="copy-notification">Email copied to clipboard!</div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.home-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.container {
+    max-width: 700px;
+    width: 90%;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image {
+    margin-bottom: 1.5rem;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+.hero-title {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.nav-button {
+    padding: 0.5rem 1.25rem;
+    background: #1a1a1a;
+    color: #ffffff;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-button:hover {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-link {
+    color: #4b5563;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #3b82f6;
+}
+
+.social-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.contact-section {
+    margin-top: 1.25rem;
+}
+
+.email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #f3f4f6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.email-link:hover {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.email-icon {
+    width: 18px;
+    height: 18px;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover .email-icon {
+    color: #ffffff;
+}
+
+.email-text {
+    color: inherit;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .profile-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .nav-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .email-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .email-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+</style>
