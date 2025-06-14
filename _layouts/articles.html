@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<main class="articles-page">
+    <div class="container">
+        <!-- Back Navigation -->
+        <div class="page-header">
+            <a href="{{ '/' | relative_url }}" class="back-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+        
+        <!-- Articles Grid -->
+        <div class="articles-grid">
+            {% for article in site.articles %}
+            <article class="article-card">
+                <div class="card-content">
+                    <h2 class="article-title">{{ article.title }}</h2>
+                    
+                    <div class="article-meta">
+                        {% if article.category %}
+                        <span class="article-category">{{ article.category }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <a href="{{ article.url | relative_url }}" class="read-article-btn">
+                        <span>Read Article</span>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+

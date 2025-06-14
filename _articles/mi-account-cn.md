@@ -1,6 +1,9 @@
-# Create a Chinese Xiaomi Account
-
-This guide will help you create a Chinese Xiaomi account.
+---
+title: "Create a Chinese Xiaomi Account"
+excerpt: "This guide will help you create a Chinese Xiaomi account"
+category: "xiaomi"
+layout: article
+---
 
 ## Register Now
 

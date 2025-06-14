@@ -1,7 +1,8 @@
-# Xiaomi Unlock Tool Error Codes Reference
-
-This document provides a reference for common error codes encountered with the Xiaomi Unlock Tool, along with their descriptions and solutions.
-
+---
+title: "Xiaomi Unlock Tool Error Codes Reference"
+excerpt: "This document provides a reference for common error codes encountered with the Xiaomi Unlock Tool, along with their descriptions and solutions."
+category: "xiaomi"
+layout: article
 ---
 
 ## Error Code: 20041

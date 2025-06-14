@@ -1,0 +1,42 @@
+title: "offici5l"
+email: offici5lcontact@proton.me
+description: ""
+baseurl: ""
+url: "https://offici5l.github.io"
+
+# Social links
+github_username: offici5l
+twitter_username: offici5l
+telegram_username: offici5l
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name/
+  articles:
+    output: true
+    permalink: /:collection/:name/
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
