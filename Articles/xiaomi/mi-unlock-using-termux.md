@@ -46,7 +46,7 @@ After obtaining the verification code and entering it The phrase "{"R":"","S":"O
 **8** turn off your Xiaomi phone, press and hold the Volume Down key and the Power button to enter bootloader mode.
 
 **9** Connect devices via the OTG adapter
-![](picture/otg.jpg)
+![](../../picture/otg.jpg)
 
 **10** When the device is recognized, you will be asked to press Enter to unlock the bootloader
 
