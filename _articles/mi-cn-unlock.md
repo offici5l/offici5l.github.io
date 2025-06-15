@@ -13,7 +13,7 @@ Creating a Chinese Xiaomi account outside China is difficult due to the requirem
 Code 20041: "Sorry, your Mi ID is not associated with a phone number."
 This error occurs because Xiaomi mandates a phone number for account verification, and non-Chinese numbers are not accepted.
 
-# Solution: Workaround for Creating a Chinese Xiaomi Account
+# Solution:
 On February 28, 2025, a glitch was discovered that allows users to create a Chinese Xiaomi account using an international phone number. Follow these steps to unlock the bootloader:
 
 ## Steps:
