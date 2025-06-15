@@ -5,6 +5,19 @@ category: "xiaomi"
 layout: article
 ---
 
+## Introduction
+On October 20, 2024, Xiaomi implemented a new restriction for bootloader unlocking, affecting users with mismatched device and account regions. Users with a Chinese device linked to a global Xiaomi account, or a global device linked to a Chinese Xiaomi account, encounter the error:
+Code 20045: "The place where the account is registered does not match the place where the phone is sold."
+This creates a significant challenge, especially for users outside China with Chinese devices, as creating a Chinese Xiaomi account typically requires a Chinese phone number. Below is an improved guide to address this issue, including a workaround discovered on February 28, 2025.
+
+## The Challenge
+Creating a Chinese Xiaomi account outside China is difficult due to the requirement of a Chinese phone number for registration on Xiaomi’s official website. Even when a Chinese account is created using an email (e.g., via https://cn.account.xiaomi.com/fe/service/register/email?_uRegion=CN, tested successfully on December 4, 2024), users face another hurdle during the final bootloader unlocking step:
+Code 20041: "Sorry, your Mi ID is not associated with a phone number."
+This error occurs because Xiaomi mandates a phone number for account verification, and non-Chinese numbers are not accepted.
+
+# Solution: Workaround for Creating a Chinese Xiaomi Account
+On February 28, 2025, a glitch was discovered that allows users to create a Chinese Xiaomi account using an international phone number. Follow these steps to unlock the bootloader:
+
 ## Steps:
 
 1.  **Create a Chinese Xiaomi Account**
