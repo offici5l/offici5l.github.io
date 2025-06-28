@@ -3,14 +3,14 @@
 
 /* CSS Variables */
 :root {
-  --primary-color: #212121;
-  --secondary-color: #ffffff;
-  --accent-color: #0056b3;
-  --text-color: #333333;
-  --light-gray: #f5f5f5;
-  --border-color: #e0e0e0;
-  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --primary-color: #000000; /* Black */
+  --secondary-color: #ffffff; /* White */
+  --accent-color: #333333; /* Dark Gray for accents */
+  --text-color: #333333; /* Dark Gray for text */
+  --light-gray: #f0f0f0; /* Light Gray */
+  --border-color: #cccccc; /* Medium Gray for borders */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --max-width: 1200px;
@@ -298,6 +298,9 @@ a:hover {
   overflow: hidden;
   transition: var(--transition);
   box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .project-card:hover,
@@ -309,6 +312,7 @@ a:hover {
 
 .card-content {
   padding: 1.5rem;
+  flex-grow: 1;
 }
 
 .project-title,
@@ -316,23 +320,30 @@ a:hover {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--primary-color);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   line-height: 1.4;
+}
+
+.project-description,
+.article-description {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
 }
 
 .project-meta,
 .article-meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 0;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
 .project-category,
 .article-category {
   background: var(--light-gray);
   color: var(--text-color);
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 500;
@@ -342,6 +353,8 @@ a:hover {
   padding: 1rem 1.5rem;
   background: var(--light-gray);
   border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .view-project-btn,
@@ -352,18 +365,50 @@ a:hover {
   color: var(--accent-color);
   font-weight: 500;
   transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
 }
 
 .view-project-btn:hover,
 .read-article-btn:hover {
-  transform: translateX(4px);
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  transform: translateY(-2px);
 }
 
 .view-project-btn svg,
 .read-article-btn svg {
   width: 16px;
   height: 16px;
+  fill: currentColor;
 }
+
+.btn.btn-primary {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 1px solid var(--primary-color);
+}
+
+.btn.btn-primary:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+}
+
+.view-all-projects {
+  text-align: center;
+  margin-top: 3rem;
+}
+
 
 /* Content Page Styles */
 .content-header {

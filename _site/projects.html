@@ -12,7 +12,7 @@
     <!-- Open Graph -->
     <meta property="og:title" content="">
     <meta property="og:description" content="">
-    <meta property="og:url" content="http://localhost:4000/projects.html">
+    <meta property="og:url" content="http://localhost:4001/projects.html">
     <meta property="og:type" content="website">
     
     <!-- Fonts -->
@@ -84,8 +84,8 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <a href="${project.homepage}" class="view-project-btn" target="_blank" rel="noopener noreferrer">
-                                            <span>View Project</span>
+                                        <a href="${project.html_url}" class="view-project-btn" target="_blank" rel="noopener noreferrer">
+                                            <span>View on GitHub</span>
                                             <svg viewBox="0 0 24 24" fill="currentColor">
                                                 <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
                                             </svg>
@@ -101,6 +101,11 @@
                         });
                 });
             </script>
+            <div class="view-all-projects">
+                <a href="https://github.com/offici5l?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    View all projects on GitHub
+                </a>
+            </div>
         </div>
     </div>
 </main>
