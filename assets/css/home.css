@@ -1,0 +1,295 @@
+/* Variables for a formal, modern, and unified theme */
+:root {
+    --color-bg: #f0f2f5; /* Very light, almost white background */
+    --color-text-primary: #333333; /* Dark gray for main text */
+    --color-text-secondary: #666666; /* Medium gray for secondary text */
+    --color-accent: #212529; /* Deep black for accent */
+    --color-accent-hover: #000000; /* Pure black on hover */
+    --color-border: #e0e0e0; /* Light gray border */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Very subtle shadow */
+    --shadow-medium: rgba(0, 0, 0, 0.12); /* Slightly more visible shadow */
+    --border-radius-sm: 6px;
+    --border-radius-md: 12px;
+    --transition-speed: 0.4s; /* Smooth transition speed */
+    --transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth ease-out-quad */
+}
+
+/* General Reset & Base Styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Clean, professional sans-serif */
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-primary-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Homepage Layout - Unified Page */
+.home-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--color-bg); /* Solid background for unified look */
+}
+
+.content-wrapper {
+    max-width: 700px; /* Optimal width for content */
+    width: 100%;
+    padding: 3rem; /* Generous padding */
+    background-color: var(--color-text-light); /* White background for content area */
+    border-radius: var(--border-radius-md); /* Softly rounded corners */
+    box-shadow: 0 8px 20px var(--shadow-light); /* Subtle, elegant shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
+}
+
+.content-wrapper:hover {
+    transform: translateY(-3px); /* Very subtle lift on hover */
+    box-shadow: 0 12px 25px var(--shadow-medium); /* Slightly deeper shadow */
+}
+
+/* Hero Section */
+.hero {
+    width: 100%;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Subtle divider */
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    margin-bottom: 1.5rem;
+}
+
+.profile-img {
+    width: 140px; /* Professional size */
+    height: 140px;
+    border-radius: 50%;
+    border: 3px solid var(--color-accent); /* Clean accent border */
+    object-fit: cover;
+    box-shadow: 0 4px 10px var(--shadow-light); /* Soft shadow */
+    transition: transform var(--transition-speed) var(--transition-ease), border-color var(--transition-speed) var(--transition-ease);
+}
+
+.profile-img:hover {
+    transform: scale(1.02); /* Gentle scale on hover */
+    border-color: var(--color-accent-hover);
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif; /* Strong, modern heading font */
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+/* GitHub Bio Section (formerly About Me) */
+.github-bio-section {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--color-bg); /* Matches page background for unified look */
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--color-border); /* Subtle border */
+    text-align: center; /* Center align bio text */
+}
+
+.github-bio-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+}
+
+/* Navigation */
+.main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.8rem;
+    background-color: var(--color-accent);
+    color: #FFFFFF; /* Explicitly set to white for clarity */
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all var(--transition-speed) var(--transition-ease);
+    box-shadow: 0 3px 8px var(--shadow-light);
+    letter-spacing: 0.01em;
+    border: none; /* No border for clean look */
+}
+
+.nav-button:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px); /* Very subtle lift */
+    box-shadow: 0 5px 12px var(--shadow-medium);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.social-link {
+    color: var(--color-text-secondary);
+    transition: color var(--transition-speed) var(--transition-ease), transform var(--transition-speed) var(--transition-ease);
+}
+
+.social-link:hover {
+    color: var(--color-accent);
+    transform: translateY(-2px) scale(1.05); /* Gentle lift and slight scale */
+}
+
+.social-icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* Contact Section */
+.contact-section {
+    width: 100%;
+}
+
+.email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.8rem 1.8rem;
+    border-radius: 20px;
+    background-color: var(--color-bg); /* Matches page background */
+    border: 1px solid var(--color-accent); /* Accent border */
+    transition: all var(--transition-speed) var(--transition-ease);
+    box-shadow: 0 2px 6px var(--shadow-light);
+}
+
+.email-link:hover {
+    background-color: var(--color-accent);
+    color: var(--color-text-light);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    transform: translateY(-2px);
+}
+
+.email-icon {
+    width: 20px;
+    height: 20px;
+    transition: color var(--transition-speed) var(--transition-ease);
+}
+
+.email-link:hover .email-icon {
+    color: var(--color-text-light);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 2.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .nav-button {
+        width: 80%;
+        max-width: 280px;
+        font-size: 0.9rem;
+        padding: 0.7rem 1.5rem;
+    }
+
+    .social-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .email-link {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-page {
+        padding: 1rem;
+    }
+
+    .content-wrapper {
+        padding: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .github-bio-section p {
+        font-size: 0.9rem;
+    }
+
+    .nav-button {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .social-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .email-link {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
