@@ -1,9 +1,3 @@
----
-title: "Unlock Bootloader Xiaomi for Chinese Devices (For Users Outside China)"
-excerpt: "This guide provides a step-by-step solution to unlock Xiaomi's bootloader , specifically for Chinese devices used outside China, which often results in `Code 20045`."
-category: "xiaomi"
----
-
 ## Introduction
 On October 20, 2024, Xiaomi implemented a new restriction for bootloader unlocking, affecting users with mismatched device and account regions. Users with a Chinese device linked to a global Xiaomi account, or a global device linked to a Chinese Xiaomi account, encounter the error:
 Code 20045: "The place where the account is registered does not match the place where the phone is sold."

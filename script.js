@@ -175,19 +175,55 @@ function createProjectCard(repo, index) {
 // Load articles (for articles page)
 async function loadArticles() {
     try {
-        // Load articles data from generated JSON file
-        const response = await fetch('./articles_data.json');
+        // Load articles metadata from centralized Markdown file
+        const response = await fetch('./articles/articles.md');
         if (!response.ok) {
-            throw new Error('Failed to load articles data');
+            throw new Error('Failed to load articles metadata');
         }
-        articlesData = await response.json();
+        const articlesText = await response.text();
+        articlesData = parseArticlesMetadata(articlesText);
         updateArticles();
     } catch (error) {
         console.error('Error loading articles:', error);
-        // Fallback to empty array if JSON file doesn't exist
+        // Fallback to empty array if metadata file doesn't exist
         articlesData = [];
         updateArticles();
     }
+}
+
+// Parse articles metadata from Markdown file
+function parseArticlesMetadata(text) {
+    const articles = [];
+    const lines = text.split('\n');
+    let currentArticle = {};
+    
+    for (let line of lines) {
+        line = line.trim();
+        
+        if (line.startsWith('title: ')) {
+            // If we have a complete article, add it to the array
+            if (currentArticle.title && currentArticle.description && currentArticle.filename) {
+                articles.push(currentArticle);
+            }
+            // Start a new article
+            currentArticle = {
+                title: line.substring(7).trim()
+            };
+        } else if (line.startsWith('description: ')) {
+            currentArticle.description = line.substring(13).trim();
+        } else if (line.startsWith('category: ')) {
+            currentArticle.category = line.substring(10).trim();
+        } else if (line.startsWith('filename: ')) {
+            currentArticle.filename = line.substring(10).trim();
+        }
+    }
+    
+    // Add the last article if complete
+    if (currentArticle.title && currentArticle.description && currentArticle.filename) {
+        articles.push(currentArticle);
+    }
+    
+    return articles;
 }
 
 // Update articles section (articles page)

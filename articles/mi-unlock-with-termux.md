@@ -1,9 +1,3 @@
----
-title: "Unlocking Xiaomi Bootloader Without a PC (Using Termux)"
-excerpt: "how to unlock your Xiaomi device bootloader using only another Android phone with Termux, no PC required."
-category: "xiaomi"
----
-
 ## Requirements:
 - **A second Android phone**
 - **OTG adapter**

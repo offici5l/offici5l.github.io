@@ -1,9 +1,3 @@
----
-title: "Xiaomi Unlock Tool Error Codes Reference"
-excerpt: "This document provides a reference for common error codes encountered with the Xiaomi Unlock Tool, along with their descriptions and solutions."
-category: "xiaomi"
----
-
 ## Error Code: 20041
 
 **Message:** "sorry, your mi id is not associated with a phone number"
