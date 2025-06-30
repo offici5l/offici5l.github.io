@@ -27,6 +27,15 @@
 **Solution:** You must wait for the beginning of the next month, meaning the 1st of next month.
 
 ---
+## Error Code: 10023
+
+**Message:** "Sorry, couldn't unlock more devices"
+
+**Description:** you trying to unlock another device with the same account! Starting in 2025, only one device per year is allowed to be unlocked with the same account
+
+**Solution:** use a new account or wait a year!
+
+---
 
 ## Error Code: 10000
 
