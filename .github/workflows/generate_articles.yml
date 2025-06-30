@@ -24,7 +24,7 @@ jobs:
       working-directory: ./offici5l-portfolio-updated
 
     - name: Upload generated data
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: articles-data
         path: offici5l-portfolio-updated/articles_data.json
