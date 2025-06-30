@@ -2,7 +2,6 @@
 title: "Unlock Bootloader Xiaomi for Chinese Devices (For Users Outside China)"
 excerpt: "This guide provides a step-by-step solution to unlock Xiaomi's bootloader , specifically for Chinese devices used outside China, which often results in `Code 20045`."
 category: "xiaomi"
-layout: article
 ---
 
 ## Introduction
