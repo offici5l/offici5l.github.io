@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="article-title">Article - Offici5l</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">💻</span>
+                OFFICI5L
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/projects" class="nav-link">Projects</a></li>
+                <li><a href="/articles" class="nav-link active">Articles</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="section">
+                <a href="/articles" class="btn btn-secondary" style="margin-bottom: 2rem; display: inline-flex;">
+                    ← Back to Articles
+                </a>
+                
+                <div id="article-content" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">Loading article...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Offici5l</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get article name from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleName = urlParams.get('name');
+        
+        if (articleName) {
+            loadArticle(articleName);
+        } else {
+            showError('No article specified');
+        }
+        
+        async function loadArticle(name) {
+            try {
+                const response = await fetch(`articles/${name}.md`);
+                if (!response.ok) {
+                    throw new Error('Article not found');
+                }
+                
+                const markdown = await response.text();
+                const html = marked.parse(markdown);
+                
+                // Extract title from first heading
+                const titleMatch = markdown.match(/^#\s+(.+)$/m);
+                const title = titleMatch ? titleMatch[1] : name;
+                
+                document.getElementById('article-title').textContent = `${title} - Offici5l`;
+                document.getElementById('article-content').innerHTML = html;
+                
+            } catch (error) {
+                showError('Article not found');
+            }
+        }
+        
+        function showError(message) {
+            document.getElementById('article-content').innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h2 style="color: var(--neon-blue); margin-bottom: 1rem;">${message}</h2>
+                    <p style="color: var(--text-muted);">The article you're looking for doesn't exist.</p>
+                    <a href="/articles" class="btn btn-primary" style="margin-top: 1rem;">Back to Articles</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
+

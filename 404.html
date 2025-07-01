@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Simple URL rewriting for GitHub Pages
+        const path = window.location.pathname;
+        
+        if (path === '/projects') {
+            window.location.replace('/projects.html');
+        } else if (path === '/articles') {
+            window.location.replace('/articles.html');
+        } else if (path.startsWith('/articles/')) {
+            const articleName = path.replace('/articles/', '');
+            window.location.replace(`/article.html?name=${articleName}`);
+        } else {
+            window.location.replace('/');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
+

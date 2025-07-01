@@ -174,56 +174,32 @@ function createProjectCard(repo, index) {
 
 // Load articles (for articles page)
 async function loadArticles() {
-    try {
-        // Load articles metadata from centralized Markdown file
-        const response = await fetch('./articles/articles.md');
-        if (!response.ok) {
-            throw new Error('Failed to load articles metadata');
+    // Define the articles based on the corrected structure
+    const articles = [
+        {
+            title: "Mi Account CN - Xiaomi Account Management",
+            description: "Comprehensive guide for managing Xiaomi accounts in China region, including account creation, verification, and troubleshooting common issues.",
+            filename: "mi-account-cn"
+        },
+        {
+            title: "Mi CN Unlock - Bootloader Unlocking Guide",
+            description: "Step-by-step instructions for unlocking Xiaomi device bootloaders in China region, including prerequisites and safety considerations.",
+            filename: "mi-cn-unlock"
+        },
+        {
+            title: "Mi Error Codes - Troubleshooting Reference",
+            description: "Complete reference guide for Xiaomi device error codes, their meanings, and solutions to resolve common issues.",
+            filename: "mi-error-codes"
+        },
+        {
+            title: "Mi Unlock with Termux - Advanced Method",
+            description: "Advanced guide for unlocking Xiaomi devices using Termux on Android, including command-line tools and automation scripts.",
+            filename: "mi-unlock-with-termux"
         }
-        const articlesText = await response.text();
-        articlesData = parseArticlesMetadata(articlesText);
-        updateArticles();
-    } catch (error) {
-        console.error('Error loading articles:', error);
-        // Fallback to empty array if metadata file doesn't exist
-        articlesData = [];
-        updateArticles();
-    }
-}
+    ];
 
-// Parse articles metadata from Markdown file
-function parseArticlesMetadata(text) {
-    const articles = [];
-    const lines = text.split('\n');
-    let currentArticle = {};
-    
-    for (let line of lines) {
-        line = line.trim();
-        
-        if (line.startsWith('title: ')) {
-            // If we have a complete article, add it to the array
-            if (currentArticle.title && currentArticle.description && currentArticle.filename) {
-                articles.push(currentArticle);
-            }
-            // Start a new article
-            currentArticle = {
-                title: line.substring(7).trim()
-            };
-        } else if (line.startsWith('description: ')) {
-            currentArticle.description = line.substring(13).trim();
-        } else if (line.startsWith('category: ')) {
-            currentArticle.category = line.substring(10).trim();
-        } else if (line.startsWith('filename: ')) {
-            currentArticle.filename = line.substring(10).trim();
-        }
-    }
-    
-    // Add the last article if complete
-    if (currentArticle.title && currentArticle.description && currentArticle.filename) {
-        articles.push(currentArticle);
-    }
-    
-    return articles;
+    articlesData = articles;
+    updateArticles();
 }
 
 // Update articles section (articles page)
