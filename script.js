@@ -414,9 +414,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('popstate', handleRouteChange);
 
+
     function handleRouteChange() {
-        const path = window.location.pathname;
-        if (path.startsWith('/articles/')) {
+        let path = window.location.pathname;
+        if (window.location.hash) {
+            path = window.location.hash.substring(1); // Remove # from the path
+        }
+        if (path.startsWith('/articles/') || path.startsWith('articles/')) {
             const articleSlug = path.substring('/articles/'.length);
             if (articleSlug) {
                 displayFullArticle(articleSlug);
