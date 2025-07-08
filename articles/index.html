@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offici5l's Portfolio</title>
+    <meta name="description" content="The portfolio of offici5l, a passionate developer showcasing projects and skills.">
+    <meta name="keywords" content="offici5l, portfolio, developer, web developer, projects, github">
+    <meta name="author" content="offici5l">
+    <meta property="og:title" content="offici5l's Portfolio">
+    <meta property="og:description" content="Check out my projects and skills.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/127665988?v=4">
+    <meta property="og:url" content="https://offici5l.github.io/portfolio/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="offici5l's Portfolio">
+    <meta name="twitter:description" content="Check out my projects and skills.">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/127665988?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="tsparticles"></div>
+    <header></header>
+    <main>
+        <div id="about">
+            <p id="bio"></p>
+        </div>
+        <div id="projects">
+            <h2 id="projects-toggle" class="toggle-button">
+                Projects <span class="toggle-icon">▷</span>
+            </h2>
+            <div id="projects-content" style="display: none;">
+                <div id="projects-container">
+                    <p>Loading projects...</p>
+                </div>
+                <button id="load-more-projects" style="display: none;">Load More Projects</button>
+            </div>
+        </div>
+        <div id="articles">
+            <h2 id="articles-toggle" class="toggle-button">
+                Articles <span class="toggle-icon">▷</span>
+            </h2>
+            <div id="articles-content" style="display: none;">
+                <div id="articles-list-container">
+                    <p>Loading articles...</p>
+                </div>
+                <div id="article-full-view-container" style="display: none;"></div>
+            </div>
+        </div>
+        <div id="contact-container"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js" defer></script>
+    <script src="info.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
