@@ -418,7 +418,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const path = window.location.pathname;
         if (path.startsWith('/articles/')) {
             const articleSlug = path.substring('/articles/'.length);
-            displayFullArticle(articleSlug);
+            if (articleSlug) {
+                displayFullArticle(articleSlug);
+            } else {
+                showMainSections();
+                fetch(window.location.origin + '/articles/articles.json')
+                    .then(response => response.json())
+                    .then(displayArticlesList)
+                    .catch(error => {
+                        articlesListContainer.innerHTML = '<p>Error loading articles list.</p>';
+                    });
+            }
         } else {
             showMainSections();
             fetch(window.location.origin + '/articles/articles.json')
