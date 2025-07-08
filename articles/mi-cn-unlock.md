@@ -1,6 +1,4 @@
----
-Unlock Xiaomi CN Devices
----
+# Unlock Xiaomi CN Devices
 
 ## Introduction
 On October 20, 2024, Xiaomi implemented a new restriction for bootloader unlocking, affecting users with mismatched device and account regions. Users with a Chinese device linked to a global Xiaomi account, or a global device linked to a Chinese Xiaomi account, encounter the error:

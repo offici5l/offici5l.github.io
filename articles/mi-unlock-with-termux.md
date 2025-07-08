@@ -1,6 +1,4 @@
----
 # Mi Unlock with Termux
----
 
 ## Requirements:
 - **A second Android phone**

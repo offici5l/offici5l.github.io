@@ -1,7 +1,4 @@
----
 # Mi Unlock Tool Error Codes
----
-
 
 ## Error Code: 20041
 

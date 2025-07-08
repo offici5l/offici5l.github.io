@@ -1,6 +1,4 @@
----
 # Create a Chinese Xiaomi Account
----
 
 ## Register Now
 
