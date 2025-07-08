@@ -1,3 +1,8 @@
+---
+# Mi Unlock Tool Error Codes
+---
+
+
 ## Error Code: 20041
 
 **Message:** "sorry, your mi id is not associated with a phone number"

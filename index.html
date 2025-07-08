@@ -1,108 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offici5l - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>offici5l's Portfolio</title>
+    <meta name="description" content="The portfolio of offici5l, a passionate developer showcasing projects and skills.">
+    <meta name="keywords" content="offici5l, portfolio, developer, web developer, projects, github">
+    <meta name="author" content="offici5l">
+    <meta property="og:title" content="offici5l's Portfolio">
+    <meta property="og:description" content="Check out my projects and skills.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/127665988?v=4">
+    <meta property="og:url" content="https://offici5l.github.io/portfolio/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="offici5l's Portfolio">
+    <meta name="twitter:description" content="Check out my projects and skills.">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/127665988?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay">
-        <div class="loading-content">
-            <div class="carbon-spinner"></div>
-            <p>Loading profile data...</p>
+    <div id="tsparticles"></div>
+    <header></header>
+    <main>
+        <div id="about">
+            <p id="bio"></p>
         </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" class="logo-link">
-                    <div class="logo-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <span class="logo-text">OFFICI5L</span>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/projects" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/articles" class="nav-link">Articles</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Home Section -->
-    <section class="home-section">
-        <div class="container">
-            <div class="hero-content">
-                <div class="profile-section">
-                    <div class="profile-avatar">
-                        <img id="profile-image" src="" alt="Profile" class="avatar-img">
-                        <div class="avatar-glow"></div>
-                    </div>
-                    <div class="profile-info">
-                        <h1 class="profile-name" id="profile-name">Loading...</h1>
-                        <div class="profile-bio" id="profile-bio">
-                            <p>Loading profile information...</p>
-                        </div>
-                    </div>
+        <div id="projects">
+            <h2 id="projects-toggle" class="toggle-button">
+                Projects <span class="toggle-icon">▷</span>
+            </h2>
+            <div id="projects-content" style="display: none;">
+                <div id="projects-container">
+                    <p>Loading projects...</p>
                 </div>
-                
-                <div class="action-buttons">
-                    <a href="/projects" class="carbon-btn primary">
-                        <i class="fas fa-folder-open"></i>
-                        <span>Projects</span>
-                    </a>
-                    <a href="/articles" class="carbon-btn secondary">
-                        <i class="fas fa-newspaper"></i>
-                        <span>Articles</span>
-                    </a>
+                <button id="load-more-projects" style="display: none;">Load More Projects</button>
+            </div>
+        </div>
+        <div id="articles">
+            <h2 id="articles-toggle" class="toggle-button">
+                Articles <span class="toggle-icon">▷</span>
+            </h2>
+            <div id="articles-content" style="display: none;">
+                <div id="articles-list-container">
+                    <p>Loading articles...</p>
                 </div>
+                <div id="article-full-view-container" style="display: none;"></div>
             </div>
         </div>
-    </section>
-
-    <!-- Contact and Social Section -->
-    <section class="social-section">
-        <div class="container">
-            <div class="contact-email">
-                <p class="email-text">offici5lcontact@proton.me</p>
-            </div>
-            <div class="social-icons">
-                <a href="https://x.com/offici5l" target="_blank" class="social-icon x">
-                    <i class="fab fa-x"></i>
-                </a>
-                <a href="https://t.me/Offici5l_Channel" target="_blank" class="social-icon telegram">
-                    <i class="fab fa-telegram"></i>
-                </a>
-                <a href="https://github.com/offici5l" target="_blank" class="social-icon github">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Offici5l</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+        <div id="contact-container"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js" defer></script>
+    <script src="info.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
-

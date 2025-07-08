@@ -1,3 +1,7 @@
+---
+Unlock Xiaomi CN Devices
+---
+
 ## Introduction
 On October 20, 2024, Xiaomi implemented a new restriction for bootloader unlocking, affecting users with mismatched device and account regions. Users with a Chinese device linked to a global Xiaomi account, or a global device linked to a Chinese Xiaomi account, encounter the error:
 Code 20045: "The place where the account is registered does not match the place where the phone is sold."
@@ -12,7 +16,7 @@ On February 28, 2025, offici5l discovered a glitch that allows users to create a
 ## Steps:
 
 1.  **Create a Chinese Xiaomi Account**
-    You can register a Chinese Xiaomi account by following the instructions in this article: [Create a Chinese Xiaomi Account](../../articles/mi-account-cn.html)
+    You can register a Chinese Xiaomi account by following the instructions in this article: [Create a Chinese Xiaomi Account](/articles/mi-account-cn)
 
 2.  *Note:* Skip this step for MIUI users.
      Use [MiBypassTool](https://github.com/offici5l/MiBypassTool) For HyperOS devices ( hyperos2 devices and some hyperos1 devices cannot do this )
@@ -25,6 +29,6 @@ On February 28, 2025, offici5l discovered a glitch that allows users to create a
 
 ## Warning
 
-Xiaomi may patch this method at any time. Last verified: April 22, 2025.
+Xiaomi may patch this method at any time.
 
-
+Last verified: April 22, 2025.

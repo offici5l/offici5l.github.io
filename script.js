@@ -1,407 +1,434 @@
-// Configuration
-const CONFIG = {
-    GITHUB_USERNAME: 'offici5l',
-    GITHUB_API_BASE: 'https://api.github.com',
-    HOMEPAGE_FILTER: 'https://offici5l.github.io/',
-    ARTICLES_BASE_URL: 'https://offici5l.github.io/articles/'
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const { username, socialLinks, email } = userInfo;
+    const githubApiUrl = `https://api.github.com/users/${username}`;
+    const githubReposApiUrl = `https://api.github.com/users/${username}/repos`;
 
-// Global state
-let userData = null;
-let reposData = null;
-let articlesData = null;
+    const projectsPerPage = 6;
+    let allProjects = [];
+    let displayedProjectsCount = 0;
+    let githubButton = null;
+    let particlesInstance = null;
+    let articlesExpanded = false;
 
-// DOM Elements
-const loadingOverlay = document.getElementById('loading-overlay');
+    const projectsContainer = document.getElementById('projects-container');
+    const loadMoreButton = document.getElementById('load-more-projects');
+    const aboutSection = document.getElementById('about');
+    const projectsToggle = document.getElementById('projects-toggle');
+    const projectsContent = document.getElementById('projects-content');
+    const articlesToggle = document.getElementById('articles-toggle');
+    const articlesContent = document.getElementById('articles-content');
+    const articlesListContainer = document.getElementById('articles-list-container');
+    const articleFullViewContainer = document.getElementById('article-full-view-container');
 
-// Get current page
-function getCurrentPage() {
-    const path = window.location.pathname;
-    if (path.includes('projects')) return 'projects';
-    if (path.includes('articles')) return 'articles';
-    return 'home';
-}
-
-// Initialize the application
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        initializeNavigation();
-        
-        const currentPage = getCurrentPage();
-        
-        if (currentPage === 'home') {
-            await loadGitHubUserData();
-        } else if (currentPage === 'projects') {
-            await loadGitHubProjects();
-        } else if (currentPage === 'articles') {
-            await loadArticles();
-        }
-        
-        initializeAnimations();
-        hideLoadingOverlay();
-    } catch (error) {
-        console.error('Error initializing application:', error);
-        hideLoadingOverlay();
-        showErrorMessage('Failed to load data. Please try again later.');
-    }
-});
-
-// Load GitHub user data (for home page)
-async function loadGitHubUserData() {
-    try {
-        const userResponse = await fetch(`${CONFIG.GITHUB_API_BASE}/users/${CONFIG.GITHUB_USERNAME}`);
-        if (!userResponse.ok) throw new Error('Failed to fetch user data');
-        userData = await userResponse.json();
-
-        updateUserProfile();
-    } catch (error) {
-        console.error('Error loading GitHub user data:', error);
-        showFallbackProfile();
-        throw error;
-    }
-}
-
-// Load GitHub projects (for projects page)
-async function loadGitHubProjects() {
-    try {
-        const reposResponse = await fetch(`${CONFIG.GITHUB_API_BASE}/users/${CONFIG.GITHUB_USERNAME}/repos?per_page=100&sort=updated`);
-        if (!reposResponse.ok) throw new Error('Failed to fetch repositories');
-        reposData = await reposResponse.json();
-
-        updateProjects();
-    } catch (error) {
-        console.error('Error loading GitHub projects:', error);
-        throw error;
-    }
-}
-
-// Update user profile information (home page)
-function updateUserProfile() {
-    if (!userData) return;
-
-    // Update profile image
-    const profileImage = document.getElementById('profile-image');
-    if (profileImage && userData.avatar_url) {
-        profileImage.src = userData.avatar_url;
-        profileImage.alt = userData.name || userData.login;
-    }
-
-    // Update profile name
-    const profileName = document.getElementById('profile-name');
-    if (profileName) {
-        profileName.textContent = userData.name || userData.login;
-    }
-
-    // Update profile bio
-    const profileBio = document.getElementById('profile-bio');
-    if (profileBio) {
-        if (userData.bio) {
-            profileBio.innerHTML = `<p>${userData.bio}</p>`;
-        } else {
-            profileBio.innerHTML = `<p>Passionate developer focused on creating innovative solutions and sharing knowledge through code.</p>`;
-        }
-    }
-}
-
-// Show fallback profile data
-function showFallbackProfile() {
-    const profileImage = document.getElementById('profile-image');
-    const profileName = document.getElementById('profile-name');
-    const profileBio = document.getElementById('profile-bio');
-
-    if (profileImage) {
-        profileImage.src = 'https://github.com/offici5l.png';
-        profileImage.alt = 'Offici5l';
-    }
-
-    if (profileName) {
-        profileName.textContent = 'Offici5l';
-    }
-
-    if (profileBio) {
-        profileBio.innerHTML = `<p>Passionate developer focused on creating innovative solutions and sharing knowledge through code.</p>`;
-    }
-}
-
-// Update projects section (projects page)
-function updateProjects() {
-    if (!reposData) return;
-
-    // Filter repositories with homepage starting with the specified URL
-    const filteredRepos = reposData.filter(repo => 
-        repo.homepage && repo.homepage.startsWith(CONFIG.HOMEPAGE_FILTER)
-    );
-
-    const projectsGrid = document.getElementById('projects-grid');
-    if (!projectsGrid) return;
-
-    // Clear loading state
-    projectsGrid.innerHTML = '';
-
-    if (filteredRepos.length === 0) {
-        projectsGrid.innerHTML = `
-            <div class="no-projects">
-                <p>No projects with live demos found.</p>
-            </div>
-        `;
-        return;
-    }
-
-    // Create project cards
-    filteredRepos.forEach((repo, index) => {
-        const projectCard = createProjectCard(repo, index);
-        projectsGrid.appendChild(projectCard);
-    });
-}
-
-// Create a project card element
-function createProjectCard(repo, index) {
-    const card = document.createElement('div');
-    card.className = 'project-card fade-in';
-    card.style.animationDelay = `${index * 0.1}s`;
-
-    card.innerHTML = `
-        <h3 class="project-title">${repo.name}</h3>
-        <p class="project-description">${repo.description || 'No description available'}</p>
-        <a href="${repo.html_url}" class="project-link" target="_blank">
-            <i class="fas fa-external-link-alt"></i>
-            <span>View Project</span>
-        </a>
-    `;
-
-    return card;
-}
-
-// Load articles (for articles page)
-async function loadArticles() {
-    try {
-        const response = await fetch('articles.md');
-        if (!response.ok) {
-            throw new Error('Failed to load articles metadata');
-        }
-        
-        const content = await response.text();
-        const articles = parseArticlesMetadata(content);
-        
-        articlesData = articles;
-        updateArticles();
-    } catch (error) {
-        console.error('Error loading articles:', error);
-        // Fallback to hardcoded articles
-        const articles = [
-            {
-                title: "Mi Account CN - Xiaomi Account Management",
-                description: "Comprehensive guide for managing Xiaomi accounts in China region, including account creation, verification, and troubleshooting common issues.",
-                filename: "mi-account-cn"
-            },
-            {
-                title: "Mi CN Unlock - Bootloader Unlocking Guide",
-                description: "Step-by-step instructions for unlocking Xiaomi device bootloaders in China region, including prerequisites and safety considerations.",
-                filename: "mi-cn-unlock"
-            },
-            {
-                title: "Mi Error Codes - Troubleshooting Reference",
-                description: "Complete reference guide for Xiaomi device error codes, their meanings, and solutions to resolve common issues.",
-                filename: "mi-error-codes"
-            },
-            {
-                title: "Mi Unlock with Termux - Advanced Method",
-                description: "Advanced guide for unlocking Xiaomi devices using Termux on Android, including command-line tools and automation scripts.",
-                filename: "mi-unlock-with-termux"
+    const avatarImg = aboutSection.querySelector('img');
+    let avatarCenter = { x: "50%", y: "25%" };
+    if (avatarImg) {
+        const updateAvatarPosition = () => {
+            const rect = avatarImg.getBoundingClientRect();
+            const canvas = document.getElementById('tsparticles');
+            const canvasRect = canvas ? canvas.getBoundingClientRect() : { left: 0, top: 0 };
+            avatarCenter = {
+                x: ((rect.left + rect.width / 2 - canvasRect.left) / window.innerWidth) * 100 + '%',
+                y: ((rect.top + rect.height / 2 - canvasRect.top) / window.innerHeight) * 100 + '%'
+            };
+            if (particlesInstance) {
+                particlesInstance.options.particles.move.orbit.center = avatarCenter;
+                particlesInstance.options.particles.move.attract.center = avatarCenter;
+                particlesInstance.refresh();
             }
-        ];
-        
-        articlesData = articles;
-        updateArticles();
-    }
-}
-
-// Parse articles metadata from markdown file
-function parseArticlesMetadata(content) {
-    const articles = [];
-    const lines = content.split('\n');
-    let currentArticle = {};
-    
-    for (const line of lines) {
-        const trimmed = line.trim();
-        if (trimmed.startsWith('title:')) {
-            if (Object.keys(currentArticle).length > 0) {
-                articles.push(currentArticle);
-            }
-            currentArticle = { title: trimmed.replace('title:', '').trim() };
-        } else if (trimmed.startsWith('description:')) {
-            currentArticle.description = trimmed.replace('description:', '').trim();
-        } else if (trimmed.startsWith('category:')) {
-            currentArticle.category = trimmed.replace('category:', '').trim();
-        } else if (trimmed.startsWith('filename:')) {
-            currentArticle.filename = trimmed.replace('filename:', '').trim();
-        }
-    }
-    
-    if (Object.keys(currentArticle).length > 0) {
-        articles.push(currentArticle);
-    }
-    
-    return articles;
-}
-
-// Update articles section (articles page)
-function updateArticles() {
-    if (!articlesData) return;
-
-    const articlesGrid = document.getElementById('articles-grid');
-    if (!articlesGrid) return;
-
-    // Clear loading state
-    articlesGrid.innerHTML = '';
-
-    if (articlesData.length === 0) {
-        articlesGrid.innerHTML = `
-            <div class="no-articles">
-                <p>No articles found.</p>
-            </div>
-        `;
-        return;
+        };
+        updateAvatarPosition();
+        window.addEventListener('resize', updateAvatarPosition);
     }
 
-    // Create article cards
-    articlesData.forEach((article, index) => {
-        const articleCard = createArticleCard(article, index);
-        articlesGrid.appendChild(articleCard);
-    });
-}
-
-// Create an article card element
-function createArticleCard(article, index) {
-    const card = document.createElement('div');
-    card.className = 'article-card fade-in';
-    card.style.animationDelay = `${index * 0.1}s`;
-
-    // Create corrected article URL
-    const articleUrl = `${CONFIG.ARTICLES_BASE_URL}${article.filename}`;
-
-    card.innerHTML = `
-        <h3 class="article-title">${article.title}</h3>
-        <p class="article-description">${article.description}</p>
-        <a href="${articleUrl}" class="article-link" target="_blank">
-            <i class="fas fa-book-open"></i>
-            <span>Read Full Article</span>
-        </a>
-    `;
-
-    return card;
-}
-
-// Initialize navigation functionality
-function initializeNavigation() {
-    // Set active navigation link based on current page
-    setActiveNavLink();
-}
-
-// Set active navigation link
-function setActiveNavLink() {
-    const currentPage = getCurrentPage();
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        
-        const href = link.getAttribute('href');
-        if (
-            (currentPage === 'home' && href === 'index.html') ||
-            (currentPage === 'projects' && href === 'projects.html') ||
-            (currentPage === 'articles' && href === 'articles.html')
-        ) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Initialize animations and scroll effects
-function initializeAnimations() {
-    // Navbar background on scroll
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(26, 26, 26, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-            }
-        }
-    });
-
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    const initParticles = () => {
+        tsParticles.load("tsparticles", {
+            background: {
+                color: {
+                    value: "transparent"
+                }
+            },
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onClick: {
+                        enable: false,
+                        mode: "push"
+                    },
+                    onHover: {
+                        enable: false,
+                        mode: "connect"
+                    },
+                    resize: true
+                },
+                modes: {
+                    push: {
+                        quantity: 3,
+                        particles: {
+                            position: avatarCenter
+                        }
+                    },
+                    connect: {
+                        distance: 100,
+                        radius: 200,
+                        links: {
+                            opacity: 0.5
+                        }
+                    }
+                }
+            },
+            particles: {
+                color: {
+                    value: ["#ffffff", "#38bdf8"]
+                },
+                links: {
+                    color: "#38bdf8",
+                    distance: 80,
+                    enable: true,
+                    opacity: 0.4,
+                    width: 0.4,
+                    blendMode: "screen"
+                },
+                move: {
+                    direction: "none",
+                    enable: true,
+                    outModes: {
+                        default: "bounce"
+                    },
+                    random: false,
+                    speed: 0.5,
+                    straight: false,
+                    orbit: {
+                        enable: true,
+                        radius: { min: 60, max: 80 },
+                        speed: 0.4,
+                        center: avatarCenter
+                    },
+                    attract: {
+                        enable: true,
+                        rotateX: 800,
+                        rotateY: 1600,
+                        center: avatarCenter
+                    }
+                },
+                number: {
+                    density: {
+                        enable: true,
+                        area: 800
+                    },
+                    value: 40
+                },
+                opacity: {
+                    value: { min: 0.2, max: 0.5 },
+                    animation: {
+                        enable: true,
+                        speed: 0.8,
+                        minimumValue: 0.2
+                    }
+                },
+                shape: {
+                    type: ["circle"]
+                },
+                size: {
+                    value: { min: 0.8, max: 1.5 },
+                    animation: {
+                        enable: true,
+                        speed: 1.5,
+                        minimumValue: 0.8
+                    }
+                }
+            },
+            detectRetina: true
+        }).then(particles => {
+            particlesInstance = particles;
+        });
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+    if (!window.location.pathname.startsWith('/articles/')) {
+        initParticles();
+    }
+
+    fetch(githubApiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const bioText = data.bio || 'No bio available.';
+            aboutSection.innerHTML = `
+                <img src="${data.avatar_url}" alt="${data.name || username}'s avatar">
+                <p id="bio">${bioText.split(' ').map(word => `<span>${word}</span>`).join(' ')}</p>
+            `;
+            const bioElement = document.getElementById('bio');
+            const spans = bioElement.querySelectorAll('span');
+            spans.forEach((span, index) => {
+                setTimeout(() => {
+                    span.classList.add('visible');
+                }, index * 80);
+            });
+            const contactContainer = document.getElementById('contact-container');
+            contactContainer.innerHTML = `
+                <div class="email-container">
+                    <a href="mailto:${email}" class="email-link">
+                        <svg class="email-icon" width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#ffffff"/>
+                        </svg>
+                        ${email}
+                    </a>
+                </div>
+                <div class="social-links">
+                    <a href="${socialLinks.x}" target="_blank" class="x-link">
+                        <svg class="x-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H1.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153zM17.61 20.644h2.039L6.486 3.24H4.298L17.61 20.644z" fill="#ffffff"/>
+                        </svg>
+                    </a>
+                    <a href="${socialLinks.telegram}" target="_blank" class="telegram-link">
+                        <svg class="telegram-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.265 2.737a1.5 1.5 0 0 0-1.627-.32L2.885 9.589a1.5 1.5 0 0 0 .05 2.818l4.854 1.937 2.473 7.785a1.5 1.5 0 0 0 2.664.606l3.224-3.765 5.104 3.765a1.5 1.5 0 0 0 2.315-.85l3.375-16.2a1.5 1.5 0 0 0-.68-1.948zM9.75 15.354l-.698 2.214-1.824-5.786 11.37-7.938-8.848 11.51z" fill="#ffffff"/>
+                        </svg>
+                    </a>
+                    <a href="${socialLinks.github}" target="_blank" class="github-link">
+                        <svg class="github-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.164 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.602-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.607.069-.607 1.003.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.349-1.087.636-1.338-2.22-.252-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.683-.103-.253-.446-1.27.098-2.646 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.114 2.504.336 1.909-1.296 2.747-1.026 2.747-1.026.546 1.376.203 2.394.1 2.646.64.699 1.026 1.592 1.026 2.683 0 3.841-2.337 4.687-4.565 4.936.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.58.688.482A10.019 10.019 0 0 0 22 12c0-5.523-4.477-10-10-10z" fill="#ffffff"/>
+                        </svg>
+                    </a>
+                </div>
+            `;
+        })
+        .catch(error => {
+            console.error('Error fetching GitHub user data:', error);
+            aboutSection.innerHTML = `
+                <img src="https://via.placeholder.com/150" alt="Placeholder avatar">
+                <p id="bio">Error loading bio. Please try again later.</p>
+            `;
+        });
+
+    const displayProjects = () => {
+        const projectsToDisplay = allProjects.slice(displayedProjectsCount, displayedProjectsCount + projectsPerPage);
+
+        if (projectsToDisplay.length === 0 && displayedProjectsCount === 0) {
+            projectsContainer.innerHTML = '<p>No projects found.</p>';
+            loadMoreButton.style.display = 'none';
+            return;
+        }
+
+        projectsToDisplay.forEach((repo, index) => {
+            const projectCard = document.createElement('div');
+            projectCard.classList.add('project-card');
+            projectCard.innerHTML = `
+                <h3>${repo.name}</h3>
+                <p>${repo.description || 'No description available.'}</p>
+                <a href="${repo.html_url}" target="_blank">View Repository</a>
+            `;
+            projectsContainer.appendChild(projectCard);
+
+            setTimeout(() => {
+                projectCard.classList.add('show');
+            }, index * 80);
+        });
+
+        displayedProjectsCount += projectsToDisplay.length;
+
+        if (displayedProjectsCount < allProjects.length) {
+            loadMoreButton.style.display = 'block';
+            if (githubButton) {
+                githubButton.style.display = 'none';
             }
-        });
-    }, observerOptions);
-
-    // Observe elements for animation
-    setTimeout(() => {
-        const animateElements = document.querySelectorAll('.fade-in');
-        animateElements.forEach(el => {
-            observer.observe(el);
-        });
-    }, 500);
-}
-
-// Hide loading overlay
-function hideLoadingOverlay() {
-    if (loadingOverlay) {
-        loadingOverlay.classList.add('hidden');
-        setTimeout(() => {
-            loadingOverlay.style.display = 'none';
-        }, 500);
-    }
-}
-
-// Show error message
-function showErrorMessage(message) {
-    const errorDiv = document.createElement('div');
-    errorDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #ff4444;
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-        max-width: 300px;
-    `;
-    errorDiv.textContent = message;
-    
-    document.body.appendChild(errorDiv);
-    
-    setTimeout(() => {
-        errorDiv.remove();
-    }, 5000);
-}
-
-// Add CSS for animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
+        } else {
+            loadMoreButton.style.display = 'none';
+            if (!githubButton) {
+                githubButton = document.createElement('a');
+                githubButton.id = 'github-link-button';
+                githubButton.href = `https://github.com/${username}?tab=repositories`;
+                githubButton.target = '_blank';
+                githubButton.textContent = 'View More on GitHub';
+                projectsContainer.parentNode.insertBefore(githubButton, loadMoreButton.nextSibling);
+            }
+            githubButton.style.display = 'block';
         }
-        to {
-            transform: translateX(0);
-            opacity: 1;
+    };
+
+    fetch(githubReposApiUrl)
+        .then(response => response.json())
+        .then(repos => {
+            allProjects = repos.filter(repo => 
+                repo.homepage && repo.homepage.startsWith(`https://${username}.github.io/projects`)
+            );
+        })
+        .catch(error => {});
+
+    projectsToggle.addEventListener('click', () => {
+        const isExpanded = projectsContent.style.display === 'block';
+
+        if (isExpanded) {
+            projectsContent.style.display = 'none';
+            projectsToggle.classList.remove('expanded');
+            displayedProjectsCount = 0;
+            projectsContainer.innerHTML = '';
+            if (githubButton) {
+                githubButton.style.display = 'none';
+            }
+        } else {
+            projectsContent.style.display = 'block';
+            projectsToggle.classList.add('expanded');
+            
+            displayedProjectsCount = 0;
+            projectsContainer.innerHTML = '';
+
+            if (allProjects.length > 0) {
+                displayProjects();
+            } else {
+                projectsContainer.innerHTML = '<p>No projects found.</p>';
+                loadMoreButton.style.display = 'none';
+                if (githubButton) {
+                    githubButton.style.display = 'none';
+                }
+            }
+        }
+    });
+
+    loadMoreButton.addEventListener('click', displayProjects);
+
+    const hideAllSections = () => {
+        document.getElementById('about').style.display = 'none';
+        document.getElementById('projects').style.display = 'none';
+        document.getElementById('contact-container').style.display = 'none';
+        document.querySelector('header').style.display = 'none';
+        articlesContent.style.display = 'none';
+        articleFullViewContainer.style.display = 'none';
+        articlesListContainer.style.display = 'none';
+        document.body.classList.remove('article-full-page');
+        document.querySelector('main').classList.remove('article-full-page');
+        if (particlesInstance) {
+            particlesInstance.pause();
+            document.getElementById('tsparticles').style.display = 'none';
+        }
+    };
+
+    const showMainSections = () => {
+        document.getElementById('about').style.display = 'flex';
+        document.getElementById('projects').style.display = 'block';
+        document.getElementById('contact-container').style.display = 'block';
+        document.querySelector('header').style.display = 'block';
+        if (articlesExpanded) {
+            articlesContent.style.display = 'block';
+            articlesToggle.classList.add('expanded');
+        } else {
+            articlesContent.style.display = 'none';
+            articlesToggle.classList.remove('expanded');
+        }
+        articlesListContainer.style.display = 'grid';
+        articleFullViewContainer.style.display = 'none';
+        if (particlesInstance) {
+            document.getElementById('tsparticles').style.display = 'block';
+            particlesInstance.play();
+        } else if (!window.location.pathname.startsWith('/articles/')) {
+            initParticles();
+        }
+    };
+
+    const displayArticlesList = (articles) => {
+        while (articlesListContainer.firstChild) {
+            articlesListContainer.removeChild(articlesListContainer.firstChild);
+        }
+        
+        if (articles.length === 0) {
+            articlesListContainer.innerHTML = '<p>No articles found.</p>';
+            return;
+        }
+
+        articles.forEach((article, index) => {
+            const articleElement = document.createElement('div');
+            articleElement.classList.add('article-item');
+            articleElement.innerHTML = `
+                <h3>${article.title}</h3>
+                <p>${article.summary}</p>
+                <a href="/articles/${article.file.replace('.md', '')}">Read More</a>
+            `;
+            articlesListContainer.appendChild(articleElement);
+        });
+        articlesListContainer.style.display = 'grid';
+    };
+
+    const displayFullArticle = (articleSlug) => {
+        articlesExpanded = true;
+        hideAllSections();
+        articlesContent.style.display = 'block';
+        articleFullViewContainer.style.display = 'block';
+        document.body.classList.add('article-full-page');
+        document.querySelector('main').classList.add('article-full-page');
+
+        const fileName = `${articleSlug}.md`;
+        fetch(window.location.origin + `/articles/${fileName}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                articleFullViewContainer.innerHTML = `
+                    <div class="article-content">
+                        <button id="back-to-articles">← Back to Articles</button>
+                        ${marked.parse(markdown)}
+                    </div>
+                `;
+                const articleLinks = articleFullViewContainer.querySelectorAll('a[href^="/articles/"]');
+                articleLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const articleSlug = e.target.getAttribute('href').split('/articles/')[1];
+                        history.pushState({}, '', `/articles/${articleSlug}`);
+                        displayFullArticle(articleSlug);
+                    });
+                });
+            })
+            .catch(error => {
+                articleFullViewContainer.innerHTML = '<p>Error loading article. Please try again later.</p>';
+            });
+    };
+
+    articlesToggle.addEventListener('click', () => {
+        articlesExpanded = !articlesExpanded;
+        if (articlesExpanded) {
+            articlesToggle.classList.add('expanded');
+            handleRouteChange();
+        } else {
+            articlesContent.style.display = 'none';
+            articlesToggle.classList.remove('expanded');
+        }
+    });
+
+    articlesListContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' && e.target.href.includes('/articles/')) {
+            e.preventDefault();
+            const articleSlug = e.target.href.split('/articles/')[1];
+            history.pushState({}, '', `/articles/${articleSlug}`);
+            displayFullArticle(articleSlug);
+        }
+    });
+
+    document.body.addEventListener('click', (e) => {
+        if (e.target.id === 'back-to-articles') {
+            history.pushState({}, '', '/');
+            handleRouteChange();
+        }
+    });
+
+    window.addEventListener('popstate', handleRouteChange);
+
+    function handleRouteChange() {
+        const path = window.location.pathname;
+        if (path.startsWith('/articles/')) {
+            const articleSlug = path.substring('/articles/'.length);
+            displayFullArticle(articleSlug);
+        } else {
+            showMainSections();
+            fetch(window.location.origin + '/articles/articles.json')
+                .then(response => response.json())
+                .then(displayArticlesList)
+                .catch(error => {
+                    articlesListContainer.innerHTML = '<p>Error loading articles list.</p>';
+                });
         }
     }
-`;
-document.head.appendChild(style);
 
+    handleRouteChange();
+});
