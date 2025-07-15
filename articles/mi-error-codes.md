@@ -21,7 +21,7 @@
 **Solution 2:** (Solution 1)
 
 **Message 3:** "Your device's activation time is too short, please try again in ** hours"  
-** bolsa_description 3:** There is no precise description for this message currently. It may be due to the phone purchase or activation period not yet exceeding 7 days.  
+**description 3:** There is no precise description for this message currently. It may be due to the phone purchase or activation period not yet exceeding 7 days.  
 **Solution 3:** Just wait for the time to expire and try running the unlock tool again.
 
 ---
