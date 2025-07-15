@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.title = userInfo.username;
+    document.querySelector('meta[name="description"]').content = userInfo.username;
+    document.querySelector('meta[name="author"]').content = userInfo.username;
+
     const app = document.getElementById('app-container');
     const { username, email, socialLinks } = userInfo;
     const githubApiUrl = `https://api.github.com/users/${username}`;
@@ -25,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </header>
             <main>
                 <section id="about">
-                    <img id="avatar" src="" alt="${username} Avatar" loading="lazy">
+                    <div class="avatar-container">
+                        <img id="avatar" src="" alt="${username} Avatar" loading="lazy">
+                    </div>
                     <p id="bio"></p>
                 </section>
 
@@ -94,18 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const typeWriter = (element, text, speed) => {
-        let i = 0;
-        element.innerHTML = ""; // Clear the element first
-        function type() {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            }
-        }
-        type();
-    };
+    
 
     const loadUserData = async () => {
         try {
@@ -113,8 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             document.getElementById('avatar').src = data.avatar_url;
             const bioElement = document.getElementById('bio');
-            const bioText = data.bio || 'A passionate developer creating elegant and functional applications.';
-            typeWriter(bioElement, bioText, 50); // 50ms speed
+            bioElement.textContent = data.bio || 'A passionate developer creating elegant and functional applications.';
         } catch (error) {
             console.error('Error loading user data:', error);
         }
@@ -126,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(githubReposApiUrl);
             const repos = await response.json();
             const filteredProjects = repos
-                .filter(repo => repo.homepage && repo.homepage.startsWith('https://offici5l.github.io/'))
+                .filter(repo => repo.homepage && repo.homepage.startsWith(userInfo.homepage))
                 .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
             if (filteredProjects.length > 0) {
