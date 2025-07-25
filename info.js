@@ -1,6 +1,6 @@
 const userInfo = {
     username: 'offici5l',
-    email: 'offici5lcontact@protonmail.com',
+    email: 'offici5lcontact@proton.me',
     socialLinks: {
         x: 'https://x.com/offici5l',
         telegram: 'https://t.me/Offici5l_Channel',
