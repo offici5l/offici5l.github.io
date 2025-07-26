@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/articles/${articleId}.md`);
             if (!response.ok) throw new Error('Article not found');
             const markdown = await response.text();
-            
+
             // Fetch articles.json to find metadata
             const articlesResponse = await fetch('/articles/articles.json');
             const articlesData = await articlesResponse.json();
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    
+
 
     const loadUserData = async () => {
         try {
@@ -197,4 +197,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', router);
     window.addEventListener('load', router);
 });
-
