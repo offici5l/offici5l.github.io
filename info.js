@@ -6,5 +6,5 @@ const userInfo = {
         telegram: 'https://t.me/Offici5l_Channel',
         github: 'https://github.com/offici5l'
     },
-    homepage: 'https://offici5l.github.io/'
+    homepage: 'https://offici5l.github.io'
 };

@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(githubReposApiUrl);
             const repos = await response.json();
             const filteredProjects = repos
-                .filter(repo => repo.has_pages && repo.homepage && repo.homepage.startsWith(userInfo.homepage))
+                .filter(repo => repo.homepage === userInfo.homepage)
                 .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
             if (filteredProjects.length > 0) {
