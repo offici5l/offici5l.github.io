@@ -83,7 +83,7 @@ main {
     margin: 0 auto 2.5rem;
     border-radius: 50%;
     overflow: hidden; /* Ensure image stays within bounds */
-    box-shadow: 0 0 0 5px var(--card-background), 0 0 0 6px var(--accent-color); /* Subtle border glow */
+    box-shadow: 0 0 0 5px var(--card-background), 0 0 0 6px var(--accent-color), 0 0 15px var(--shadow-color); /* Subtle border glow and shadow */
 }
 
 .avatar-container::before,
