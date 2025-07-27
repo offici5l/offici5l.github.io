@@ -395,7 +395,7 @@ main {
     font-size: 1.1rem;
 }
 
-.bitcoin-info {
+.support-contact-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -411,7 +411,7 @@ main {
     overflow: hidden;
 }
 
-.bitcoin-info::before {
+.support-contact-card::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -422,6 +422,13 @@ main {
     animation: rotate-border 8s linear infinite;
     z-index: 0;
     opacity: 0.1;
+}
+
+.contact-section-within-card {
+    margin-top: 2rem; /* Space between bitcoin and contact */
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
 }
 
 @keyframes rotate-border {

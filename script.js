@@ -43,16 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div id="content-container">
                     <section id="contact-support" class="content-view active">
-                        <div id="support-container">
-                            <div class="bitcoin-info">
-                                <h3>Support My Work (BTC Address)</h3>
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${userInfo.bitcoinAddress}" alt="Bitcoin QR Code" class="bitcoin-qr-code">
-                                <div class="bitcoin-address-container">
-                                    <span id="bitcoin-address">${userInfo.bitcoinAddress}</span>
-                                    <button id="copy-bitcoin-address" class="copy-button">Copy Address</button>
-                                </div>
+                        <div class="support-contact-card">
+                            <h3>Support My Work (BTC Address)</h3>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${userInfo.bitcoinAddress}" alt="Bitcoin QR Code" class="bitcoin-qr-code">
+                            <div class="bitcoin-address-container">
+                                <span id="bitcoin-address">${userInfo.bitcoinAddress}</span>
+                                <button id="copy-bitcoin-address" class="copy-button">Copy Address</button>
                             </div>
-                            <div id="contact-container">
+                            <div class="contact-section-within-card">
                                 <h3>Contact</h3>
                                 <a href="mailto:${email}" class="email-link">${email}</a>
                                 <div class="social-links">
