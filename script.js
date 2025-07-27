@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (parts[1] === 'articles' && parts[2]) {
             renderArticlePage(parts[2]);
         } else {
-        renderHomePage();
+            renderHomePage();
         }
     };
 

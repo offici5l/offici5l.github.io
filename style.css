@@ -1,5 +1,3 @@
-/* Tech Noir Theme - V13 (Refined Donate Section Text) */
-
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -89,8 +87,7 @@ main {
     height: 200px;
     margin: 0 auto 3rem;
     border-radius: 50%;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--card-background), #1e1e22);
+    overflow: visible;
     border: 3px solid var(--accent-color);
     box-shadow: 0 0 20px var(--shadow-color), 0 0 30px var(--hover-glow);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -104,21 +101,26 @@ main {
 .avatar-container::before {
     content: '';
     position: absolute;
-    top: -6px;
-    left: -6px;
-    width: calc(100% + 12px);
-    height: calc(100% + 12px);
+    top: -40px;
+    left: -40px;
+    width: 280px;
+    height: 280px;
+    background: conic-gradient(
+        transparent 0%, 
+        var(--accent-color) 5%, 
+        transparent 15%, 
+        var(--hover-glow) 25%, 
+        transparent 35%
+    );
     border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-    opacity: 0.3;
-    animation: pulse-glow 3s ease-in-out infinite;
-    z-index: 0;
+    animation: rotate-border 5s linear infinite;
+    z-index: 1;
+    opacity: 0.5;
 }
 
-@keyframes pulse-glow {
-    0% { transform: scale(0.95); opacity: 0.3; }
-    50% { transform: scale(1.1); opacity: 0.6; }
-    100% { transform: scale(0.95); opacity: 0.3; }
+@keyframes rotate-border {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 #about img {
@@ -128,6 +130,7 @@ main {
     object-fit: cover;
     position: relative;
     z-index: 2;
+    background: linear-gradient(135deg, var(--card-background), #1e1e22);
 }
 
 #about p#bio {
@@ -269,41 +272,19 @@ main {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--hover-glow);
 }
 
+/* Removed scanner effect from donate-contact-card to prevent interference with QR code */
 .donate-contact-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        transparent 0%, 
-        var(--accent-color) 5%, 
-        transparent 15%, 
-        var(--hover-glow) 25%, 
-        transparent 35%
-    );
-    animation: rotate-border 5s linear infinite;
-    z-index: 0;
-    opacity: 0.2;
-}
-
-@keyframes rotate-border {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.donate-contact-card > * {
-    position: relative;
-    z-index: 1;
+    content: none; /* Explicitly disable conic gradient */
 }
 
 .bitcoin-donate {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem; /* Increased spacing between address and QR code */
+    gap: 2rem;
     width: 100%;
+    position: relative;
+    z-index: 1; /* Ensure content is above any potential background effects */
 }
 
 .bitcoin-donate h4 {
@@ -333,6 +314,8 @@ main {
     box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7), 0 0 20px var(--shadow-color);
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
+    position: relative;
+    z-index: 2; /* Above any potential background effects */
 }
 
 .bitcoin-address-container:hover {
@@ -392,6 +375,8 @@ main {
     border: 4px solid var(--bitcoin-color);
     box-shadow: 0 0 25px var(--shadow-color), 0 6px 20px rgba(0, 0, 0, 0.4);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    z-index: 2; /* Ensure QR code is above any background effects */
 }
 
 .bitcoin-qr-code:hover {
@@ -405,6 +390,8 @@ main {
     border-top: 3px solid var(--accent-color);
     width: 100%;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-section-within-card h3 {
@@ -639,6 +626,12 @@ main {
         width: 32px;
         height: 32px;
     }
+    .avatar-container::before {
+        top: -32px;
+        left: -32px;
+        width: 264px;
+        height: 264px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -653,5 +646,11 @@ main {
     }
     .bitcoin-donate h4 {
         font-size: 1.4rem;
+    }
+    .avatar-container::before {
+        top: -24px;
+        left: -24px;
+        width: 248px;
+        height: 248px;
     }
 }
