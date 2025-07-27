@@ -1,4 +1,4 @@
-/* Tech Noir Theme - V8 (Enhanced) */
+/* Tech Noir Theme - V13 (Refined Donate Section Text) */
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -8,13 +8,16 @@
 
 :root {
     --background-color: #0a0a0a;
-    --primary-text: #f5f5f7;
-    --secondary-text: #a1a1a6;
-    --accent-color: #007aff; /* Techy blue */
+    --primary-text: #ffffff;
+    --secondary-text: #b0b0b5;
+    --accent-color: #00aaff;
+    --bitcoin-color: #f7931a;
     --border-color: #2a2a2c;
-    --card-background: #121212;
-    --shadow-color: rgba(0, 122, 255, 0.2);
-    --hover-glow: rgba(0, 122, 255, 0.4);
+    --card-background: #141414;
+    --shadow-color: rgba(0, 170, 255, 0.3);
+    --hover-glow: rgba(0, 170, 255, 0.5);
+    --success-color: #00cc00;
+    --error-color: #ff3333;
 }
 
 html {
@@ -28,8 +31,7 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: radial-gradient(circle at top left, rgba(0, 122, 255, 0.05) 0%, transparent 30%),
-                      radial-gradient(circle at bottom right, rgba(0, 122, 255, 0.05) 0%, transparent 30%);
+    background-image: linear-gradient(135deg, rgba(0, 170, 255, 0.05) 0%, transparent 50%);
     background-attachment: fixed;
 }
 
@@ -38,36 +40,41 @@ body {
 }
 
 header, main {
-    max-width: 800px; /* Slightly wider for more content */
+    max-width: 900px;
     margin: 0 auto;
     width: 100%;
 }
 
 header {
-    padding: 2rem 0;
+    padding: 2.5rem 0;
 }
 
 .luxury-header {
     text-align: center;
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--primary-text);
     letter-spacing: 0.05em;
-    text-shadow: 0 0 10px var(--shadow-color);
+    text-shadow: 0 0 15px var(--shadow-color);
+    transition: text-shadow 0.4s ease;
+}
+
+.luxury-header:hover {
+    text-shadow: 0 0 20px var(--hover-glow);
 }
 
 main {
     min-height: 70vh;
     text-align: center;
-    padding-bottom: 4rem;
+    padding-bottom: 5rem;
 }
 
 .fade-in {
-    animation: fadeIn 1s ease-in-out forwards;
+    animation: fadeIn 1.2s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -78,55 +85,40 @@ main {
 
 .avatar-container {
     position: relative;
-    width: 180px; /* Slightly larger avatar */
-    height: 180px;
-    margin: 0 auto 2.5rem;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 3rem;
     border-radius: 50%;
-    overflow: hidden; /* Ensure image stays within bounds */
-    box-shadow: 0 0 0 5px var(--card-background), 0 0 0 6px var(--accent-color), 0 0 15px var(--shadow-color); /* Subtle border glow and shadow */
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--card-background), #1e1e22);
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--shadow-color), 0 0 30px var(--hover-glow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.avatar-container::before,
-.avatar-container::after {
+.avatar-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--hover-glow), 0 0 40px var(--shadow-color);
+}
+
+.avatar-container::before {
     content: '';
     position: absolute;
-    top: -5px;
-    left: -5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
+    top: -6px;
+    left: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
     border-radius: 50%;
-    box-shadow: 0 0 25px var(--accent-color); /* More prominent glow */
-    animation: neural-pulse 4s ease-in-out infinite;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    opacity: 0.3;
+    animation: pulse-glow 3s ease-in-out infinite;
     z-index: 0;
-    opacity: 0;
 }
 
-.avatar-container::after {
-    animation-delay: -2s; /* Halfway out of sync */
-}
-
-@keyframes neural-pulse {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-        box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.7);
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 1;
-        box-shadow: 0 0 30px 15px rgba(0, 122, 255, 0);
-    }
-    100% {
-        transform: scale(0.9);
-        opacity: 0;
-        box-shadow: 0 0 0 0 rgba(0, 122, 255, 0);
-    }
-}
-
-@keyframes text-neural-pulse {
-    0% { text-shadow: 0 0 4px var(--secondary-text); }
-    50% { text-shadow: 0 0 15px var(--accent-color); }
-    100% { text-shadow: 0 0 4px var(--secondary-text); }
+@keyframes pulse-glow {
+    0% { transform: scale(0.95); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+    100% { transform: scale(0.95); opacity: 0.3; }
 }
 
 #about img {
@@ -139,44 +131,53 @@ main {
 }
 
 #about p#bio {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.15rem; /* Slightly larger font */
+    font-size: 1.2rem;
     color: var(--secondary-text);
-    max-width: 600px; /* Adjusted max-width */
+    max-width: 650px;
     margin: 0 auto;
     font-weight: 400;
     line-height: 1.8;
-    animation: text-neural-pulse 3s ease-in-out infinite alternate;
+    background: linear-gradient(90deg, var(--secondary-text), #d0d0d5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: text-glow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes text-glow {
+    0% { text-shadow: 0 0 5px var(--secondary-text); }
+    50% { text-shadow: 0 0 15px var(--accent-color); }
+    100% { text-shadow: 0 0 5px var(--secondary-text); }
 }
 
 #view-switcher {
     display: flex;
     justify-content: center;
-    margin: 2.5rem 0 3.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 15px; /* More rounded */
-    padding: 6px;
-    background-color: var(--card-background);
+    margin: 3rem 0 4rem;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px;
+    background: linear-gradient(145deg, var(--card-background), #1a1a1a);
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    transition: box-shadow 0.4s ease, transform 0.2s ease;
+    box-shadow: 0 5px 20px var(--shadow-color);
+    transition: box-shadow 0.4s ease, transform 0.3s ease;
 }
 
 #view-switcher:hover {
-    box-shadow: 0 0 20px var(--shadow-color);
-    transform: translateY(-2px);
+    box-shadow: 0 10px 30px var(--hover-glow);
+    transform: translateY(-3px);
 }
 
 .view-button {
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 1.05rem; /* Slightly larger font */
+    font-weight: 600;
+    font-size: 1.1rem;
     color: var(--secondary-text);
     background-color: transparent;
     border: none;
-    padding: 0.8rem 1.8rem; /* More padding */
-    border-radius: 10px; /* More rounded */
+    padding: 0.9rem 2rem;
+    border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
     letter-spacing: 0.5px;
@@ -191,7 +192,7 @@ main {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
     transition: all 0.4s ease;
 }
 
@@ -201,20 +202,20 @@ main {
 
 .view-button:hover {
     color: var(--primary-text);
-    background-color: rgba(255, 255, 255, 0.08); /* Stronger hover effect */
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .view-button.active {
-    background-color: var(--accent-color);
+    background: linear-gradient(45deg, var(--accent-color), #00ccff);
     color: #fff;
-    box-shadow: 0 4px 20px var(--shadow-color); /* Stronger shadow */
-    transform: translateY(-2px); /* More pronounced lift */
-    font-weight: 600;
+    box-shadow: 0 5px 25px var(--shadow-color);
+    transform: translateY(-2px);
+    font-weight: 700;
 }
 
 .content-view {
     display: none;
-    animation: slideIn 0.6s ease-in-out forwards; /* Slower animation */
+    animation: slideIn 0.7s ease-in-out forwards;
 }
 
 .content-view.active {
@@ -222,42 +223,219 @@ main {
 }
 
 @keyframes slideIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 #projects-container, #articles-list-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid */
-    gap: 1.5rem; /* Increased gap */
-    padding-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding-top: 1.5rem;
 }
 
-#contact-container, #support-container {
+#donate-container {
     text-align: center;
-    padding: 2.5rem 0;
+    padding: 3rem 0;
+}
+
+#donate-container h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    text-shadow: 0 0 15px var(--shadow-color);
+    margin-bottom: 2rem;
+}
+
+.donate-contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background: linear-gradient(135deg, var(--card-background), #1e1e22);
+    border: 3px solid var(--accent-color);
+    border-radius: 25px;
+    padding: 3rem;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.4), 0 0 30px var(--shadow-color);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.donate-contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--hover-glow);
+}
+
+.donate-contact-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent 0%, 
+        var(--accent-color) 5%, 
+        transparent 15%, 
+        var(--hover-glow) 25%, 
+        transparent 35%
+    );
+    animation: rotate-border 5s linear infinite;
+    z-index: 0;
+    opacity: 0.2;
+}
+
+@keyframes rotate-border {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.donate-contact-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.bitcoin-donate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem; /* Increased spacing between address and QR code */
+    width: 100%;
+}
+
+.bitcoin-donate h4 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    text-shadow: 0 0 10px var(--shadow-color);
+    margin-bottom: 0.5rem;
+}
+
+.bitcoin-donate .address-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--secondary-text);
+    margin-bottom: 1rem;
+}
+
+.bitcoin-address-container {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    background: linear-gradient(90deg, #000, #1a1a1a);
+    border: 3px solid var(--border-color);
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 100%;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7), 0 0 20px var(--shadow-color);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.bitcoin-address-container:hover {
+    border-color: var(--bitcoin-color);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0 0 25px var(--hover-glow);
+}
+
+.bitcoin-address-container.copied::after {
+    content: 'Copied!';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success-color);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: showCopied 1.5s ease-in-out forwards;
+}
+
+@keyframes showCopied {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+}
+
+#bitcoin-address {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 1.2rem;
+    color: var(--primary-text);
+    word-break: break-all;
+    flex-grow: 1;
+    text-align: left;
+    user-select: all;
+    transition: text-shadow 0.4s ease;
+}
+
+#bitcoin-address:hover {
+    text-shadow: 0 0 10px var(--shadow-color);
+}
+
+.qr-code-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--secondary-text);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.bitcoin-qr-code {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    border: 4px solid var(--bitcoin-color);
+    box-shadow: 0 0 25px var(--shadow-color), 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.bitcoin-qr-code:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px var(--hover-glow), 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.contact-section-within-card {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 3px solid var(--accent-color);
+    width: 100%;
+    text-align: center;
+}
+
+.contact-section-within-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    text-shadow: 0 0 10px var(--shadow-color);
+    margin-bottom: 1.5rem;
 }
 
 .email-link {
-    display: inline-block; /* Changed to inline-block */
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--primary-text);
     text-decoration: none;
-    font-size: 1.3rem; /* Larger font */
-    margin-bottom: 2.5rem;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
     position: relative;
+    padding-bottom: 0.4rem;
+    transition: all 0.4s ease;
 }
 
 .email-link::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -5px;
+    bottom: 0;
     width: 100%;
-    height: 2px;
-    background-color: var(--accent-color);
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--hover-glow));
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform-origin: left;
+    transition: transform 0.4s ease;
 }
 
 .email-link:hover::after {
@@ -266,35 +444,36 @@ main {
 
 .email-link:hover {
     color: var(--accent-color);
-    text-shadow: 0 0 10px var(--shadow-color);
+    text-shadow: 0 0 15px var(--shadow-color);
 }
 
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 3rem; /* Increased gap */
+    gap: 4rem;
+    margin-top: 2rem;
 }
 
 .social-links a svg {
-    width: 32px; /* Larger icons */
-    height: 32px;
+    width: 40px;
+    height: 40px;
     fill: var(--secondary-text);
-    transition: fill 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .social-links a:hover svg {
-    fill: var(--accent-color); /* Change to accent color on hover */
-    transform: translateY(-6px) scale(1.1); /* More pronounced lift and slight scale */
-    filter: drop-shadow(0 0 8px var(--shadow-color));
+    fill: var(--accent-color);
+    transform: translateY(-10px) scale(1.2);
+    filter: drop-shadow(0 0 12px var(--shadow-color));
 }
 
 .project-card, .article-item {
-    background-color: var(--card-background);
-    padding: 2rem; /* More padding */
+    background: linear-gradient(135deg, var(--card-background), #1e1e22);
+    padding: 2.5rem;
     text-align: left;
-    border: 1px solid var(--border-color);
-    border-radius: 15px; /* More rounded */
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
     text-decoration: none;
     color: inherit;
     position: relative;
@@ -310,7 +489,7 @@ main {
     height: 100%;
     background: radial-gradient(circle at top right, var(--hover-glow) 0%, transparent 70%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
     z-index: 0;
 }
 
@@ -319,17 +498,16 @@ main {
 }
 
 .project-card:hover, .article-item:hover {
-    transform: translateY(-8px); /* More pronounced lift */
+    transform: translateY(-10px);
     border-color: var(--accent-color);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2); /* Stronger shadow */
-    background-color: #1a1a1a; /* Slightly lighter background on hover */
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
 }
 
 .project-card h3, .article-item h3 {
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 1.3rem; /* Larger font */
-    margin-bottom: 0.6rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
     color: var(--primary-text);
     position: relative;
     z-index: 1;
@@ -337,163 +515,48 @@ main {
 
 .project-card p, .article-item p {
     color: var(--secondary-text);
-    font-size: 1.05rem; /* Slightly larger font */
+    font-size: 1.1rem;
     margin-bottom: 0;
     position: relative;
     z-index: 1;
 }
 
 .article-item .card-meta {
-    margin-top: 1.2rem;
-    font-size: 0.95rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
     color: var(--secondary-text);
     position: relative;
     z-index: 1;
 }
 
-/* View More Projects Button */
 .view-more-projects-container {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 3.5rem;
 }
 
 .view-more-button {
     display: inline-block;
-    background-color: var(--accent-color);
+    background: linear-gradient(45deg, var(--accent-color), #00ccff);
     color: #fff;
-    padding: 1rem 2.5rem; /* More padding */
-    border-radius: 10px;
+    padding: 1.2rem 3rem;
+    border-radius: 12px;
     text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 20px var(--shadow-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 25px var(--shadow-color);
     letter-spacing: 0.05em;
 }
 
 .view-more-button:hover {
-    background-color: #005bb5; /* Darker shade of accent */
-    transform: translateY(-3px); /* More pronounced lift */
-    box-shadow: 0 8px 25px var(--hover-glow);
+    background: linear-gradient(45deg, #0088cc, var(--accent-color));
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px var(--hover-glow);
 }
 
-/* Support Section */
-#support-container {
-    text-align: center;
-    padding: 2.5rem 0;
-}
-
-#support-container h3 {
-    font-size: 2rem; /* Larger heading */
-    margin-bottom: 1.2rem;
-    color: var(--primary-text);
-    text-shadow: 0 0 10px var(--shadow-color);
-}
-
-#support-container p {
-    color: var(--secondary-text);
-    margin-bottom: 2.5rem;
-    font-size: 1.1rem;
-}
-
-.support-contact-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.8rem; /* Increased gap */
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-    padding: 2.5rem;
-    max-width: 400px; /* Slightly wider */
-    margin: 0 auto;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.support-contact-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg at 50% 50%, transparent 0%, var(--accent-color) 10%, transparent 30%, transparent 70%, var(--accent-color) 90%, transparent 100%);
-    animation: rotate-border 8s linear infinite;
-    z-index: 0;
-    opacity: 0.1;
-}
-
-.contact-section-within-card {
-    margin-top: 2rem; /* Space between bitcoin and contact */
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
-    width: 100%;
-}
-
-@keyframes rotate-border {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.bitcoin-qr-code {
-    width: 160px; /* Slightly larger QR */
-    height: 160px;
-    border-radius: 10px;
-    border: 2px solid var(--accent-color); /* Accent border */
-    box-shadow: 0 0 15px var(--shadow-color);
-    position: relative;
-    z-index: 1;
-}
-
-.bitcoin-address-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* Increased gap */
-    background-color: #000;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 1rem 1.2rem; /* More padding */
-    width: 100%;
-    justify-content: space-between;
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 1;
-}
-
-#bitcoin-address {
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 1rem; /* Slightly larger font */
-    color: var(--primary-text);
-    word-break: break-all;
-    flex-grow: 1;
-    text-align: left;
-    user-select: all; /* Allow easy selection */
-}
-
-.copy-button {
-    background-color: var(--accent-color);
-    color: #fff;
-    border: none;
-    padding: 0.7rem 1.2rem; /* More padding */
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9rem; /* Slightly larger font */
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 10px var(--shadow-color);
-}
-
-.copy-button:hover {
-    background-color: #005bb5;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px var(--hover-glow);
-}
-
-/* Article View */
 #article-view {
-    padding: 2rem 0 4rem;
-    max-width: 720px;
+    padding: 2.5rem 0 5rem;
+    max-width: 800px;
     margin: 0 auto;
     text-align: left;
 }
@@ -502,69 +565,93 @@ main {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     color: var(--primary-text);
-    margin: 2.5rem 0 1.5rem;
+    margin: 3rem 0 1.8rem;
 }
 
 .article-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    margin-bottom: 2.5rem;
 }
 
-.article-content h2 { font-size: 2rem; }
-.article-content h3 { font-size: 1.5rem; }
+.article-content h2 { font-size: 2.2rem; }
+.article-content h3 { font-size: 1.6rem; }
 
 .article-content p, .article-content ul, .article-content ol {
     color: var(--secondary-text);
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
 }
 
 .article-content a {
     color: var(--primary-text);
     text-decoration: underline;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
 }
 
 .article-content a:hover { color: var(--accent-color); }
 
 .article-content pre {
     background-color: #000;
-    border: 1px solid var(--border-color);
-    padding: 1.5rem;
-    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 10px;
     overflow-x: auto;
     font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .back-link {
     display: inline-block;
-    margin-top: 3rem;
+    margin-top: 3.5rem;
     color: var(--secondary-text);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.4s ease;
 }
 
 .back-link:hover { color: var(--primary-text); }
 
-/* Responsive */
 @media (max-width: 768px) {
     #app-container { padding: 0 1.5rem; }
-    .article-content h1 { font-size: 2rem; }
+    .article-content h1 { font-size: 2.2rem; }
     #projects-container, #articles-list-container {
         grid-template-columns: 1fr;
+    }
+    .donate-contact-card {
+        padding: 2.5rem;
+        max-width: 90%;
+    }
+    .bitcoin-qr-code {
+        width: 160px;
+        height: 160px;
+    }
+    .bitcoin-address-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+    .social-links {
+        gap: 3rem;
+    }
+    .social-links a svg {
+        width: 32px;
+        height: 32px;
     }
 }
 
 @media (max-width: 480px) {
     #app-container { padding: 0 1rem; }
-    .view-button { padding: 0.6rem 1rem; font-size: 0.9rem; }
-    .article-content h1 { font-size: 1.8rem; }
-    .bitcoin-info { padding: 1.5rem; }
-    .bitcoin-address-container { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-    .copy-button { width: 100%; }
-    .social-links { gap: 2rem; }
-    .social-links a svg { width: 28px; height: 28px; }
+    .view-button { padding: 0.7rem 1.2rem; font-size: 1rem; }
+    .article-content h1 { font-size: 2rem; }
+    #donate-container h3 {
+        font-size: 1.8rem;
+    }
+    .email-link {
+        font-size: 1.3rem;
+    }
+    .bitcoin-donate h4 {
+        font-size: 1.4rem;
+    }
 }

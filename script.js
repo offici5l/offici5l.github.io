@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('meta[name="author"]').content = userInfo.username;
 
     const app = document.getElementById('app-container');
-    const { username, email, socialLinks } = userInfo;
+    const { username, email, socialLinks, bitcoinAddress } = userInfo;
     const githubApiUrl = `https://api.github.com/users/${username}`;
     const githubReposApiUrl = `https://api.github.com/users/${username}/repos`;
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <header>
                 <div class="luxury-header">
                     <a href="#/" style="text-decoration: none; color: inherit;">
-                        
+                        ${username}
                     </a>
                 </div>
             </header>
@@ -36,19 +36,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 </section>
 
                 <nav id="view-switcher">
-                    <button class="view-button active" data-view="contact-support">Contact/Support</button>
+                    <button class="view-button active" data-view="donate-contact">Donate & Contact</button>
                     <button class="view-button" data-view="projects">Projects</button>
                     <button class="view-button" data-view="articles">Writings</button>
                 </nav>
 
                 <div id="content-container">
-                    <section id="contact-support" class="content-view active">
-                        <div class="support-contact-card">
-                            <h3>Support My Work (BTC Address)</h3>
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${userInfo.bitcoinAddress}" alt="Bitcoin QR Code" class="bitcoin-qr-code">
-                            <div class="bitcoin-address-container">
-                                <span id="bitcoin-address">${userInfo.bitcoinAddress}</span>
-                                <button id="copy-bitcoin-address" class="copy-button">Copy Address</button>
+                    <section id="donate-contact" class="content-view active">
+                        <div class="donate-contact-card">
+                            <h3>Donate</h3>
+                            <div class="bitcoin-donate">
+                                <h4>using Bitcoin</h4>
+                                <span class="address-label">address:</span>
+                                <div class="bitcoin-address-container" id="bitcoin-address-container">
+                                    <span id="bitcoin-address">${bitcoinAddress}</span>
+                                </div>
+                                <span class="qr-code-label">QR code address:</span>
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${bitcoinAddress}" alt="Bitcoin QR Code" class="bitcoin-qr-code">
                             </div>
                             <div class="contact-section-within-card">
                                 <h3>Contact</h3>
@@ -84,13 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
         loadArticles();
         setupViewSwitcher();
 
-        // Add event listener for Bitcoin address copy button
-        const copyButton = document.getElementById('copy-bitcoin-address');
-        if (copyButton) {
-            copyButton.addEventListener('click', () => {
+        const bitcoinAddressContainer = document.getElementById('bitcoin-address-container');
+        if (bitcoinAddressContainer) {
+            bitcoinAddressContainer.addEventListener('click', () => {
                 const bitcoinAddress = document.getElementById('bitcoin-address').textContent;
                 navigator.clipboard.writeText(bitcoinAddress).then(() => {
-                    alert('Bitcoin address copied to clipboard!');
+                    bitcoinAddressContainer.classList.add('copied');
+                    setTimeout(() => {
+                        bitcoinAddressContainer.classList.remove('copied');
+                    }, 1500);
                 }).catch(err => {
                     console.error('Failed to copy: ', err);
                 });
@@ -106,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Article not found');
             const markdown = await response.text();
 
-            // Fetch articles.json to find metadata
             const articlesResponse = await fetch('/articles/articles.json');
             const articlesData = await articlesResponse.json();
             const articleData = articlesData.find(a => a.file === `${articleId}.md`);
@@ -122,15 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
-
     const loadUserData = async () => {
         try {
             const response = await fetch(githubApiUrl);
             const data = await response.json();
             document.getElementById('avatar').src = data.avatar_url;
             const bioElement = document.getElementById('bio');
-            bioElement.textContent = data.bio || 'A passionate developer creating elegant and functional applications.';
+            bioElement.textContent = data.bio || 'Crafting innovative solutions and sharing knowledge through open-source projects.';
         } catch (error) {
             console.error('Error loading user data:', error);
         }
@@ -154,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `).join('');
                 container.innerHTML += `
                     <div class="view-more-projects-container">
-                        <a href="${userInfo.socialLinks.github}" target="_blank" rel="noopener noreferrer" class="view-more-button">View More Projects on GitHub</a>
+                        <a href="${userInfo.socialLinks.github}" target="_blank" rel="noopener noreferrer" class="view-more-button">Explore More Projects on GitHub</a>
                     </div>
                 `;
             } else {
@@ -194,13 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', () => {
                 const targetView = button.dataset.view;
 
-                // Update button active state
                 viewButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
-                // Update content view active state
                 contentViews.forEach(view => {
-                    if (view.id === targetView || (targetView === 'contact-support' && (view.id === 'contact' || view.id === 'support'))) {
+                    if (view.id === targetView || (targetView === 'donate-contact' && (view.id === 'donate' || view.id === 'contact'))) {
                         view.classList.add('active');
                     } else {
                         view.classList.remove('active');
@@ -217,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (parts[1] === 'articles' && parts[2]) {
             renderArticlePage(parts[2]);
         } else {
-            renderHomePage();
+        renderHomePage();
         }
     };
 
