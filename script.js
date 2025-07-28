@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <section id="donate" class="content-view">
                     <div class="donate-contact-card">
                         <div class="bitcoin-donate">
-                            <h4>Bitcoin Donation</h4>
+                            <h4>Bitcoin</h4>
                             <span class="address-label">Address:</span>
                             <div class="bitcoin-address-container" id="bitcoin-address-container">
                                 <span id="bitcoin-address">${bitcoinAddress}</span>
