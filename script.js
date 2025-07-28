@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const templates = {
         home: `
-            <header>
-                <div class="luxury-header">
-                    <a href="#/" style="text-decoration: none; color: inherit;">
-                        ${username}
-                    </a>
-                </div>
-            </header>
             <main>
                 <section id="about">
                     <div class="avatar-container">
@@ -52,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <span id="bitcoin-address">${bitcoinAddress}</span>
                                 </div>
                                 <span class="qr-code-label">QR code address:</span>
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${bitcoinAddress}" alt="Bitcoin QR Code" class="bitcoin-qr-code">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${bitcoinAddress}" alt="Bitcoin QR Code" class="bitcoin-qr-code">
                             </div>
                             <div class="contact-section-within-card">
                                 <h3>Contact</h3>
@@ -96,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     bitcoinAddressContainer.classList.add('copied');
                     setTimeout(() => {
                         bitcoinAddressContainer.classList.remove('copied');
-                    }, 1500);
+                    }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy: ', err);
                 });
@@ -133,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             document.getElementById('avatar').src = data.avatar_url;
             const bioElement = document.getElementById('bio');
-            bioElement.textContent = data.bio || 'Crafting innovative solutions and sharing knowledge through open-source projects.';
+            bioElement.textContent = data.bio || 'Passionate about technology and creativity, I always strive for learning and developing my skills...';
         } catch (error) {
             console.error('Error loading user data:', error);
         }
@@ -225,3 +218,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', router);
     window.addEventListener('load', router);
 });
+
