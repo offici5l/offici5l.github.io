@@ -1,10 +1,7 @@
 const userInfo = {
-    username: 'offici5l',
+    username_github: 'offici5l',
+    username_x: 'offici5l',
+    username_telegram: 'Offici5l_Channel',
     email: 'offici5lcontact@proton.me',
-    socialLinks: {
-        x: 'https://x.com/offici5l',
-        telegram: 'https://t.me/Offici5l_Channel',
-        github: 'https://github.com/offici5l'
-    },
     homepage: 'https://offici5l.github.io'
 };

@@ -6,6 +6,7 @@
 
 :root {
     --background-color: #000000;
+    --background-gradient: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
     --primary-text: #ffffff;
     --secondary-text: #cccccc;
     --border-color: #333333;
@@ -13,6 +14,15 @@
     --hover-glow: rgba(255, 255, 255, 0.3);
     --protonmail-color: #6D4AFF;
     --protonmail-dark: #5038CC;
+    --javascript-color: #f7df1e;
+    --python-color: #3776ab;
+    --c-color: #555555;
+    --kotlin-color: #7f52ff;
+    --shell-color: #89e051;
+    --typescript-color: #3178c6;
+    --go-color: #00add8;
+    --rust-color: #dea584;
+    --card-gradient: linear-gradient(145deg, #1a1a1a 0%, #111111 100%);
 }
 
 html {
@@ -21,11 +31,21 @@ html {
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--background-color);
+    background: var(--background-gradient);
     color: var(--primary-text);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    position: relative;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 #app-container {
@@ -63,11 +83,22 @@ main.loaded {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: var(--secondary-text);
     z-index: 1000;
-    transition: opacity 0.3s ease;
+}
+
+#loading-indicator::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--protonmail-color);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 #about {
@@ -82,11 +113,12 @@ main.loaded {
     overflow: hidden;
     border: 3px solid var(--primary-text);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .avatar-container:hover {
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--protonmail-color);
 }
 
 .avatar-container img {
@@ -97,12 +129,13 @@ main.loaded {
 }
 
 #about p#bio {
+    font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 400;
     color: var(--secondary-text);
     max-width: 700px;
     margin: 0 auto;
-    line-height: 1.9;
+    line-height: 2;
 }
 
 #view-switcher {
@@ -117,17 +150,35 @@ main.loaded {
     font-weight: 600;
     font-size: 1.1rem;
     color: var(--primary-text);
-    background: transparent;
-    border: 2px solid var(--primary-text);
+    background: linear-gradient(135deg, var(--protonmail-color), var(--protonmail-dark));
+    border: 2px solid var(--protonmail-color);
     padding: 0.8rem 2.5rem;
     border-radius: 30px;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
+.view-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.view-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
 .view-button:hover {
-    background: var(--primary-text);
-    color: var(--background-color);
     box-shadow: 0 0 15px var(--hover-glow);
 }
 
@@ -139,14 +190,14 @@ main.loaded {
 
 .content-view {
     display: none;
-    animation: slideIn 0.8s ease forwards;
+    animation: fadeIn 0.8s ease forwards;
 }
 
 .content-view.active {
     display: block;
 }
 
-@keyframes slideIn {
+@keyframes fadeIn {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
@@ -233,7 +284,7 @@ main.loaded {
 }
 
 .guide-button {
-    background: var(--protonmail-color);
+    background: linear-gradient(135deg, var(--protonmail-color), var(--protonmail-dark));
     border: 2px solid var(--protonmail-color);
     color: var(--primary-text);
     padding: 0.6rem 1.5rem;
@@ -244,6 +295,26 @@ main.loaded {
     transition: all 0.3s ease;
     display: inline-block;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.guide-button:hover::before {
+    width: 200px;
+    height: 200px;
 }
 
 .guide-button:hover {
@@ -278,6 +349,18 @@ main.loaded {
     transition: all 0.3s ease;
 }
 
+.social-links a[href*="github.com"] {
+    border-color: #ffffff;
+}
+
+.social-links a[href*="t.me"] {
+    border-color: #0088cc;
+}
+
+.social-links a[href*="x.com"] {
+    border-color: #1da1f2;
+}
+
 .social-links a:hover {
     background: var(--primary-text);
     border-color: var(--primary-text);
@@ -289,71 +372,135 @@ main.loaded {
 }
 
 .project-card {
-    background: var(--card-background);
-    padding: 3rem;
+    background: var(--card-gradient);
+    padding: 2.5rem;
     border: 1px solid var(--border-color);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+    animation-delay: calc(var(--index) * 0.2s);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover::before {
+    opacity: 1;
 }
 
 .project-card:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--hover-glow);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px var(--hover-glow);
 }
 
 .project-card h3 {
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 1.6rem;
-    margin-bottom: 1.2rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
     color: var(--primary-text);
+    position: relative;
+    z-index: 1;
 }
 
 .project-card p {
     color: var(--secondary-text);
-    font-size: 1.15rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.project-card[data-language="JavaScript"] {
+    border-left: 5px solid var(--javascript-color);
+}
+
+.project-card[data-language="Python"] {
+    border-left: 5px solid var(--python-color);
+}
+
+.project-card[data-language="C"] {
+    border-left: 5px solid var(--c-color);
+}
+
+.project-card[data-language="Kotlin"] {
+    border-left: 5px solid var(--kotlin-color);
+}
+
+.project-card[data-language="Shell"] {
+    border-left: 5px solid var(--shell-color);
+}
+
+.project-card[data-language="TypeScript"] {
+    border-left: 5px solid var(--typescript-color);
+}
+
+.project-card[data-language="Go"] {
+    border-left: 5px solid var(--go-color);
+}
+
+.project-card[data-language="Rust"] {
+    border-left: 5px solid var(--rust-color);
 }
 
 .project-details {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 1.5rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--secondary-text);
+    position: relative;
+    z-index: 1;
 }
 
 .project-details span {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
 }
 
 .language-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     vertical-align: middle;
 }
 
 .view-project-button {
-    background: transparent;
-    border: 2px solid var(--primary-text);
+    background: linear-gradient(135deg, var(--protonmail-color), var(--protonmail-dark));
+    border: 2px solid var(--protonmail-color);
     color: var(--primary-text);
-    padding: 0.6rem 1.5rem;
-    border-radius: 10px;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
     display: inline-block;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .view-project-button:hover {
     background: var(--primary-text);
     color: var(--background-color);
-    box-shadow: 0 0 12px var(--hover-glow);
+    box-shadow: 0 0 15px var(--hover-glow);
 }
 
 .view-more-projects-container {
@@ -362,14 +509,14 @@ main.loaded {
 }
 
 .github-projects-button {
-    background: transparent;
+    background: linear-gradient(135deg, var(--protonmail-color), var(--protonmail-dark));
     color: var(--primary-text);
     padding: 1rem 3rem;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
-    border: 2px solid var(--primary-text);
+    border: 2px solid var(--protonmail-color);
     transition: all 0.3s ease;
 }
 
@@ -385,8 +532,8 @@ main.loaded {
     }
 
     .avatar-container {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
 
     .avatar-container img {
@@ -415,7 +562,7 @@ main.loaded {
 
     #view-switcher {
         flex-direction: column;
-        gap: 0.8rem;
+        gap: 1rem;
     }
 
     .view-button {
@@ -435,15 +582,32 @@ main.loaded {
     }
 
     .language-icon {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .project-card {
+        padding: 2rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.8rem;
+    }
+
+    .project-card p {
+        font-size: 1.1rem;
+    }
+
+    .view-project-button {
+        padding: 0.7rem 1.8rem;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
     .avatar-container {
-        width: 160px;
-        height: 160px;
+        width: 140px;
+        height: 140px;
     }
 
     .email-label {
@@ -462,7 +626,15 @@ main.loaded {
     }
 
     .project-card {
-        padding: 2rem;
+        padding: 1.5rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .project-card p {
+        font-size: 1rem;
     }
 
     .github-projects-button {
@@ -471,12 +643,12 @@ main.loaded {
     }
 
     .language-icon {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
     }
 
     .view-project-button {
-        padding: 0.5rem 1.2rem;
+        padding: 0.6rem 1.5rem;
         font-size: 0.85rem;
     }
 
