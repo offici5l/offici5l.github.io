@@ -7,6 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app-container');
     const githubApiUrl = `https://api.github.com/users/${username}`;
     const githubReposApiUrl = `https://api.github.com/users/${username}/repos`;
+    const cacheKey = `userData_${username}`;
+    const cacheTTL = 5 * 60 * 1000;
+
+    const languageIcons = {
+        JavaScript: 'devicon-javascript-plain',
+        Python: 'devicon-python-plain',
+        Java: 'devicon-java-plain',
+        Ruby: 'devicon-ruby-plain',
+        PHP: 'devicon-php-plain',
+        C: 'devicon-c-plain',
+        'C++': 'devicon-cplusplus-plain',
+        'C#': 'devicon-csharp-plain',
+        TypeScript: 'devicon-typescript-plain',
+        Go: 'devicon-go-plain',
+        Rust: 'devicon-rust-plain',
+        HTML: 'devicon-html5-plain',
+        CSS: 'devicon-css3-plain',
+    };
 
     const template = `
         <main>
@@ -25,7 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <section id="contact-donate" class="content-view">
                     <div class="donate-contact-card">
                         <div class="bitcoin-donate">
-                            <p class="email-label">Email (Contact/Donate): <a href="mailto:${email}" class="email-address">${email}</a></p>
+                            <p class="email-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm0 48H464V400H48V112zm208 208c-61.9 0-112-50.1-112-112S194.1 96 256 96s112 50.1 112 112-50.1 112-112 112zm0-48c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64z"/></svg>
+                                Email (Contact/Donate):
+                            </p>
+                            <p class="email-address-container">
+                                <a href="mailto:${email}" class="email-address">${email}</a>
+                            </p>
                             <button class="guide-button" onclick="window.open('https://proton.me/support/wallet-bitcoin-via-email#how-to-send', '_blank')">Proton Wallet Donation Guide</button>
                         </div>
                         <div class="social-links">
@@ -42,11 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
         </main>
     `;
 
-    const render = () => {
-        app.innerHTML = template;
-        loadUserData();
-        loadProjects();
-        setupViewSwitcher();
+    const getCachedData = (key) => {
+        const cached = localStorage.getItem(key);
+        if (cached) {
+            const { data, timestamp } = JSON.parse(cached);
+            if (Date.now() - timestamp < cacheTTL) {
+                return data;
+            }
+        }
+        return null;
+    };
+
+    const setCachedData = (key, data) => {
+        localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
     };
 
     const loadUserData = async () => {
@@ -55,15 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.style.display = 'flex';
 
         try {
-            const response = await fetch(githubApiUrl);
-            const data = await response.json();
+            let data = getCachedData(cacheKey);
+            if (!data) {
+                const response = await fetch(githubApiUrl, { cache: 'no-cache' });
+                if (!response.ok) throw new Error('Failed to fetch user data');
+                data = await response.json();
+                setCachedData(cacheKey, data);
+            }
+
             const avatar = document.getElementById('avatar');
-            avatar.src = data.avatar_url;
+            const bio = document.getElementById('bio');
+            avatar.src = data.avatar_url || 'https://via.placeholder.com/240';
 
             const img = new Image();
-            img.src = data.avatar_url;
+            img.src = data.avatar_url || 'https://via.placeholder.com/240';
             img.onload = () => {
-                document.getElementById('bio').textContent = data.bio || 'Tech enthusiast';
+                bio.textContent = data.bio || 'Tech enthusiast';
                 loadingIndicator.style.opacity = '0';
                 setTimeout(() => {
                     loadingIndicator.style.display = 'none';
@@ -71,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             };
             img.onerror = () => {
-                document.getElementById('bio').textContent = data.bio || 'Tech enthusiast';
+                bio.textContent = 'Tech enthusiast';
+                avatar.src = 'https://via.placeholder.com/240';
                 loadingIndicator.style.opacity = '0';
                 setTimeout(() => {
                     loadingIndicator.style.display = 'none';
@@ -81,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error loading user data:', error);
             document.getElementById('bio').textContent = 'Tech enthusiast';
+            document.getElementById('avatar').src = 'https://via.placeholder.com/240';
             loadingIndicator.style.opacity = '0';
             setTimeout(() => {
                 loadingIndicator.style.display = 'none';
@@ -91,23 +132,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadProjects = async () => {
         const container = document.getElementById('projects-container');
+        const projectsCacheKey = `projects_${username}`;
         try {
-            const response = await fetch(githubReposApiUrl);
-            const repos = await response.json();
-            const projects = repos
-                .filter(repo => repo.homepage === userInfo.homepage)
-                .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+            let projects = getCachedData(projectsCacheKey);
+            if (!projects) {
+                const response = await fetch(githubReposApiUrl, { cache: 'no-cache' });
+                if (!response.ok) throw new Error('Failed to fetch projects');
+                const repos = await response.json();
+                projects = repos
+                    .filter(repo => repo.homepage === userInfo.homepage)
+                    .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+                setCachedData(projectsCacheKey, projects);
+            }
 
             container.innerHTML = projects.length > 0 ? 
                 projects.map(project => `
-                    <a href="${project.html_url}" target="_blank" rel="noopener noreferrer" class="project-card">
+                    <div class="project-card">
                         <h3>${project.name}</h3>
                         <p>${project.description || 'No description'}</p>
                         <div class="project-details">
                             <span>⭐ ${project.stargazers_count}</span>
-                            <span>${project.language || 'N/A'}</span>
+                            <span>
+                                ${project.language ? `<i class="${languageIcons[project.language] || 'devicon-code-plain'} language-icon"></i> ${project.language}` : 'N/A'}
+                            </span>
                         </div>
-                    </a>
+                        <a href="${project.html_url}" target="_blank" rel="noopener noreferrer" class="view-project-button">View Project</a>
+                    </div>
                 `).join('') + `
                 <div class="view-more-projects-container">
                     <a href="${socialLinks.github}" target="_blank" rel="noopener noreferrer" class="github-projects-button">More Projects</a>
@@ -115,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ` : 
                 '<p>No projects found</p>';
         } catch (error) {
-            container.innerHTML = '<p>Error loading projects</p>';
+            container.innerHTML = '<p>Error loading projects. Please try again later.</p>';
             console.error('Error loading projects:', error);
         }
     };
@@ -130,8 +180,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         });
-        // No default active view, sections are hidden until a button is clicked
     };
+
+    const render = async () => {
+        app.innerHTML = template;
+        await Promise.all([loadUserData(), loadProjects()]);
+        setupViewSwitcher();
+    };
+
+    const deviconLink = document.createElement('link');
+    deviconLink.rel = 'stylesheet';
+    deviconLink.href = 'https://cdn.jsdelivr.net/npm/devicon@2.15.1/devicon.min.css';
+    document.head.appendChild(deviconLink);
 
     render();
     window.addEventListener('hashchange', render);
