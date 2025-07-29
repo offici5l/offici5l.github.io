@@ -1,4 +1,3 @@
-/* style.css */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -6,13 +5,13 @@
 }
 
 :root {
-    --background-color: #0a0a0a;
+    --background-color: #000000;
     --primary-text: #ffffff;
-    --secondary-text: #b0b0b5;
-    --bitcoin-color: #f7931a;
-    --protonmail-color: #6d4aff;
-    --border-color: #2a2a2c;
-    --card-background: #141414;
+    --secondary-text: #cccccc;
+    --border-color: #333333;
+    --card-background: #111111;
+    --hover-glow: rgba(255, 255, 255, 0.3);
+    --protonmail-color: #6D4AFF; /* ProtonMail official purple color */
 }
 
 html {
@@ -20,114 +19,123 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--background-color);
     color: var(--primary-text);
-    line-height: 1.6;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
 #app-container {
-    padding: 0 1rem;
-    max-width: 900px;
+    padding: 0 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 header {
-    padding: 2rem 0;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 main {
-    min-height: 70vh;
+    min-height: 80vh;
     text-align: center;
-    padding-bottom: 4rem;
+    padding-bottom: 5rem;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
 }
 
-.fade-in {
-    animation: fadeIn 1s ease-in-out forwards;
+main.loaded {
+    opacity: 1;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+#loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--secondary-text);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
 }
 
 #about {
-    padding: 3rem 0 2rem;
+    padding: 4rem 0 3rem;
 }
 
 .avatar-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 1.5rem;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto 2.5rem;
     border-radius: 50%;
-    animation: subtle-wave 6s ease-in-out infinite;
+    overflow: hidden;
+    border: 3px solid var(--primary-text);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.avatar-container:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
 }
 
 .avatar-container img {
-    border-radius: 50%;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border: 4px solid transparent;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.8)) padding-box, linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.9)) border-box;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-}
-
-@keyframes subtle-wave {
-    0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
-    50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
 }
 
 #about p#bio {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 400;
     color: var(--secondary-text);
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
-    line-height: 1.7;
+    line-height: 1.9;
 }
 
 #view-switcher {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin: 1.5rem 0;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    gap: 1.5rem;
+    margin: 2.5rem 0;
 }
 
 .view-button {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
-    color: var(--secondary-text);
-    background: var(--card-background);
-    border: 1px solid var(--border-color);
-    padding: 0.8rem 2rem;
-    border-radius: 15px;
+    font-size: 1.1rem;
+    color: var(--primary-text);
+    background: transparent;
+    border: 2px solid var(--primary-text);
+    padding: 0.8rem 2.5rem;
+    border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .view-button:hover {
-    color: var(--primary-text);
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
+    background: var(--primary-text);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--hover-glow);
 }
 
 .view-button.active {
     background: var(--primary-text);
     color: var(--background-color);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px var(--hover-glow);
 }
 
 .content-view {
     display: none;
-    animation: slideIn 0.6s ease forwards;
+    animation: slideIn 0.8s ease forwards;
 }
 
 .content-view.active {
@@ -135,226 +143,240 @@ main {
 }
 
 @keyframes slideIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 #projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 3rem;
+    padding-top: 2rem;
 }
 
 #donate-container {
-    padding: 1rem 0;
+    padding: 2rem 0;
 }
 
 .donate-contact-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     background: var(--card-background);
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 2rem;
-    max-width: 500px;
+    border-radius: 15px;
+    padding: 3rem;
+    max-width: 600px;
     margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
 
 .donate-contact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--hover-glow);
 }
 
 .bitcoin-donate {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     width: 100%;
 }
 
 .email-label {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 500;
     color: var(--secondary-text);
+    text-align: center;
 }
 
 .email-address {
     font-family: 'SF Mono', monospace;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--protonmail-color);
     text-decoration: none;
-    cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .email-address:hover {
+    color: #5038CC; /* Darker shade of ProtonMail purple on hover */
     text-decoration: underline;
 }
 
 .guide-button {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--secondary-text);
-    padding: 0.6rem 1.2rem;
+    background: transparent;
+    border: 2px solid var(--primary-text);
+    color: var(--primary-text);
+    padding: 0.6rem 1.5rem;
     border-radius: 10px;
     cursor: pointer;
     font-size: 0.9rem;
+    font-weight: 600;
     transition: all 0.3s ease;
-    margin-top: 1rem;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .guide-button:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--primary-text);
-    transform: translateY(-2px);
+    background: var(--primary-text);
+    color: var(--background-color);
+    box-shadow: 0 0 12px var(--hover-glow);
 }
 
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 1.5rem;
+    gap: 3rem;
+    margin-top: 2.5rem;
 }
 
 .social-links a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 50px;
+    height: 50px;
+    background: var(--card-background);
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
 }
 
 .social-links a svg {
-    width: 26px;
-    height: 26px;
-    fill: var(--secondary-text);
+    width: 30px;
+    height: 30px;
+    fill: var(--primary-text);
     transition: all 0.3s ease;
 }
 
+.social-links a:hover {
+    background: var(--primary-text);
+    border-color: var(--primary-text);
+    transform: scale(1.1);
+}
+
 .social-links a:hover svg {
-    fill: var(--primary-text);
-    transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+    fill: var(--background-color);
 }
 
 .project-card {
     background: var(--card-background);
-    padding: 2rem;
+    padding: 3rem;
     border: 1px solid var(--border-color);
-    border-radius: 20px;
+    border-radius: 15px;
     transition: all 0.3s ease;
     text-decoration: none;
     color: inherit;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border-color: var(--primary-text);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--hover-glow);
 }
 
 .project-card h3 {
     font-weight: 700;
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
     color: var(--primary-text);
 }
 
 .project-card p {
     color: var(--secondary-text);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem; /* Added margin for spacing */
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
 }
 
 .project-details {
     display: flex;
     justify-content: space-around;
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
     color: var(--secondary-text);
 }
 
 .project-details span {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 
 .view-more-projects-container {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
 
 .github-projects-button {
     background: transparent;
     color: var(--primary-text);
-    padding: 0.8rem 2rem;
-    border-radius: 5px;
+    padding: 1rem 3rem;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    border: 2px solid var(--primary-text);
     transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
 }
 
 .github-projects-button:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--primary-text);
-}
-
-@keyframes showCopied {
-    0% { opacity: 0; transform: translateX(-50%) translateY(-5px); }
-    50% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(-5px); }
+    background: var(--primary-text);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--hover-glow);
 }
 
 @media (max-width: 768px) {
+    #app-container {
+        padding: 0 1.5rem;
+    }
+
     .avatar-container {
-        width: 180px;
-        height: 180px;
+        width: 200px;
+        height: 200px;
     }
-    
+
     .avatar-container img {
-        border-width: 3px;
+        border-width: 2px;
     }
-    
+
     .donate-contact-card {
-        padding: 1.5rem;
+        padding: 2.5rem;
         max-width: 90%;
     }
-    
+
     .social-links {
-        gap: 1.5rem;
+        gap: 2rem;
     }
-    
+
     .social-links a {
-        width: 34px;
-        height: 34px;
+        width: 45px;
+        height: 45px;
     }
-    
+
     .social-links a svg {
-        width: 22px;
-        height: 22px;
+        width: 25px;
+        height: 25px;
     }
-    
+
     #view-switcher {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.8rem;
     }
-    
+
     .view-button {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
+        padding: 0.7rem 2rem;
+        font-size: 1rem;
+    }
+
+    .email-address {
+        font-size: 1.2rem;
     }
 }
 
@@ -363,44 +385,26 @@ main {
         width: 160px;
         height: 160px;
     }
-    
+
     .email-label {
-        font-size: 1.1rem;
-    }
-    
-    .email-address {
         font-size: 1.2rem;
     }
-    
-    .project-card {
-        padding: 1.5rem;
+
+    .email-address {
+        font-size: 1.1rem;
     }
-}
 
-footer {
-    text-align: center;
-    padding: 2rem 0;
-    color: var(--secondary-text);
-    font-size: 0.9rem;
-}
+    .guide-button {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.85rem;
+    }
 
-footer p {
-    margin-bottom: 0.5rem;
-}
+    .project-card {
+        padding: 2rem;
+    }
 
-footer a {
-    color: var(--primary-text);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-#loading-indicator {
-    text-align: center;
-    padding: 20px;
-    font-size: 1.2rem;
-    color: var(--secondary-text);
+    .github-projects-button {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
 }
