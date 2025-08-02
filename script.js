@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="bitcoin-donate">
                     <p class="email-label">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm0 48H464V400H48V112zm208 208c-61.9 0-112-50.1-112-112S194.1 96 256 96s112 50.1 112 112-50.1 112-112 112zm0-48c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64z"/></svg>
-                        Email (Connect & Support):
+                        Email (Contact & Support):
                     </p>
                     <p class="email-address-container">
                         <a href="mailto:${email}" class="email-address">${email}</a>
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <section id="projects" class="content-view active">
                 <h1>Projects</h1>
                 <div class="projects-list" id="projects-container"></div>
-                <a href="https://github.com/${username_github}?tab=repositories" target="_blank" rel="noopener noreferrer" class="more-projects-btn">More Projects</a>
+                <a href="https://github.com/${username_github}" target="_blank" rel="noopener noreferrer" class="more-projects-btn">More Projects</a>
             </section>
         </main>
     `;
