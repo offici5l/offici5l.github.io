@@ -161,7 +161,7 @@ main.loaded {
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--protonmail-color);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
@@ -171,6 +171,22 @@ main.loaded {
     padding: 1rem 1.5rem;
     box-shadow: 0 0 15px var(--glow-color);
     transition: all 0.3s ease;
+}
+
+section {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--protonmail-color);
+    margin-bottom: 1.5rem;
 }
 
 .email-label:hover {
@@ -185,7 +201,7 @@ main.loaded {
     flex-shrink: 0;
 }
 
-.donation-buttons {
+.support-buttons {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -381,7 +397,7 @@ main.loaded {
 }
 
 .more-projects-btn {
-    display: block;
+    display: inline-block;
     margin: 2rem auto;
     padding: 0.8rem 2rem;
     background: var(--protonmail-color);
