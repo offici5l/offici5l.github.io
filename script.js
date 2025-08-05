@@ -1,30 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     const { username_github, username_x, username_telegram, email, homepage, donation_link_oxapay } = userInfo;
     document.title = username_github;
-    document.querySelector('meta[name="description"]').content = `${username_github}'s portfolio`;
-    document.querySelector('meta[name="author"]').content = username_github;
-    const app = document.getElementById('app-container');
+    document.querySelector("meta[name=\"description\"]").content = `${username_github}\'s portfolio`;
+    document.querySelector("meta[name=\"author\"]").content = username_github;
+    const app = document.getElementById("app-container");
     const githubApiUrl = `https://api.github.com/users/${username_github}`;
     const githubReposApiUrl = `https://api.github.com/users/${username_github}/repos`;
     const cacheKey = `userData_${username_github}`;
     const projectsCacheKey = `projects_${username_github}`;
     const cacheTTL = 5 * 60 * 1000;
     const languageIcons = {
-        JavaScript: 'devicon-javascript-plain',
-        Python: 'devicon-python-plain',
-        Java: 'devicon-java-plain',
-        Ruby: 'devicon-ruby-plain',
-        PHP: 'devicon-php-plain',
-        C: 'devicon-c-plain',
-        'C++': 'devicon-cplusplus-plain',
-        'C#': 'devicon-csharp-plain',
-        TypeScript: 'devicon-typescript-plain',
-        Go: 'devicon-go-plain',
-        Rust: 'devicon-rust-plain',
-        HTML: 'devicon-html5-plain',
-        CSS: 'devicon-css3-plain',
-        Kotlin: 'devicon-kotlin-plain',
-        Shell: 'devicon-bash-plain'
+        JavaScript: "devicon-javascript-plain",
+        Python: "devicon-python-plain",
+        Java: "devicon-java-plain",
+        Ruby: "devicon-ruby-plain",
+        PHP: "devicon-php-plain",
+        C: "devicon-c-plain",
+        "C++": "devicon-cplusplus-plain",
+        "C#": "devicon-csharp-plain",
+        TypeScript: "devicon-typescript-plain",
+        Go: "devicon-go-plain",
+        Rust: "devicon-rust-plain",
+        HTML: "devicon-html5-plain",
+        CSS: "devicon-css3-plain",
+        Kotlin: "devicon-kotlin-plain",
+        Shell: "devicon-bash-plain"
     };
     const template = `
         <main>
@@ -35,21 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <section id="about">
                 <div class="avatar-container">
-                    <img id="avatar" src="" alt="${username_github}'s Avatar" loading="lazy">
+                    <img id="avatar" src="" alt="${username_github}\'s Avatar" loading="lazy">
                 </div>
                 <p id="bio"></p>
             </section>
             <section id="contact-donate" class="content-view active">
                 <div class="bitcoin-donate">
                     <p class="email-label">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm0 48H464V400H48V112zm208 208c-61.9 0-112-50.1-112-112S194.1 96 256 96s112 50.1 112 112-50.1 112-112 112zm0-48c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64z"/></svg>
-                        Email (Contact & Support):
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                        ${email}
                     </p>
-                    <p class="email-address-container">
-                        <a href="mailto:${email}" class="email-address">${email}</a>
-                    </p>
-                    <button class="guide-button" onclick="window.open('https://proton.me/support/wallet-bitcoin-via-email#how-to-send', '_blank')">How to Donate with Proton Wallet</button>
-                    <button class="guide-button oxapay-button" onclick="window.open('${donation_link_oxapay}', '_blank')">Donate with OxaPay</button>
+                    <div class="donation-buttons">
+                        <button class="guide-button proton-wallet-btn" onclick="window.open(\'https://proton.me/support/wallet-bitcoin-via-email#how-to-send\', \'_blank\')">Donate with Proton Wallet</button>
+                        <button class="guide-button oxapay-button" onclick="window.open(\'${donation_link_oxapay}\', \'_blank\')">Donate with OxaPay</button>
+                    </div>
                 </div>
                 <div class="social-links">
                     <a href="https://x.com/${username_x}" target="_blank" rel="noopener noreferrer" title="X" aria-label="Visit X profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a>
@@ -76,34 +75,34 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
     };
     const loadUserData = async () => {
-        const loadingIndicator = document.getElementById('loading-indicator');
-        const main = document.querySelector('main');
+        const loadingIndicator = document.getElementById("loading-indicator");
+        const main = document.querySelector("main");
         let data = getCachedData(cacheKey);
         if (!data) {
-            const response = await fetch(githubApiUrl, { cache: 'no-cache' });
+            const response = await fetch(githubApiUrl, { cache: "no-cache" });
             data = await response.json();
             setCachedData(cacheKey, data);
         }
-        const avatar = document.getElementById('avatar');
-        const bio = document.getElementById('bio');
-        avatar.src = data.avatar_url || 'https://via.placeholder.com/240';
-        avatar.alt = `${username_github}'s profile picture`;
-        bio.textContent = data.bio || 'Tech enthusiast';
+        const avatar = document.getElementById("avatar");
+        const bio = document.getElementById("bio");
+        avatar.src = data.avatar_url || "https://via.placeholder.com/240";
+        avatar.alt = `${username_github}\'s profile picture`;
+        bio.textContent = data.bio || "Tech enthusiast";
         const img = new Image();
-        img.src = data.avatar_url || 'https://via.placeholder.com/240';
+        img.src = data.avatar_url || "https://via.placeholder.com/240";
         img.onload = img.onerror = () => {
-            loadingIndicator.style.opacity = '0';
+            loadingIndicator.style.opacity = "0";
             setTimeout(() => {
-                loadingIndicator.style.display = 'none';
-                main.classList.add('loaded');
+                loadingIndicator.style.display = "none";
+                main.classList.add("loaded");
             }, 600);
         };
     };
     const loadProjects = async () => {
-        const container = document.getElementById('projects-container');
+        const container = document.getElementById("projects-container");
         let projectsData = getCachedData(projectsCacheKey);
         if (!projectsData) {
-            const response = await fetch(githubReposApiUrl, { cache: 'no-cache' });
+            const response = await fetch(githubReposApiUrl, { cache: "no-cache" });
             projectsData = await response.json();
             projectsData = projectsData
                 .filter(repo => repo.homepage === homepage)
@@ -111,44 +110,45 @@ document.addEventListener('DOMContentLoaded', () => {
             setCachedData(projectsCacheKey, projectsData);
         }
         if (projectsData.length === 0) {
-            container.innerHTML = '<p>No projects found.</p>';
+            container.innerHTML = "<p>No projects found.</p>";
             return;
         }
         projectsData.forEach(project => {
             const projectCard = `
-                <div class="project-card" data-language="${project.language || ''}">
+                <div class="project-card" data-language="${project.language || ""}">
                     <h3>${project.name}</h3>
                     <div class="project-description-container">
-                        <p class="project-description">${project.description || 'No description'}</p>
+                        <p class="project-description">${project.description || "No description"}</p>
                     </div>
                     <div class="project-details">
                         <span>⭐ ${project.stargazers_count}</span>
-                        <span>${project.language ? `<i class="${languageIcons[project.language] || 'devicon-code-plain'} language-icon"></i> ${project.language}` : 'N/A'}</span>
+                        <span>${project.language ? `<i class="${languageIcons[project.language] || "devicon-code-plain"} language-icon"></i> ${project.language}` : "N/A"}</span>
                     </div>
                     <a href="${project.html_url}" target="_blank" rel="noopener noreferrer" class="view-project-button">View Project</a>
                 </div>
             `;
-            container.insertAdjacentHTML('beforeend', projectCard);
+            container.insertAdjacentHTML("beforeend", projectCard);
         });
     };
     const render = async () => {
         app.innerHTML = template;
         await Promise.all([loadUserData(), loadProjects()]);
-        tsParticles.load('particles-js', {
+        tsParticles.load("particles-js", {
             particles: {
                 number: { value: 50, density: { enable: true, value_area: 800 } },
-                color: { value: ['#6D4AFF', '#ffffff'] },
-                shape: { type: 'circle' },
+                color: { value: ["#6D4AFF", "#ffffff"] },
+                shape: { type: "circle" },
                 opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
-                move: { enable: true, speed: 1, direction: 'none', random: true },
-                line_linked: { enable: true, distance: 120, color: '#6D4AFF', opacity: 0.3 }
+                move: { enable: true, speed: 1, direction: "none", random: true },
+                line_linked: { enable: true, distance: 120, color: "#6D4AFF", opacity: 0.3 }
             },
             interactivity: {
-                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
+                events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
                 modes: { grab: { distance: 140 }, push: { particles_nb: 3 } }
             }
         });
     };
     render();
 });
+

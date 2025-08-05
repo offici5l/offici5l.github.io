@@ -152,7 +152,7 @@ main.loaded {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.7rem;
+    gap: 1.5rem;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -160,71 +160,92 @@ main.loaded {
 .email-label {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--secondary-text);
+    color: var(--protonmail-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    background: var(--card-gradient);
+    border: 2px solid var(--protonmail-color);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 0 15px var(--glow-color);
+    transition: all 0.3s ease;
+}
+
+.email-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--glow-color);
 }
 
 .email-label svg {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     fill: var(--protonmail-color);
+    flex-shrink: 0;
 }
 
-.email-address-container {
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-
-.email-address {
-    font-family: 'Fira Code', monospace;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--protonmail-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90%;
-    display: inline-block;
-}
-
-.email-address:hover {
-    color: var(--protonmail-dark);
+.donation-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .guide-button {
     background: var(--card-gradient);
     border: 2px solid var(--protonmail-color);
     color: var(--primary-text);
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 0 8px var(--glow-color);
+    box-shadow: 0 0 10px var(--glow-color);
     transform: translateZ(0);
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.guide-button:hover::before {
+    left: 100%;
 }
 
 .guide-button:hover {
     background: var(--protonmail-color);
-    box-shadow: 0 0 12px var(--protonmail-color);
-    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--protonmail-color);
+    transform: translateY(-3px);
 }
 
-.oxapay-button {
-    margin-top: 0.5rem;
-    background: var(--protonmail-color);
+.proton-wallet-btn {
+    background: linear-gradient(135deg, var(--protonmail-color), var(--protonmail-dark));
     border-color: var(--protonmail-color);
 }
 
+.proton-wallet-btn:hover {
+    background: linear-gradient(135deg, var(--protonmail-dark), #3d2a99);
+}
+
+.oxapay-button {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    border-color: #ff6b35;
+}
+
 .oxapay-button:hover {
-    background: var(--protonmail-dark);
+    background: linear-gradient(135deg, #e55a2b, #d67e1a);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
 }
 
 .social-links {
@@ -444,8 +465,18 @@ main.loaded {
     }
 
     .guide-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .donation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .email-label {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
     }
 }
 
@@ -486,8 +517,19 @@ main.loaded {
     }
 
     .guide-button {
-        padding: 0.4rem 0.9rem;
-        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .email-label {
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
+        gap: 0.6rem;
+    }
+
+    .email-label svg {
+        width: 18px;
+        height: 18px;
     }
 }
 
@@ -524,8 +566,13 @@ main.loaded {
     }
 
     .guide-button {
-        padding: 0.35rem 0.8rem;
-        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .email-label {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -550,3 +597,4 @@ main.loaded {
     50% { width: 100%; }
     100% { width: 0; }
 }
+
