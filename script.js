@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const { username_github, username_x, username_telegram, email, homepage, donation_link_oxapay } = userInfo;
+    const { username_github, username_x, username_telegram, email, homepage, support_buttons } = userInfo;
     document.title = username_github;
     document.querySelector("meta[name=\"description\"]").content = `${username_github}\'s portfolio`;
     document.querySelector("meta[name=\"author\"]").content = username_github;
@@ -48,9 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </section>
             <section id="support-projects" class="content-view active">
                 <h1>Support Projects</h1>
-                <div class="support-buttons">
-                    <button class="guide-button proton-wallet-btn" onclick="window.open('https://proton.me/support/wallet-bitcoin-via-email#how-to-send', '_blank')"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proton-wallet.svg" class="icon" alt="Proton Wallet">Support with Proton Wallet</button>
-                    <button class="guide-button oxapay-button" onclick="window.open('${donation_link_oxapay}', '_blank')"><img src="https://oxapay.com/_next/static/media/wallet.dbfb0bff.svg" class="icon" alt="OxaPay">Support with OxaPay</button>
+                <div class="support-buttons" id="support-buttons-container">
                 </div>
             </section>
             <section id="projects" class="content-view active">
@@ -136,6 +134,35 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const render = async () => {
         app.innerHTML = template;
+        // Handle support buttons visibility
+        const supportProjectsSection = document.getElementById("support-projects");
+        const supportButtonsContainer = document.getElementById("support-buttons-container");
+
+        if (support_buttons === false || (typeof support_buttons === 'object' && Object.keys(support_buttons).length === 0)) {
+            supportProjectsSection.style.display = "none";
+        } else {
+            for (const key in support_buttons) {
+                const buttonInfo = support_buttons[key];
+                if (buttonInfo && buttonInfo.redirect) {
+                    const button = document.createElement("button");
+                    button.className = `guide-button ${key}-btn`;
+                    button.onclick = () => window.open(buttonInfo.redirect, '_blank');
+
+                    const img = document.createElement("img");
+                    img.src = buttonInfo.svg;
+                    img.className = "icon";
+                    img.alt = buttonInfo.name;
+
+                    button.appendChild(img);
+                    button.append(buttonInfo.name);
+                    supportButtonsContainer.appendChild(button);
+                }
+            }
+            if (supportButtonsContainer.children.length === 0) {
+                supportProjectsSection.style.display = "none";
+            }
+        }
+        
         await Promise.all([loadUserData(), loadProjects()]);
         tsParticles.load("particles-js", {
             particles: {
