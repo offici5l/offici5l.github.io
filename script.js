@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         ${email}
                     </p>
                     <div class="donation-buttons">
-                        <button class="guide-button proton-wallet-btn" onclick="window.open(\'https://proton.me/support/wallet-bitcoin-via-email#how-to-send\', \'_blank\')">Donate with Proton Wallet</button>
-                        <button class="guide-button oxapay-button" onclick="window.open(\'${donation_link_oxapay}\', \'_blank\')">Donate with OxaPay</button>
+                        <button class="guide-button proton-wallet-btn" onclick="window.open('https://proton.me/support/wallet-bitcoin-via-email#how-to-send', '_blank')"><img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proton-wallet.svg" class="icon" alt="Proton Wallet">Donate with Proton Wallet</button>
+                        <button class="guide-button oxapay-button" onclick="window.open('${donation_link_oxapay}', '_blank')"><img src="https://oxapay.com/_next/static/media/wallet.dbfb0bff.svg" class="icon" alt="OxaPay">Donate with OxaPay</button>
                     </div>
                 </div>
                 <div class="social-links">

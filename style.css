@@ -229,23 +229,16 @@ main.loaded {
     transform: translateY(-3px);
 }
 
-.proton-wallet-btn {
-    background: linear-gradient(135deg, var(--protonmail-color), var(--protonmail-dark));
-    border-color: var(--protonmail-color);
+.guide-button .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
 
-.proton-wallet-btn:hover {
-    background: linear-gradient(135deg, var(--protonmail-dark), #3d2a99);
-}
-
-.oxapay-button {
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
-    border-color: #ff6b35;
-}
-
-.oxapay-button:hover {
-    background: linear-gradient(135deg, #e55a2b, #d67e1a);
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+.guide-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .social-links {
