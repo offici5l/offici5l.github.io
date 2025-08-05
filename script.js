@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const { username_github, username_x, username_telegram, email, homepage } = userInfo;
+    const { username_github, username_x, username_telegram, email, homepage, donation_link_oxapay } = userInfo;
     document.title = username_github;
     document.querySelector('meta[name="description"]').content = `${username_github}'s portfolio`;
     document.querySelector('meta[name="author"]').content = username_github;
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="mailto:${email}" class="email-address">${email}</a>
                     </p>
                     <button class="guide-button" onclick="window.open('https://proton.me/support/wallet-bitcoin-via-email#how-to-send', '_blank')">How to Donate with Proton Wallet</button>
+                    <button class="guide-button oxapay-button" onclick="window.open('${donation_link_oxapay}', '_blank')">Donate with OxaPay</button>
                 </div>
                 <div class="social-links">
                     <a href="https://x.com/${username_x}" target="_blank" rel="noopener noreferrer" title="X" aria-label="Visit X profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a>

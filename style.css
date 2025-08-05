@@ -217,6 +217,16 @@ main.loaded {
     transform: translateY(-2px);
 }
 
+.oxapay-button {
+    margin-top: 0.5rem;
+    background: var(--protonmail-color);
+    border-color: var(--protonmail-color);
+}
+
+.oxapay-button:hover {
+    background: var(--protonmail-dark);
+}
+
 .social-links {
     display: flex;
     justify-content: center;
