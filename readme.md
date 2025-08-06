@@ -1,6 +1,16 @@
-# Dynamic Portfolio ex: https://offici5l.github.io
+# Dynamic Portfolio
 
-This is a dynamic portfolio designed to showcase your projects, email, social media, and support/donation options.
+**Live Demo:** [https://offici5l.github.io](https://offici5l.github.io)
+
+This project provides a dynamic and easily customizable personal portfolio website, showcasing your projects, contact information, social media links, and support options.
+
+## Features
+
+*   **Dynamic GitHub Integration:** Automatically fetches your avatar, bio, and projects from your GitHub profile.
+*   **Configurable Links:** Easily set up email, Telegram, and X (Twitter) links.
+*   **Customizable Support Buttons:** Add various buttons for user support.
+*   **Project Filtering:** Displays GitHub repositories based on a matching homepage URL.
+*   **Interactive Background:** Uses `tsparticles` for visual engagement.
 
 ## Setup
 
