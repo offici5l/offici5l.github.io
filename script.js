@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <a href="https://github.com/${username_github}" target="_blank" rel="noopener noreferrer" class="more-projects-btn">More Projects</a>
             </section>
             <section id="support-projects" class="content-view active">
-                <h1>Support My Projects</h1>
+                <h1>Support Projects</h1>
                 <div class="support-buttons" id="support-buttons-container">
                 </div>
             </section>
