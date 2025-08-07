@@ -39,22 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <p id="bio"></p>
             </section>
-            <section id="contact" class="content-view active">
-                <h1>Contact</h1>
-                <p class="email-label">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
-                    ${email}
-                </p>
+            <section id="projects" class="content-view active">
+                <h1>Projects</h1>
+                <div class="projects-list" id="projects-container"></div>
+                <a href="https://github.com/${username_github}" target="_blank" rel="noopener noreferrer" class="more-projects-btn">More Projects</a>
             </section>
             <section id="support-projects" class="content-view active">
                 <h1>Support My Projects</h1>
                 <div class="support-buttons" id="support-buttons-container">
                 </div>
             </section>
-            <section id="projects" class="content-view active">
-                <h1>Projects</h1>
-                <div class="projects-list" id="projects-container"></div>
-                <a href="https://github.com/${username_github}" target="_blank" rel="noopener noreferrer" class="more-projects-btn">More Projects</a>
+            <section id="contact" class="content-view active">
+                <h1>Contact</h1>
+                <p class="email-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                    ${email}
+                </p>
             </section>
             <section id="social-media" class="content-view active">
                 <h1>Active On</h1>
