@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </p>
             </section>
             <section id="support-projects" class="content-view active">
-                <h1>Support My Journey</h1>
+                <h1>Support My Projects</h1>
                 <div class="support-buttons" id="support-buttons-container">
                 </div>
             </section>
