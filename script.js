@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const { username_github, username_x, username_telegram, email, homepage, support_buttons } = userInfo;
+    const { username_github, username_x, username_telegram, email, github_topic, support_buttons, about_me } = userInfo;
     document.title = username_github;
     document.querySelector("meta[name=\"description\"]").content = `${username_github}\'s portfolio`;
     document.querySelector("meta[name=\"author\"]").content = username_github;
     const app = document.getElementById("app-container");
     const githubApiUrl = `https://api.github.com/users/${username_github}`;
-    const githubReposApiUrl = `https://api.github.com/users/${username_github}/repos`;
+    const githubReposApiUrl = `https://api.github.com/search/repositories?q=user:${username_github}+topic:${github_topic}`;
     const cacheKey = `userData_${username_github}`;
     const projectsCacheKey = `projects_${username_github}`;
     const cacheTTL = 5 * 60 * 1000;
@@ -38,6 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img id="avatar" src="" alt="${username_github}\'s Avatar" loading="lazy">
                 </div>
                 <p id="bio"></p>
+            </section>
+            <section id="about-me" class="content-view active">
+                <h1>About Me</h1>
+                <div class="projects-list">
+                    <div class="project-card">
+                        <p id="about-me-text" class="project-description"></p>
+                    </div>
+                </div>
             </section>
             <section id="projects" class="content-view active">
                 <h1>Projects</h1>
@@ -88,8 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const avatar = document.getElementById("avatar");
         const bio = document.getElementById("bio");
         avatar.src = data.avatar_url || "https://via.placeholder.com/240";
-        avatar.alt = `${username_github}\'s profile picture`;
+        avatar.alt = `${username_github}'s profile picture`;
         bio.textContent = data.bio || "Tech enthusiast";
+        const aboutMeText = document.getElementById("about-me-text");
+        if (about_me && aboutMeText) {
+                        aboutMeText.innerHTML = about_me.replace(/\n/g, '<br>');
+        }
         const img = new Image();
         img.src = data.avatar_url || "https://via.placeholder.com/240";
         img.onload = img.onerror = () => {
@@ -105,9 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let projectsData = getCachedData(projectsCacheKey);
         if (!projectsData) {
             const response = await fetch(githubReposApiUrl, { cache: "no-cache" });
-            projectsData = await response.json();
-            projectsData = projectsData
-                .filter(repo => repo.homepage === homepage)
+            const searchResult = await response.json();
+            projectsData = searchResult.items
                 .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
             setCachedData(projectsCacheKey, projectsData);
         }
@@ -164,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         await Promise.all([loadUserData(), loadProjects()]);
+
         tsParticles.load("particles-js", {
             particles: {
                 number: { value: 50, density: { enable: true, value_area: 800 } },
@@ -182,4 +194,3 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     render();
 });
-
