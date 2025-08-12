@@ -424,6 +424,11 @@ h1 {
     margin: 2rem;
 }
 
+#about-me-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
 @media (max-width: 768px) {
     #app-container {
         padding: 0 1rem;
@@ -487,6 +492,11 @@ h1 {
         padding: 0.8rem 1.2rem;
         font-size: 1rem;
     }
+
+    #about-me-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
 }
 
 @media (max-width: 480px) {
@@ -540,6 +550,11 @@ h1 {
         width: 18px;
         height: 18px;
     }
+
+    #about-me-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
 }
 
 @media (max-width: 360px) {
@@ -583,6 +598,11 @@ h1 {
         padding: 0.6rem 0.8rem;
         font-size: 0.9rem;
     }
+
+    #about-me-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
 }
 
 @-webkit-keyframes slideIn {
@@ -595,15 +615,14 @@ h1 {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@-webkit@keyframes progress {
+@-webkit-keyframes progress {
     0% { width: 0; }
     50% { width: 100%; }
     100% { width: 0; }
 }
 
-@-moz@keyframes progress {
+@-moz-keyframes progress {
     0% { width: 0; }
     50% { width: 100%; }
     100% { width: 0; }
 }
-
