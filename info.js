@@ -17,7 +17,5 @@ const userInfo = {
             svg: 'https://oxapay.com/_next/static/media/wallet.dbfb0bff.svg'
         }
     },
-    about_me: `Passionate about technology in general, I believe that true innovation lies in ideas that transcend the ordinary and create positive transformation. I began my journey in the world of programming in 2023, facing significant challenges due to limited access to a modern computer—I have an old and nearly broken laptop. However, I turned this constraint into a unique opportunity, learning and developing most of my projects (about 98%) entirely using only my mobile phone. This persistence inspired me to create custom solutions for those who face similar challenges in accessing a laptop.
-
-I adopt a flexible approach to learning, currently benefiting particularly from advancements in artificial intelligence to save time and focus on generating new ideas. I always see myself on the path of continuous learning.`
+    about_me: `Passionate about technology and creativity, I started my journey in 2023. Turning constraints into opportunities, I've written the code for 98% of my projects entirely on my mobile phone. I'm a lifelong learner who thinks outside the box, driven by the goal of building a revolutionary idea.`
 };
