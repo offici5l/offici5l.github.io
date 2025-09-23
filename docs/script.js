@@ -116,3 +116,57 @@ document.addEventListener('DOMContentLoaded', () => {
         hideLoadingScreen();
     }
 });
+
+// Modal functionality
+const statsModal = document.getElementById('statsModal');
+const statsBtn = document.getElementById('statsBtn');
+const closeBtn = document.getElementById('closeBtn');
+const statsContent = document.getElementById('statsContent');
+
+// --- TODO: Replace this with your actual API call ---
+function fetchWalletStats() {
+    const address = userInfo.support_buttons.bitcoin.address;
+    const url = `https://blockstream.info/api/address/${address}`;
+
+    return fetch(url)
+        .then(response => response.json());
+}
+
+function showStats() {
+    statsContent.innerHTML = '<p>Loading...</p>';
+    fetchWalletStats().then(data => {
+        const chain_stats = data.chain_stats;
+        const mempool_stats = data.mempool_stats;
+
+        statsContent.innerHTML = `
+            <h4>Chain Stats</h4>
+            <p><strong>Funded TXO Count:</strong> ${chain_stats.funded_txo_count}</p>
+            <p><strong>Funded TXO Sum:</strong> ${(chain_stats.funded_txo_sum / 100000000).toFixed(8)} BTC</p>
+            <p><strong>Spent TXO Count:</strong> ${chain_stats.spent_txo_count}</p>
+            <p><strong>Spent TXO Sum:</strong> ${(chain_stats.spent_txo_sum / 100000000).toFixed(8)} BTC</p>
+            <p><strong>Transaction Count:</strong> ${chain_stats.tx_count}</p>
+            <hr>
+            <h4>Mempool Stats</h4>
+            <p><strong>Funded TXO Count:</strong> ${mempool_stats.funded_txo_count}</p>
+            <p><strong>Funded TXO Sum:</strong> ${(mempool_stats.funded_txo_sum / 100000000).toFixed(8)} BTC</p>
+            <p><strong>Spent TXO Count:</strong> ${mempool_stats.spent_txo_count}</p>
+            <p><strong>Spent TXO Sum:</strong> ${(mempool_stats.spent_txo_sum / 100000000).toFixed(8)} BTC</p>
+            <p><strong>Transaction Count:</strong> ${mempool_stats.tx_count}</p>
+        `;
+    });
+}
+
+statsBtn.onclick = function() {
+    statsModal.style.display = 'block';
+    showStats();
+}
+
+closeBtn.onclick = function() {
+    statsModal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == statsModal) {
+        statsModal.style.display = 'none';
+    }
+}
