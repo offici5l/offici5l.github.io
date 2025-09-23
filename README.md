@@ -3,23 +3,8 @@
 </div>
 
 ---
-### [MiCheck](https://github.com/offici5l/MiCheck)
-The most accurate and reliable way to verify Xiaomi device regions
-
----
-
 ### [FCE](https://github.com/offici5l/FCE)
 Firmware Extractor lets you pull any file from any ROM .zip package and delivers it instantly as a direct download link.
-
----
-
-### [MiUnlockTool](https://github.com/offici5l/MiUnlockTool)
-MiUnlockTool developed to retrieve encryptData(token) for Xiaomi devices for unlocking bootloader, It is compatible with all platforms.
-
----
-
-### [MiCommunityTool](https://github.com/offici5l/MiCommunityTool)
-Submitting a request for bootloader unlocking permission from the Mi Community automatically.
 
 ---
 
@@ -33,8 +18,18 @@ An application that transforms Xiaomi's official tools into a flexible mobile ex
 
 ---
 
-### [GCloud-Termux](https://github.com/offici5l/GCloud-Termux)
-access and use Google Cloud Shell from Termux on Android
+### [MiCheck](https://github.com/offici5l/MiCheck)
+The most accurate and reliable way to verify Xiaomi device regions
+
+---
+
+### [MiUnlockTool](https://github.com/offici5l/MiUnlockTool)
+MiUnlockTool developed to retrieve encryptData(token) for Xiaomi devices for unlocking bootloader, It is compatible with all platforms.
+
+---
+
+### [MiCommunityTool](https://github.com/offici5l/MiCommunityTool)
+Submitting a request for bootloader unlocking permission from the Mi Community automatically.
 
 ---
 
