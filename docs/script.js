@@ -1,3 +1,20 @@
+function generateQRCode(text, size = 120) {
+    const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&bgcolor=ffffff&color=000000&margin=1&format=png`;
+    return apiUrl;
+}
+
+function copyAddress(address, btn) {
+    navigator.clipboard.writeText(address).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.background = '#27ae60';
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    });
+}
+
 function openGitHub() {
     window.open(`https://github.com/${userInfo.username_github}`, '_blank');
 }
@@ -21,13 +38,30 @@ function initializePortfolio() {
         Object.entries(userInfo.support_buttons).forEach(([key, button]) => {
             const supportItem = document.createElement('div');
             supportItem.className = 'support-item';
-            supportItem.onclick = () => window.open(button.redirect, '_blank');
-            supportItem.innerHTML = `
-                <div class="support-icon">
-                    <img src="${button.svg}" alt="${button.name}">
-                </div>
-                <div class="support-content">${button.name}</div>
-            `;
+            
+            if (button.address) {
+                supportItem.innerHTML = `
+                    <div class="support-content">
+                        <div class="support-title">${button.name}</div>
+                        <div class="support-address">${button.address}</div>
+                        <div class="support-actions">
+                            <button class="support-btn copy-btn" onclick="copyAddress('${button.address}', this)">Copy Address</button>
+                        </div>
+                    </div>
+                    <div class="support-qr">
+                        <img src="${generateQRCode(button.address)}" alt="QR Code" class="qr-code-image">
+                    </div>
+                `;
+            } else {
+                supportItem.onclick = () => window.open(button.redirect, '_blank');
+                supportItem.innerHTML = `
+                    <div class="support-icon">
+                        <img src="${button.svg}" alt="${button.name}">
+                    </div>
+                    <div class="support-content">${button.name}</div>
+                `;
+            }
+            
             supportList.appendChild(supportItem);
         });
     } else {

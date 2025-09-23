@@ -229,7 +229,7 @@ header {
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .support-item:hover {
@@ -253,6 +253,60 @@ header {
     font-weight: 500;
     color: var(--text-primary);
     font-size: 1rem;
+    flex-grow: 1;
+}
+
+.support-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.support-address {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    word-break: break-all;
+    margin-bottom: 1rem;
+}
+
+.support-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.support-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.support-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.support-qr {
+    flex-shrink: 0;
+}
+
+.qr-code-image {
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    padding: 4px;
 }
 
 .contact-section {
@@ -361,6 +415,10 @@ header {
         text-align: center;
         gap: 1rem;
     }
+
+    .support-qr {
+        order: -1;
+    }
 }
 
 @media (max-width: 480px) {
@@ -378,5 +436,22 @@ header {
 
     .card {
         padding: 1.2rem;
+    }
+
+    .support-actions {
+        flex-direction: column;
+    }
+
+    .support-btn {
+        width: 100%;
+    }
+
+    .support-qr {
+        order: -1;
+    }
+
+    .qr-code-image {
+        width: 100px;
+        height: 100px;
     }
 }
