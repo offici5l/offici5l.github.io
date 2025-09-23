@@ -1,0 +1,80 @@
+name: Update README with Public Repositories
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    name: Update README
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch public repositories data
+        id: fetch-repos
+        run: |
+          echo "Fetching data from GitHub API..."
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/users/${{ github.repository_owner }}/repos?type=public&sort=updated&per_page=100" > repos.json
+          
+      - name: Generate clean README content
+        run: |
+          cat > README.md << 'EOF'
+          <div align="center">
+            <h1>Projects</h1>
+          </div>
+
+          ---
+          EOF
+
+          jq -r '
+          sort_by(.updated_at) | reverse |
+          .[] |
+          select(.private == false) |
+          select(.description != null and (.description | length > 0)) |
+          "### [\(.name)](\(.html_url))\n\(.description)\n\n---\n"
+          ' repos.json >> README.md
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet HEAD README.md; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No new changes found"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "New changes detected"
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config --local user.name "GitHub Actions Bot"
+          git config --local user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README - $(date +'%Y-%m-%d %H:%M:%S') Auto-updated by GitHub Actions"
+          git push
+          echo "README updated successfully!"
+
+      - name: Success notification
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          echo "Operation completed successfully!"
+          echo "README has been updated with latest repositories"
+          
+      - name: No changes notification  
+        if: steps.check-changes.outputs.changes == 'false'
+        run: |
+          echo "README is already up to date - no changes needed"
