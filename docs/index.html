@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A personal portfolio website.">
+    <meta name="author" content="">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="avatar">
+                    <img id="avatar" src="" alt="Profile Avatar">
+                </div>
+                <div class="header-info">
+                    <h1 id="name">Welcome</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <div class="card">
+                <p class="about-text" id="aboutText"></p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <div class="projects-list">
+                <div class="project-item" onclick="openProjects()">
+                    <div class="project-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="project-content">
+                        <h3>Projects</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="supportSection">
+            <div class="section-header">
+                <h2 class="section-title">Support</h2>
+            </div>
+            <div class="support-list" id="supportList"></div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+            </div>
+            <div class="contact-section">
+                <a href="#" class="email-link" id="emailLink">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span id="emailText">Contact Email</span>
+                </a>
+                <div class="social-links" id="socialLinks"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="info.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

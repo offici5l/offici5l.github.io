@@ -1,18 +1,17 @@
 const userInfo = {
+    avatar_url: 'https://avatars.githubusercontent.com/u/127665988',
     username_github: 'offici5l',
     username_x: 'offici5l',
     username_telegram: 'Offici5l_Channel',
     email: 'offici5lcontact@proton.me',
-    github_topic: 'offici5l',
-    
     support_buttons: {
         proton_wallet: {
-            name: 'with Proton Wallet',
+            name: 'Proton Wallet Support',
             redirect: 'https://proton.me/support/wallet-bitcoin-via-email#how-to-send',
             svg: 'https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proton-wallet.svg'
         },
         oxapay: {
-            name: 'with OxaPay',
+            name: 'OxaPay Donation',
             redirect: 'https://pay.oxapay.com/19904987',
             svg: 'https://oxapay.com/_next/static/media/wallet.dbfb0bff.svg'
         }
