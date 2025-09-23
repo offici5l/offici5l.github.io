@@ -105,8 +105,107 @@ function hideLoadingScreen() {
     }, 500);
 }
 
+function initializeSEO() {
+    const head = document.head;
+
+    // Update Title
+    document.title = `${userInfo.username_github} | Portfolio`;
+
+    // Update Meta Description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.name = 'description';
+        head.appendChild(metaDescription);
+    }
+    metaDescription.content = "official website of offici5l"; // User's preferred description
+
+    // Update Meta Author
+    let metaAuthor = document.querySelector('meta[name="author"]');
+    if (!metaAuthor) {
+        metaAuthor = document.createElement('meta');
+        metaAuthor.name = 'author';
+        head.appendChild(metaAuthor);
+    }
+    metaAuthor.content = userInfo.username_github;
+
+    // Add Keywords (if not already present)
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+        metaKeywords = document.createElement('meta');
+        metaKeywords.name = 'keywords';
+        head.appendChild(metaKeywords);
+    }
+    metaKeywords.content = "portfolio, developer, technology, creativity, offici5l, web developer, software engineer";
+
+
+    // Open Graph / Facebook
+    const ogTags = [
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: userInfo.base_url },
+        { property: 'og:title', content: `${userInfo.username_github} | Portfolio` },
+        { property: 'og:description', content: "official website of offici5l" },
+        { property: 'og:image', content: userInfo.avatar_url }
+    ];
+    ogTags.forEach(tagData => {
+        let tag = document.querySelector(`meta[property="${tagData.property}"]`);
+        if (!tag) {
+            tag = document.createElement('meta');
+            tag.property = tagData.property;
+            head.appendChild(tag);
+        }
+        tag.content = tagData.content;
+    });
+
+    // Twitter
+    const twitterTags = [
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:url', content: userInfo.base_url },
+        { name: 'twitter:title', content: `${userInfo.username_github} | Portfolio` },
+        { name: 'twitter:description', content: "official website of offici5l" },
+        { name: 'twitter:image', content: userInfo.avatar_url }
+    ];
+    twitterTags.forEach(tagData => {
+        let tag = document.querySelector(`meta[name="${tagData.name}"]`);
+        if (!tag) {
+            tag = document.createElement('meta');
+            tag.name = tagData.name;
+            head.appendChild(tag);
+        }
+        tag.content = tagData.content;
+    });
+
+    // Structured Data (JSON-LD)
+    let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
+    if (!jsonLdScript) {
+        jsonLdScript = document.createElement('script');
+        jsonLdScript.type = 'application/ld+json';
+        head.appendChild(jsonLdScript);
+    }
+    jsonLdScript.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": userInfo.username_github,
+        "url": userInfo.base_url,
+        "image": userInfo.avatar_url,
+        "sameAs": [
+            `https://github.com/${userInfo.username_github}`,
+            `https://x.com/${userInfo.username_x}`,
+            `https://t.me/${userInfo.username_telegram}`
+        ],
+        "jobTitle": "Software Developer", // Assuming a default job title
+        "worksFor": {
+            "@type": "Organization",
+            "name": userInfo.username_github
+        },
+        "email": `mailto:${userInfo.email}`,
+        "description": "official website of offici5l" // User's preferred description
+    }, null, 2);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initializePortfolio();
+    initializeSEO();
     
     const avatar = document.getElementById('avatar');
     avatar.onload = hideLoadingScreen;
@@ -116,6 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hideLoadingScreen();
     }
 });
+
+
 
 // Modal functionality
 const statsModal = document.getElementById('statsModal');
