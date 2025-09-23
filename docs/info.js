@@ -4,17 +4,13 @@ const userInfo = {
     username_x: 'offici5l',
     username_telegram: 'Offici5l_Channel',
     email: 'offici5lcontact@proton.me',
+    projects_url: 'https://raw.githubusercontent.com/offici5l/offici5l.github.io/refs/heads/main/README.md',
     support_buttons: {
-        proton_wallet: {
-            name: 'Proton Wallet Support',
-            redirect: 'https://proton.me/support/wallet-bitcoin-via-email#how-to-send',
-            svg: 'https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proton-wallet.svg'
-        },
         oxapay: {
             name: 'OxaPay Donation',
             redirect: 'https://pay.oxapay.com/19904987',
             svg: 'https://oxapay.com/_next/static/media/wallet.dbfb0bff.svg'
         }
     },
-    about_me: `Passionate about technology and creativity, I started my journey in 2023. Turning constraints into opportunities, I've written the code for 98% of my projects entirely on my mobile phone. I'm a lifelong learner who thinks outside the box, driven by the goal of building a revolutionary idea.`
+    about_me: `Passionate about technology and driven by creativity, I began my journey in 2023 with a mobile phone and a big dream. I’ve developed tools that make life easier for people with limited resources—like me—and I turn challenges into opportunities for innovation. My ultimate goal is to continually learn and experiment, striving to create revolutionary, out-of-the-box ideas that can inspire and change the future.`
 };

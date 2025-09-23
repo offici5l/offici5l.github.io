@@ -3,7 +3,7 @@ function openGitHub() {
 }
 
 function openProjects() {
-    window.open('https://github.com/offici5l/offici5l.github.io', '_blank');
+    window.open(userInfo.projects_url, '_blank');
 }
 
 function initializePortfolio() {
