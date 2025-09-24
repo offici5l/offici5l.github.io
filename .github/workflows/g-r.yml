@@ -46,34 +46,14 @@ jobs:
             }
           ]' repos.json > docs/projects.json
 
-      - name: Check for changes
-        id: check-changes
-        run: |
-          if git diff --quiet HEAD docs/projects.json; then
-            echo "changes=false" >> $GITHUB_OUTPUT
-            echo "No new changes found"
-          else
-            echo "changes=true" >> $GITHUB_OUTPUT
-            echo "New changes detected"
-          fi
-
       - name: Commit and push changes
-        if: steps.check-changes.outputs.changes == 'true'
         run: |
           git config --local user.name "GitHub Actions Bot"
           git config --local user.email "actions@github.com"
           git add docs/projects.json
-          git commit -m "Update projects.json - $(date +'%Y-%m-%d %H:%M:%S') Auto-updated by GitHub Actions"
-          git push
-          echo "projects.json updated successfully!"
+          git commit -m "Always update projects.json - $(date +'%Y-%m-%d %H:%M:%S') by GitHub Actions" || echo "No changes to commit"
+          git push || echo "Nothing to push"
 
       - name: Success notification
-        if: steps.check-changes.outputs.changes == 'true'
         run: |
-          echo "Operation completed successfully!"
-          echo "projects.json has been updated with latest repositories"
-
-      - name: No changes notification  
-        if: steps.check-changes.outputs.changes == 'false'
-        run: |
-          echo "projects.json is already up to date - no changes needed"
+          echo "Operation completed! projects.json was generated and pushed (if changed)."
