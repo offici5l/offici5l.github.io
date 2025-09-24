@@ -39,10 +39,7 @@ jobs:
             {
               name: .name,
               html_url: .html_url,
-              description: .description,
-              updated_at: .updated_at,
-              language: .language,
-              topics: .topics
+              description: .description  
             }
           ]' repos.json > docs/projects.json
 
