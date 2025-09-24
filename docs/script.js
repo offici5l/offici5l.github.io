@@ -24,6 +24,7 @@ function openProjects() {
 }
 
 function initializePortfolio() {
+    userInfo.base_url = window.location.origin;
     document.getElementById('avatar').src = userInfo.avatar_url;
     document.getElementById('name').textContent = userInfo.username_github;
     document.getElementById('aboutText').innerHTML = userInfo.about_me.replace(/\n/g, '<br>');

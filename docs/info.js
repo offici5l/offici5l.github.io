@@ -5,7 +5,7 @@ const userInfo = {
     username_telegram: 'Offici5l_Channel',
     email: 'offici5lcontact@proton.me',
     projects_url: 'projects.html',
-    base_url: 'https://offici5l.github.io/',
+    
     support_buttons: {
         bitcoin: {
             name: 'Bitcoin',
