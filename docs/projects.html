@@ -7,18 +7,17 @@
   <style>
     .project-list-item {
         background: var(--bg-card);
-        border: 1px solid var(--border);
+        border: 3px solid var(--accent);
         border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
+        padding: 1.8rem;
+        margin-bottom: 1.2rem;
         transition: all 0.3s ease;
         text-decoration: none;
         display: block;
         color: var(--text-primary);
     }
     .project-list-item:hover {
-        box-shadow: var(--shadow-hover);
-        border-color: var(--accent);
+        transform: translateY(-3px);
     }
     .project-list-item h3 {
         font-size: 1.2rem;
@@ -29,27 +28,29 @@
     .project-list-item p {
         color: var(--text-secondary);
         font-size: 0.95rem;
+        max-width: 600px;
     }
     .back-btn {
         display: inline-block;
         background: var(--accent);
         color: white;
         text-decoration: none;
-        padding: 0.8rem 1.5rem;
+        padding: 0.9rem 1.8rem;
         border-radius: 6px;
         font-weight: 500;
-        transition: background-color 0.3s ease;
+        transition: transform 0.3s ease;
         margin-top: 2rem;
         border: none;
         cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
     .back-btn:hover {
-        background: var(--accent-hover);
+        transform: translateY(-2px);
     }
     .page-header {
         text-align: center;
         margin-bottom: 3rem;
-        border-bottom: 2px solid var(--accent);
+        border-bottom: 3px solid var(--accent);
         padding-bottom: 0.5rem;
     }
   </style>
