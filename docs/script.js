@@ -41,6 +41,7 @@ function initializePortfolio() {
             
             if (button.address) {
                 supportItem.innerHTML = `
+                    <button class="stats-icon-btn" id="statsBtn-${key}">?</button>
                     <div class="support-content">
                         <div class="support-title">${button.name}</div>
                         <div class="support-address">${button.address}</div>
@@ -214,15 +215,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (avatar.complete) {
         hideLoadingScreen();
     }
+
+    // Modal functionality using Event Delegation
+    const statsModal = document.getElementById('statsModal');
+    const closeBtn = document.getElementById('closeBtn');
+    const supportList = document.getElementById('supportList');
+
+    if(supportList) {
+        supportList.addEventListener('click', function(event) {
+            if (event.target && event.target.matches('.stats-icon-btn')) {
+                statsModal.style.display = 'block';
+                showStats();
+            }
+        });
+    }
+
+    closeBtn.onclick = function() {
+        statsModal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == statsModal) {
+            statsModal.style.display = 'none';
+        }
+    }
 });
 
 
-
-// Modal functionality
-const statsModal = document.getElementById('statsModal');
-const statsBtn = document.getElementById('statsBtn');
-const closeBtn = document.getElementById('closeBtn');
-const statsContent = document.getElementById('statsContent');
 
 // --- TODO: Replace this with your actual API call ---
 function fetchWalletStats() {
@@ -234,6 +253,7 @@ function fetchWalletStats() {
 }
 
 function showStats() {
+    const statsContent = document.getElementById('statsContent');
     statsContent.innerHTML = '<p>Loading...</p>';
     fetchWalletStats().then(data => {
         const chain_stats = data.chain_stats;
@@ -255,19 +275,4 @@ function showStats() {
             <p><strong>Transaction Count:</strong> ${mempool_stats.tx_count}</p>
         `;
     });
-}
-
-statsBtn.onclick = function() {
-    statsModal.style.display = 'block';
-    showStats();
-}
-
-closeBtn.onclick = function() {
-    statsModal.style.display = 'none';
-}
-
-window.onclick = function(event) {
-    if (event.target == statsModal) {
-        statsModal.style.display = 'none';
-    }
 }
