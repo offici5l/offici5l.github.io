@@ -1,4 +1,5 @@
-name: Update README with Public Repositories
+name: Update Projects JSON with Public Repositories
+
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -11,9 +12,9 @@ permissions:
   actions: read
 
 jobs:
-  update-readme:
+  update-projects-json:
     runs-on: ubuntu-latest
-    name: Update README
+    name: Update Projects JSON
 
     steps:
       - name: Checkout repository
@@ -28,29 +29,27 @@ jobs:
           curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/users/${{ github.repository_owner }}/repos?type=public&sort=updated&per_page=100" > repos.json
-          
-      - name: Generate clean README content
+
+      - name: Generate projects.json in docs folder
         run: |
-          cat > README.md << 'EOF'
-          <div align="center">
-            <h1>Projects</h1>
-          </div>
-
-          ---
-          EOF
-
-          jq -r '
-          sort_by(.updated_at) | reverse |
-          .[] |
-          select(.private == false) |
-          select(.description != null and (.description | length > 0)) |
-          "### [\(.name)](\(.html_url))\n\(.description)\n\n---\n"
-          ' repos.json >> README.md
+          mkdir -p docs
+          jq '[.[] | 
+            select(.private == false) | 
+            select(.description != null and (.description | length > 0)) | 
+            {
+              name: .name,
+              html_url: .html_url,
+              description: .description,
+              updated_at: .updated_at,
+              language: .language,
+              topics: .topics
+            }
+          ]' repos.json > docs/projects.json
 
       - name: Check for changes
         id: check-changes
         run: |
-          if git diff --quiet HEAD README.md; then
+          if git diff --quiet HEAD docs/projects.json; then
             echo "changes=false" >> $GITHUB_OUTPUT
             echo "No new changes found"
           else
@@ -63,18 +62,18 @@ jobs:
         run: |
           git config --local user.name "GitHub Actions Bot"
           git config --local user.email "actions@github.com"
-          git add README.md
-          git commit -m "Update README - $(date +'%Y-%m-%d %H:%M:%S') Auto-updated by GitHub Actions"
+          git add docs/projects.json
+          git commit -m "Update projects.json - $(date +'%Y-%m-%d %H:%M:%S') Auto-updated by GitHub Actions"
           git push
-          echo "README updated successfully!"
+          echo "projects.json updated successfully!"
 
       - name: Success notification
         if: steps.check-changes.outputs.changes == 'true'
         run: |
           echo "Operation completed successfully!"
-          echo "README has been updated with latest repositories"
-          
+          echo "projects.json has been updated with latest repositories"
+
       - name: No changes notification  
         if: steps.check-changes.outputs.changes == 'false'
         run: |
-          echo "README is already up to date - no changes needed"
+          echo "projects.json is already up to date - no changes needed"
