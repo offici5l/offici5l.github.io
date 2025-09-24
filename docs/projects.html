@@ -14,7 +14,7 @@
     .project-card:hover { transform: translateY(-4px) scale(1.03); }
     .project-title { font-size: 1.2em; color: #6e72e7; margin: 0 0 8px 0; text-decoration:none;}
     .project-desc { font-size: 1em; color: #ccc; min-height:40px;}
-    .back-btn { margin: 36px auto 0; display: block; background: #494bbe; color: #fff; border: none; padding: 12px 32px; border-radius: 24px; font-size: 1.1em; cursor: pointer; transition: background 0.2s; }
+    .back-btn { margin: 36px auto 0; display: block; background: #494bbe; color: #fff; border: none; padding: 12px 32px; border-radius: 24px; font-size: 1.1em; cursor: pointer; transition: background 0.2s; text-align:center; }
     .back-btn:hover { background: #32348a; }
   </style>
 </head>
@@ -22,9 +22,16 @@
   <div class="container">
     <h1>Projects</h1>
     <div class="projects-list" id="projects"></div>
-    <button class="back-btn" onclick="window.history.back()">Back</button>
+    <button class="back-btn" onclick="goBack()">Back</button>
   </div>
   <script>
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'index.html'; // Change if your home page has a different name or path
+      }
+    }
     fetch('projects.json')
       .then(res => res.json())
       .then(projects => {
