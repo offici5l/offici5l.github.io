@@ -5,6 +5,11 @@
     "description": "MiUnlockTool developed to retrieve encryptData(token) for Xiaomi devices for unlocking bootloader, It is compatible with all platforms."
   },
   {
+    "name": "MiTool",
+    "html_url": "https://github.com/offici5l/MiTool",
+    "description": "MiTool : without a PC (using another phone via Termux), allows you to unlock the bootloader, flash ROMs, ... and offers many other features for Xiaomi devices"
+  },
+  {
     "name": "MiCheck",
     "html_url": "https://github.com/offici5l/MiCheck",
     "description": "The most accurate and reliable way to verify Xiaomi device regions"
@@ -13,11 +18,6 @@
     "name": "MiTools",
     "html_url": "https://github.com/offici5l/MiTools",
     "description": "An application that transforms Xiaomi's official tools into a flexible mobile experience, replacing the need for a PC with the ability to use another phone!"
-  },
-  {
-    "name": "MiTool",
-    "html_url": "https://github.com/offici5l/MiTool",
-    "description": "MiTool : without a PC (using another phone via Termux), allows you to unlock the bootloader, flash ROMs, ... and offers many other features for Xiaomi devices"
   },
   {
     "name": "FCE",
