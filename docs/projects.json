@@ -1,5 +1,10 @@
 [
   {
+    "name": "MiAssistantTool",
+    "html_url": "https://github.com/offici5l/MiAssistantTool",
+    "description": "Flash official recovery ROMs (Xiaomi) in Mi-Assistant mode without unlocking the bootloader. Compatible with all platforms (Windows, Linux, MacOS Android(with termux))"
+  },
+  {
     "name": "MiTool",
     "html_url": "https://github.com/offici5l/MiTool",
     "description": "MiTool : without a PC (using another phone via Termux), allows you to unlock the bootloader, flash ROMs, ... and offers many other features for Xiaomi devices"
@@ -28,10 +33,5 @@
     "name": "FCE",
     "html_url": "https://github.com/offici5l/FCE",
     "description": "Firmware Extractor lets you pull any file from any ROM .zip package and delivers it instantly as a direct download link."
-  },
-  {
-    "name": "MiAssistantTool",
-    "html_url": "https://github.com/offici5l/MiAssistantTool",
-    "description": "Flash official recovery ROMs (Xiaomi) in Mi-Assistant mode without unlocking the bootloader. Compatible with all platforms (Windows, Linux, MacOS Android(with termux))"
   }
 ]
