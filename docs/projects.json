@@ -10,6 +10,11 @@
     "description": "MiUnlockTool developed to retrieve encryptData(token) for Xiaomi devices for unlocking bootloader, It is compatible with all platforms."
   },
   {
+    "name": "MiCommunityTool",
+    "html_url": "https://github.com/offici5l/MiCommunityTool",
+    "description": "Submitting a request for bootloader unlocking permission from the Mi Community automatically."
+  },
+  {
     "name": "MiCheck",
     "html_url": "https://github.com/offici5l/MiCheck",
     "description": "The most accurate and reliable way to verify Xiaomi device regions"
@@ -23,11 +28,6 @@
     "name": "FCE",
     "html_url": "https://github.com/offici5l/FCE",
     "description": "Firmware Extractor lets you pull any file from any ROM .zip package and delivers it instantly as a direct download link."
-  },
-  {
-    "name": "MiCommunityTool",
-    "html_url": "https://github.com/offici5l/MiCommunityTool",
-    "description": "Submitting a request for bootloader unlocking permission from the Mi Community automatically."
   },
   {
     "name": "MiAssistantTool",
