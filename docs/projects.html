@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Open-source projects by offici5l">
+  <meta name="theme-color" content="#007bff">
   <link rel="stylesheet" href="style.css">
   <style>
     .project-list-item {
@@ -62,7 +64,7 @@
     </div>
     <div id="projects-list"></div>
     <div style="text-align: center;">
-        <button class="back-btn" onclick="goBack()">Back to Home</button>
+        <button class="back-btn" onclick="goBack()" aria-label="Back to Home">Back to Home</button>
     </div>
   </div>
   <script>
@@ -70,7 +72,7 @@
       window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';
     }
 
-    fetch('projects.json')
+    fetch('projects.json', { cache: 'no-store' })
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -84,7 +86,7 @@
           return;
         }
         list.innerHTML = projects.map(proj => `
-          <a href="${proj.html_url}" target="_blank" rel="noopener noreferrer" class="project-list-item">
+          <a href="${proj.html_url}" target="_blank" rel="noopener noreferrer" class="project-list-item" title="Open ${proj.name} on GitHub">
             <h3>${proj.name}</h3>
             <p>${proj.description || 'No description available.'}</p>
           </a>

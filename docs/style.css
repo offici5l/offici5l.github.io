@@ -20,6 +20,27 @@
     --shadow-hover: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #0f1216;
+        --bg-secondary: #12161b;
+        --bg-card: #151a21;
+        --text-primary: #e9ecef;
+        --text-secondary: #c1c7cf;
+        --text-muted: #98a2ad;
+        --accent: #4da3ff;
+        --accent-hover: #1f7ae6;
+        --border: #2b323b;
+        --shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+        --shadow-hover: 0 12px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .avatar { border-color: #1c2026; }
+    .email-link { box-shadow: 0 6px 20px rgba(77, 163, 255, 0.25); }
+    .social-link { background: #0f1216; }
+    .qr-code-container { border-color: #2b323b; }
+}
+
 body {
     font-family: 'Source Sans Pro', sans-serif;
     background: var(--bg-primary);

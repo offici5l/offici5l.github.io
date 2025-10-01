@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A personal portfolio website.">
     <meta name="author" content="">
+    <meta name="theme-color" content="#007bff">
     <title>Portfolio</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +23,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="avatar">
-                    <img id="avatar" src="" alt="Profile Avatar">
+                    <img id="avatar" src="" alt="Profile Avatar" width="180" height="180" loading="eager" decoding="async">
                 </div>
                 <div class="header-info">
                     <h1 id="name">Welcome</h1>
@@ -87,7 +92,14 @@
         </div>
     </div>
 
-    <script src="info.js"></script>
-    <script src="script.js"></script>
+    <script src="info.js" defer></script>
+    <script src="script.js" defer></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./sw.js').catch(function(e) { console.warn('SW reg failed', e); });
+        });
+      }
+    </script>
 </body>
 </html>

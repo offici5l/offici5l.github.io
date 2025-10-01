@@ -79,7 +79,12 @@ function openGitHub() {
 }
 
 function openProjects() {
-    window.open(userInfo.projects_url, '_blank', 'noopener,noreferrer');
+    const url = userInfo.projects_url;
+    if (typeof url === 'string' && url.endsWith('.html')) {
+        window.location.href = url;
+    } else {
+        window.open(url, '_blank', 'noopener,noreferrer');
+    }
 }
 
 function initializePortfolio() {
