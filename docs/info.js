@@ -12,5 +12,5 @@ const userInfo = {
             address: 'bc1qaqyaxz4t05wh434em3ss7q6dysfl7t348tmm08'
         }
     },
-    about_me: `Passionate about technology and driven by creativity, I began my journey in 2023 with a mobile phone and a big dream. I've developed tools that make life easier for people with limited resources—like me—and I turn challenges into opportunities for innovation. My ultimate goal is to continually learn and experiment, striving to create revolutionary, out-of-the-box ideas ...`
+    about_me: `Passionate about technology, I started my journey in 2023 with a simple phone and a big ambition. I continuously learn to achieve my goal of creating revolutionary, out-of-the-box ideas.`
 };
