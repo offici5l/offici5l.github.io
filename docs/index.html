@@ -6,7 +6,7 @@
     <meta name="description" content="A personal portfolio website.">
     <meta name="author" content="">
     <title>Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -83,6 +83,16 @@
             <h2>Wallet Statistics</h2>
             <div id="statsContent">
                 <p>Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeQrBtn">&times;</span>
+            <h2>Scan QR Code</h2>
+            <div id="qrCodeContent" class="qr-code-container" style="text-align: center; padding: 2rem;">
+                <!-- QR code will be injected here -->
             </div>
         </div>
     </div>

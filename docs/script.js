@@ -110,15 +110,11 @@ function initializePortfolio() {
                 supportItem.innerHTML = `
                     <button class="stats-icon-btn" id="statsBtn-${key}" aria-label="View wallet statistics">?</button>
                     <div class="support-content">
-                        <div class="support-title">${button.name}</div>
+                        <div class="support-title">${button.name} Address</div>
                         <div class="support-address" role="textbox" aria-readonly="true">${button.address}</div>
                         <div class="support-actions">
-                            <button class="support-btn copy-btn" onclick="copyAddress('${button.address}', this)" aria-label="Copy address to clipboard">Copy Address</button>
-                        </div>
-                    </div>
-                    <div class="support-qr">
-                        <div class="qr-code-container">
-                            <img src="${generateQRCode(button.address)}" alt="QR Code for ${button.name} address" class="qr-code-image" loading="lazy">
+                            <button class="support-btn copy-btn" onclick="copyAddress('${button.address}', this)" aria-label="Copy address to clipboard">Copy</button>
+                            <button class="support-btn" id="showQrBtn-${key}" aria-label="Show QR Code">QR Code</button>
                         </div>
                     </div>
                 `;
@@ -364,6 +360,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const statsModal = document.getElementById('statsModal');
     const closeBtn = document.getElementById('closeBtn');
     const supportList = document.getElementById('supportList');
+    const qrModal = document.getElementById('qrModal');
+    const closeQrBtn = document.getElementById('closeQrBtn');
+    const qrCodeContent = document.getElementById('qrCodeContent');
 
     if (supportList) {
         supportList.addEventListener('click', function(event) {
@@ -372,6 +371,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     statsModal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
                     showStats();
+                }
+            }
+
+            const showQrBtn = event.target.closest('[id^="showQrBtn-"]');
+            if (showQrBtn) {
+                const key = showQrBtn.id.split('-')[1];
+                const button = userInfo.support_buttons[key];
+                if (button && button.address && qrModal && qrCodeContent) {
+                    qrCodeContent.innerHTML = `<img src="${generateQRCode(button.address, 250)}" alt="QR Code for ${button.name} address" class="qr-code-image" loading="lazy">`;
+                    qrModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
                 }
             }
         });
@@ -386,9 +396,22 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    if (closeQrBtn) {
+        closeQrBtn.onclick = function() {
+            if (qrModal) {
+                qrModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        };
+    }
+
     window.onclick = function(event) {
         if (event.target === statsModal) {
             statsModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        if (event.target === qrModal) {
+            qrModal.style.display = 'none';
             document.body.style.overflow = '';
         }
     };
@@ -396,6 +419,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && statsModal && statsModal.style.display === 'block') {
             statsModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        if (event.key === 'Escape' && qrModal && qrModal.style.display === 'block') {
+            qrModal.style.display = 'none';
             document.body.style.overflow = '';
         }
     });

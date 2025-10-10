@@ -11,17 +11,17 @@
     --text-primary: #212529;
     --text-secondary: #495057;
     --text-muted: #6c757d;
-    --accent: #007bff;
-    --accent-hover: #0056b3;
+    --accent: #0056b3;
+    --accent-hover: #004085;
     --bitcoin-orange: #f7931a;
     --bitcoin-orange-hover: #e8820e;
     --border: #dee2e6;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    --shadow-hover: 0 8px 12px rgba(0, 0, 0, 0.1);
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lato', sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.7;
@@ -139,14 +139,14 @@ header {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
     border-radius: 2px;
 }
 
 .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 2.5rem;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
@@ -161,11 +161,10 @@ header {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
 }
 
 .card:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
 }
 
@@ -180,7 +179,7 @@ header {
 .project-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 2rem 2.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -199,7 +198,7 @@ header {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -209,7 +208,6 @@ header {
 }
 
 .project-item:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
     border-color: var(--accent);
 }
@@ -217,15 +215,15 @@ header {
 .project-icon {
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
     color: white;
-    border-radius: 14px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     font-size: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
 }
 
 .project-icon svg {
@@ -250,7 +248,7 @@ header {
     position: relative;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 8px;
     padding: 2.5rem;
     transition: all 0.3s ease;
     display: flex;
@@ -267,13 +265,12 @@ header {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(135deg, var(--bitcoin-orange), var(--bitcoin-orange-hover));
+    background: var(--accent);
 }
 
 .support-item:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
-    border-color: var(--bitcoin-orange);
+    border-color: var(--accent);
 }
 
 .support-content {
@@ -290,20 +287,13 @@ header {
     gap: 0.75rem;
 }
 
-.support-title::before {
-    content: '₿';
-    font-size: 1.5rem;
-    color: var(--bitcoin-orange);
-    font-weight: bold;
-}
-
 .support-address {
     font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
     font-size: 0.95rem;
     color: var(--text-secondary);
     background: var(--bg-primary);
     padding: 1rem;
-    border-radius: 12px;
+    border-radius: 8px;
     word-break: break-all;
     margin-bottom: 1.5rem;
     border: 1px solid var(--border);
@@ -317,75 +307,41 @@ header {
 }
 
 .support-btn {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--bitcoin-orange);
-    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
     background: transparent;
-    color: var(--bitcoin-orange);
+    color: var(--accent);
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
     font-family: inherit;
 }
 
 .support-btn:hover {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+}
+
+.support-btn.copy-btn {
+    border-color: var(--bitcoin-orange);
+    color: var(--bitcoin-orange);
+}
+
+.support-btn.copy-btn:hover {
     background: var(--bitcoin-orange);
     color: white;
-    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(247, 147, 26, 0.3);
 }
 
-.support-qr {
-    flex-shrink: 0;
-    position: relative;
-}
 
-.qr-code-container {
-    background: white;
-    padding: 1rem;
-    border-radius: 16px;
-    border: 2px solid var(--border);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.qr-code-container::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, var(--bitcoin-orange), var(--bitcoin-orange-hover));
-    border-radius: 18px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.support-item:hover .qr-code-container::before {
-    opacity: 1;
-}
-
-.qr-code-image {
-    width: 160px;
-    height: 160px;
-    border-radius: 8px;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.support-item:hover .qr-code-image {
-    transform: scale(1.02);
-}
 
 .contact-section {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 8px;
     padding: 3rem;
     text-align: center;
     box-shadow: var(--shadow);
@@ -400,28 +356,27 @@ header {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
 }
 
 .email-link {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
     color: white;
     text-decoration: none;
     padding: 1rem 2.5rem;
-    border-radius: 12px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.3s ease;
     margin-bottom: 3rem;
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.3);
 }
 
 .email-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 86, 179, 0.4);
 }
 
 .email-link svg {
@@ -458,7 +413,7 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    background: var(--accent);
     border-radius: 50%;
     transform: scale(0);
     transition: transform 0.3s ease;
@@ -471,8 +426,7 @@ header {
 .social-link:hover {
     color: white;
     border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.3);
 }
 
 .social-link svg {
@@ -493,7 +447,7 @@ header {
     border: 2px solid var(--border);
     border-radius: 50%;
     color: var(--text-secondary);
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
     cursor: pointer;
@@ -531,7 +485,7 @@ header {
     margin: 5% auto;
     padding: 3rem;
     border: none;
-    border-radius: 20px;
+    border-radius: 8px;
     width: 90%;
     max-width: 600px;
     position: relative;
@@ -719,14 +673,10 @@ header {
     }
 
     .support-actions {
-        flex-direction: column;
         gap: 0.75rem;
+        justify-content: center;
     }
 
-    .support-btn {
-        width: 100%;
-        text-align: center;
-    }
 
     .qr-code-image {
         width: 120px;
