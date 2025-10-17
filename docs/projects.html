@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
   <link rel="stylesheet" href="style.css">
   <style>
     .project-list-item {
@@ -65,34 +66,48 @@
         <button class="back-btn" onclick="goBack()">Back to Home</button>
     </div>
   </div>
+
+  <script src="info.js"></script>
   <script>
     function goBack() {
       window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';
     }
 
-    fetch('projects.json')
+    const GITHUB_USERNAME = userInfo.username_github;
+
+    fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?type=public&sort=updated&per_page=100`)
       .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.json();
       })
-      .then(projects => {
+      .then(repos => {
+        const projects = repos
+          .filter(r => !r.private && r.description && r.description.length > 0)
+          .map(r => ({
+            name: r.name,
+            html_url: r.html_url,
+            description: r.description
+          }));
+
         const list = document.getElementById('projects-list');
-        if (!projects || projects.length === 0) {
+        if (projects.length === 0) {
           list.innerHTML = "<p style='text-align: center; color: var(--text-secondary);'>No projects available at the moment.</p>";
           return;
         }
+
         list.innerHTML = projects.map(proj => `
           <a href="${proj.html_url}" target="_blank" rel="noopener noreferrer" class="project-list-item">
             <h3>${proj.name}</h3>
-            <p>${proj.description || 'No description available.'}</p>
+            <p>${proj.description}</p>
           </a>
         `).join('');
       })
       .catch(error => {
         console.error('Failed to load projects:', error);
-        document.getElementById('projects-list').innerHTML = "<p style='text-align: center; color: var(--text-secondary);'>Failed to load projects. Please try again later.</p>";
+        document.getElementById('projects-list').innerHTML =
+          "<p style='text-align: center; color: var(--text-secondary);'>Failed to load projects. Please try again later.</p>";
       });
   </script>
 </body>
