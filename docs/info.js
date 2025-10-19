@@ -8,7 +8,7 @@ const userInfo = {
     
     support_buttons: {
         bitcoin: {
-            name: 'Bitcoin',
+            name: 'Bitcoin (BTC)',
             address: 'bc1qaqyaxz4t05wh434em3ss7q6dysfl7t348tmm08'
         },
         usdt: {
