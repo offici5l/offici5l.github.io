@@ -11,10 +11,6 @@ const userInfo = {
             name: 'Bitcoin (BTC)',
             address: 'bc1qaqyaxz4t05wh434em3ss7q6dysfl7t348tmm08'
         },
-        usdt_bep20: {
-            name: 'USDT (BEP20)',
-            address: '0xE9f184635C9ecD6b0B18E669aFCee1352E8982Ec'
-        },
         usdt: {
             name: 'USDT (TRC-20)',
             address: 'TQAqYBMVMHrHzNWHMHYhP6MnVxeE84e7su'
