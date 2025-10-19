@@ -79,7 +79,11 @@ function openGitHub() {
 }
 
 function openProjects() {
-    window.open(userInfo.projects_url, '_blank', 'noopener,noreferrer');
+    window.location.href = 'projects.html';
+}
+
+function openDonate() {
+    window.location.href = 'donate.html';
 }
 
 function initializePortfolio() {
@@ -100,40 +104,6 @@ function initializePortfolio() {
         emailText.textContent = userInfo.email;
     }
     
-    const supportList = document.getElementById('supportList');
-    if (supportList && userInfo.support_buttons && Object.keys(userInfo.support_buttons).length > 0) {
-        Object.entries(userInfo.support_buttons).forEach(([key, button]) => {
-            const supportItem = document.createElement('div');
-            supportItem.className = 'support-item';
-            
-            if (button.address) {
-                supportItem.innerHTML = `
-                    <button class="stats-icon-btn" id="statsBtn-${key}" aria-label="View wallet statistics">?</button>
-                    <div class="support-content">
-                        <div class="support-title">${button.name} Address</div>
-                        <div class="support-address" role="textbox" aria-readonly="true">${button.address}</div>
-                        <div class="support-actions">
-                            <button class="support-btn copy-btn" onclick="copyAddress('${button.address}', this)" aria-label="Copy address to clipboard">Copy</button>
-                            <button class="support-btn" id="showQrBtn-${key}" aria-label="Show QR Code">QR Code</button>
-                        </div>
-                    </div>
-                `;
-            } else if (button.redirect) {
-                supportItem.onclick = () => window.open(button.redirect, '_blank', 'noopener,noreferrer');
-                supportItem.style.cursor = 'pointer';
-                supportItem.innerHTML = `
-                    <div class="support-icon">
-                        <img src="${button.svg}" alt="${button.name} icon" loading="lazy">
-                    </div>
-                    <div class="support-content">${button.name}</div>
-                `;
-            }
-            
-            supportList.appendChild(supportItem);
-        });
-    } else if (document.getElementById('supportSection')) {
-        document.getElementById('supportSection').style.display = 'none';
-    }
     
     const socialLinks = document.getElementById('socialLinks');
     if (socialLinks) {
@@ -359,33 +329,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const statsModal = document.getElementById('statsModal');
     const closeBtn = document.getElementById('closeBtn');
-    const supportList = document.getElementById('supportList');
     const qrModal = document.getElementById('qrModal');
     const closeQrBtn = document.getElementById('closeQrBtn');
     const qrCodeContent = document.getElementById('qrCodeContent');
-
-    if (supportList) {
-        supportList.addEventListener('click', function(event) {
-            if (event.target && event.target.matches('.stats-icon-btn')) {
-                if (statsModal) {
-                    statsModal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                    showStats();
-                }
-            }
-
-            const showQrBtn = event.target.closest('[id^="showQrBtn-"]');
-            if (showQrBtn) {
-                const key = showQrBtn.id.split('-')[1];
-                const button = userInfo.support_buttons[key];
-                if (button && button.address && qrModal && qrCodeContent) {
-                    qrCodeContent.innerHTML = `<img src="${generateQRCode(button.address, 250)}" alt="QR Code for ${button.name} address" class="qr-code-image" loading="lazy">`;
-                    qrModal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-        });
-    }
 
     if (closeBtn) {
         closeBtn.onclick = function() {

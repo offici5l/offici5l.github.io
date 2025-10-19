@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .project-list-item {
+        background: var(--bg-card);
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.8rem;
+        margin-bottom: 1.2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: block;
+        color: var(--text-primary);
+    }
+    .project-list-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .project-list-item h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .project-list-item p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        max-width: 600px;
+        word-break: break-all;
+    }
+    .support-btn {
+        background: var(--accent);
+        color: white;
+        padding: 0.5rem 1rem;
+        margin-top: 0.8rem;
+        margin-right: 0.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s ease;
+    }
+    .support-btn:hover {
+        background: #d64b4b;
+    }
+    .back-btn {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        padding: 0.9rem 1.8rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+        margin-top: 2rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .back-btn:hover {
+        transform: translateY(-2px);
+    }
+    .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        border-bottom: 3px solid var(--accent);
+        padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="page-header">
+        <h1>Donate</h1>
+    </div>
+    <div id="donate-list"></div>
+    <div style="text-align: center;">
+        <button class="back-btn" onclick="goBack()">Back to Home</button>
+    </div>
+  </div>
+
+  <div id="qrModal" class="modal">
+      <div class="modal-content">
+          <span class="close-btn" id="closeQrBtn">&times;</span>
+          <h2>Scan QR Code</h2>
+          <div id="qrCodeContent" class="qr-code-container" style="text-align: center; padding: 2rem;"></div>
+      </div>
+  </div>
+
+  <script src="info.js"></script>
+  <script>
+    function goBack() {
+      window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';
+    }
+
+    function generateQRCode(text, size = 160) {
+      return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&bgcolor=ffffff&color=000000&margin=1&format=png&ecc=M`;
+    }
+
+    function copyAddress(address, btn) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(address).then(() => {
+              showCopySuccess(btn);
+          }).catch(() => fallbackCopyTextToClipboard(address, btn));
+      } else {
+          fallbackCopyTextToClipboard(address, btn);
+      }
+    }
+
+    function fallbackCopyTextToClipboard(text, btn) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+          document.execCommand('copy');
+          showCopySuccess(btn);
+      } catch {
+          showCopyError(btn);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function showCopySuccess(btn) {
+      const originalText = btn.textContent;
+      const originalBg = btn.style.background;
+      btn.textContent = 'Copied!';
+      btn.style.background = '#27ae60';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = originalBg;
+      }, 2500);
+    }
+
+    function showCopyError(btn) {
+      const originalText = btn.textContent;
+      btn.textContent = 'Copy Failed';
+      btn.style.background = '#e74c3c';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+      }, 2500);
+    }
+
+    const supportList = document.getElementById('donate-list');
+    if (userInfo.support_buttons && Object.keys(userInfo.support_buttons).length > 0) {
+      Object.entries(userInfo.support_buttons).forEach(([key, button]) => {
+        const supportItem = document.createElement('div');
+        supportItem.className = 'project-list-item';
+
+        supportItem.innerHTML = `
+          <h3>${button.name}</h3>
+          ${button.address ? `<p>${button.address}</p>` : ''}
+          ${button.address ? `<button class="support-btn copy-btn" onclick="copyAddress('${button.address}', this)">Copy</button>` : ''}
+          ${button.address ? `<button class="support-btn" id="showQrBtn-${key}">QR Code</button>` : ''}
+        `;
+
+        if (button.redirect) {
+          supportItem.onclick = () => window.open(button.redirect, '_blank', 'noopener,noreferrer');
+          supportItem.style.cursor = 'pointer';
+        }
+
+        supportList.appendChild(supportItem);
+      });
+    } else {
+      supportList.innerHTML = "<p style='text-align: center; color: var(--text-secondary);'>No donation options available at the moment.</p>";
+    }
+
+    const qrModal = document.getElementById('qrModal');
+    const closeQrBtn = document.getElementById('closeQrBtn');
+    const qrCodeContent = document.getElementById('qrCodeContent');
+
+    supportList.addEventListener('click', function(event) {
+      const showQrBtn = event.target.closest('[id^="showQrBtn-"]');
+      if (showQrBtn) {
+        const key = showQrBtn.id.split('-')[1];
+        const button = userInfo.support_buttons[key];
+        if (button && button.address) {
+          qrCodeContent.innerHTML = `<img src="${generateQRCode(button.address, 250)}" alt="QR Code" class="qr-code-image" loading="lazy">`;
+          qrModal.style.display = 'block';
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+
+    closeQrBtn.onclick = function() {
+      qrModal.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+
+    window.onclick = function(event) {
+      if (event.target === qrModal) {
+        qrModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    };
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && qrModal.style.display === 'block') {
+        qrModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
