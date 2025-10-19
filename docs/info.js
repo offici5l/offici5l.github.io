@@ -14,7 +14,7 @@ const userInfo = {
         usdt: {
             name: 'USDT (BEP20)',
             address: '0xE9f184635C9ecD6b0B18E669aFCee1352E8982Ec'
-        }
+        },
         usdt: {
             name: 'USDT (TRC-20)',
             address: 'TQAqYBMVMHrHzNWHMHYhP6MnVxeE84e7su'
