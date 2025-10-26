@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://offici5l.github.io/sitemap.xml
