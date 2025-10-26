@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .project-list-item {
+        background: var(--bg-card);
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.8rem;
+        margin-bottom: 1.2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: block;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+    .project-list-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .project-list-item h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+    }
+    .project-list-item p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+    .back-btn {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        padding: 0.9rem 1.8rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+        margin-top: 2rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .back-btn:hover {
+        transform: translateY(-2px);
+    }
+    .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        border-bottom: 3px solid var(--accent);
+        padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="page-header">
+        <h1>Support</h1>
+    </div>
+    <div id="donate-list"></div>
+    <div style="text-align: center;">
+        <button class="back-btn" onclick="goBack()">Back to Home</button>
+    </div>
+  </div>
+
+  <script src="info.js"></script>
+  <script>
+    function goBack() {
+      window.history.length > 1 ? window.history.back() : window.location.href = 'index.html';
+    }
+
+    const supportList = document.getElementById('donate-list');
+    if (userInfo.support_buttons && Object.keys(userInfo.support_buttons).length > 0) {
+      Object.values(userInfo.support_buttons).forEach(button => {
+        if (button.redirect) {
+          const supportItem = document.createElement('div');
+          supportItem.className = 'project-list-item';
+          supportItem.innerHTML = `
+            <h3>${button.name}</h3>
+            <p>${button.description || 'Click to proceed.'}</p>
+          `;
+          supportItem.onclick = () => window.open(button.redirect, '_blank', 'noopener,noreferrer');
+          supportList.appendChild(supportItem);
+        }
+      });
+    }
+
+    if (supportList.children.length === 0) {
+      supportList.innerHTML = "<p style='text-align: center; color: var(--text-secondary);'>No support options available at the moment.</p>";
+    }
+  </script>
+</body>
+</html>
