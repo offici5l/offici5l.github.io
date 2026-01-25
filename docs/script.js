@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
         user: document.getElementById('username_display'),
         bio: document.getElementById('aboutText'),
         projects: document.getElementById('projectsLink'),
-        support: document.getElementById('supportLink'),
+        supportBtn: document.getElementById('supportBtn'),
         socials: document.getElementById('socialLinks'),
-        favicon: document.getElementById('favicon')
+        favicon: document.getElementById('favicon'),
+        modal: document.getElementById('donationModal'),
+        closeModal: document.querySelector('.close-modal'),
+        cryptoList: document.getElementById('cryptoList')
     };
 
     if (els.avatar) els.avatar.src = userInfo.avatar_url;
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (els.user) els.user.textContent = userInfo.username_github;
     if (els.bio) els.bio.textContent = userInfo.about_me;
     if (els.projects) els.projects.href = userInfo.projects_url;
-    if (els.support) els.support.href = userInfo.support;
+
 
     if (els.socials) {
         const links = [
@@ -31,4 +34,55 @@ document.addEventListener('DOMContentLoaded', () => {
             </a>
         `).join('');
     }
+
+
+    if (els.supportBtn && els.modal) {
+        els.supportBtn.addEventListener('click', () => {
+            els.modal.style.display = 'flex';
+            populateWallets();
+        });
+
+        els.closeModal.addEventListener('click', () => {
+            els.modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === els.modal) {
+                els.modal.style.display = 'none';
+            }
+        });
+    }
+
+ 
+    function populateWallets() {
+        if (!els.cryptoList || els.cryptoList.children.length > 0) return;
+        
+        const wallets = [
+            { name: 'Bitcoin (BTC)', address: userInfo.wallets.btc },
+            { name: 'USDT (BEP20)', address: userInfo.wallets.bep20 },
+            { name: 'USDT (TRC20)', address: userInfo.wallets.trc20 }
+        ];
+
+        els.cryptoList.innerHTML = wallets.map(w => `
+            <div class="crypto-item" onclick="copyToClipboard('${w.address}')">
+                <span class="coin-name">${w.name}</span>
+                <span class="coin-address">${w.address}</span>
+            </div>
+        `).join('');
+
+        const toast = document.createElement('div');
+        toast.className = 'copy-toast';
+        toast.textContent = 'Copied to clipboard!';
+        document.body.appendChild(toast);
+    }
 });
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        const toast = document.querySelector('.copy-toast');
+        if (toast) {
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    });
+}
