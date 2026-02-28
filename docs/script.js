@@ -36,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    if (els.supportBtn && els.modal) {
+    if (els.supportBtn) {
         els.supportBtn.addEventListener('click', () => {
-            els.modal.style.display = 'flex';
-            populateWallets();
+            window.open('https://offici5l-support.vercel.app/', '_blank');
         });
 
         els.closeModal.addEventListener('click', () => {
