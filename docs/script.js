@@ -38,19 +38,7 @@ SOCIALS.forEach(s => {
   slist.appendChild(a);
 });
 
-INFO.crypto.forEach(c => {
-  const item = document.createElement('div');
-  item.className = 'citem';
-  item.onclick = () => cp(c.address);
-  item.innerHTML = `
-    <div class="cdata">
-      <span class="ctag ${c.cls}">${c.tag}</span>
-      <span class="caddr">${c.address}</span>
-    </div>
-    <svg class="cic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-  `;
-  document.getElementById('clist').appendChild(item);
-});
+
 
 let cur=0,total=0;
 const track=document.getElementById('track'),dotsEl=document.getElementById('dots'),
