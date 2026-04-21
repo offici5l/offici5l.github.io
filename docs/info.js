@@ -5,5 +5,4 @@ const INFO = {
   telegram: 'https://t.me/Offici5l_Channel',
   twitter: 'https://x.com/offici5l',
   email: 'offici5lcontact@proton.me',
-
 };
