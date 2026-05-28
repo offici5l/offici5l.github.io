@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>offici5l</title>
+    <link>https://offici5l.github.io</link>
+    <description>The official website of offici5l: A tech enthusiast and developer building open-source projects entirely via a mobile phone.</description>
+    <atom:link href="https://offici5l.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en</language>
+
+  </channel>
+</rss>
