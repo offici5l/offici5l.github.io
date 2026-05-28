@@ -50,6 +50,8 @@ SVG_MOON  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke=
 SVG_BACK  = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>'
 SVG_SHARE = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'
 SVG_PIN   = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M16 2H8a1 1 0 0 0-.7 1.71L11 7.41V18a1 1 0 0 0 .55.89l2 1A1 1 0 0 0 15 19V7.41l3.71-3.71A1 1 0 0 0 16 2z"/></svg>'
+CF_ANALYTICS = '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "1825761b3d024affb84ca8cb579990bf"}\'></script>'
+
 THEME_BTN = f'<button class="theme-btn" id="theme-btn" aria-label="Toggle theme">{SVG_SUN}</button>'
 
 def make_renderer():
@@ -321,6 +323,7 @@ def build_home(posts=None):
         f'  <div id="posts">{posts_content}</div>\n'
         '</div>\n'
         '<script src="/main.js"></script>\n'
+        f'{CF_ANALYTICS}\n'
         '</body>\n</html>'
     )
 
@@ -375,6 +378,7 @@ def build_post(meta, body_html, slug, prev_p=None, next_p=None):
         f'<script src="{HLJS_JS}" crossorigin="anonymous" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79YC/1TGnU4R9H"></script>\n'
         '<script>hljs.highlightAll();</script>\n'
         f'{JS_THEME}\n{JS_COPY}\n{JS_POST}\n{JS_SHARE}\n'
+        f'{CF_ANALYTICS}\n'
         '</body>\n</html>'
     )
 
