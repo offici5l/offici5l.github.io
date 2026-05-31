@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import shutil
 import re
 import json
 from datetime import datetime, timezone
@@ -32,6 +33,7 @@ SITE_BIO  = _info.get('bio')      or SITE_DESC
 AVATAR    = _info.get('avatar')   or ''
 
 POSTS_DIR = 'posts'
+OUT_DIR   = 'public'
 HLJS_VER  = '11.10.0'
 HLJS_CSS  = '/assets/hljs/github.min.css'
 HLJS_DARK = '/assets/hljs/github-dark.min.css'
@@ -447,36 +449,49 @@ def main():
     for i, p in enumerate(posts):
         prev_p = {'slug': posts[i+1]['slug'], 'title': posts[i+1]['title']} if i+1 < len(posts) else None
         next_p = {'slug': posts[i-1]['slug'], 'title': posts[i-1]['title']} if i > 0      else None
-        os.makedirs(p['slug'], exist_ok=True)
-        with open(os.path.join(p['slug'], 'index.html'), 'w', encoding='utf-8') as f:
+        os.makedirs(os.path.join(OUT_DIR, p['slug']), exist_ok=True)
+        with open(os.path.join(OUT_DIR, p['slug'], 'index.html'), 'w', encoding='utf-8') as f:
             f.write(build_post(p['_meta'], p['_html'], p['slug'], prev_p, next_p))
         print(f'  \u2713 /{p["slug"]}/')
 
     clean = [{k: v for k, v in p.items() if not k.startswith('_')} for p in posts]
 
-    with open('posts.json', 'w', encoding='utf-8') as f:
+    os.makedirs(OUT_DIR, exist_ok=True)
+
+    with open(os.path.join(OUT_DIR, 'posts.json'), 'w', encoding='utf-8') as f:
         json.dump(clean, f, ensure_ascii=False, indent=2)
     print('  \u2713 posts.json')
 
-    with open('feed.xml', 'w', encoding='utf-8') as f:
+    with open(os.path.join(OUT_DIR, 'feed.xml'), 'w', encoding='utf-8') as f:
         f.write(build_feed(clean))
     print('  \u2713 feed.xml')
 
-    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+    with open(os.path.join(OUT_DIR, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write(build_sitemap(clean))
     print('  \u2713 sitemap.xml')
 
-    with open('index.html', 'w', encoding='utf-8') as f:
+    with open(os.path.join(OUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(build_home(clean))
     print('  \u2713 index.html')
 
-    with open('robots.txt', 'w', encoding='utf-8') as f:
+    with open(os.path.join(OUT_DIR, 'robots.txt'), 'w', encoding='utf-8') as f:
         f.write(f'User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n')
     print('  \u2713 robots.txt')
 
     with open('requirements.txt', 'w', encoding='utf-8') as f:
         f.write('markdown-it-py\nmdit_py_plugins\n')
     print('  \u2713 requirements.txt')
+
+    for static in ['main.css', 'main.js', '404.html']:
+        if os.path.exists(static):
+            shutil.copy2(static, os.path.join(OUT_DIR, static))
+    for folder in ['assets']:
+        src = folder
+        dst = os.path.join(OUT_DIR, folder)
+        if os.path.exists(src):
+            if os.path.exists(dst):
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
 
     print(f'\nDone \u2014 {len(posts)} post(s) | {SITE_URL}')
 
