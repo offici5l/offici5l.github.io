@@ -1,7 +1,7 @@
 ---
 title: Mi Unlock — Error Codes
 description: A reference for Mi Unlock error codes, their causes, and solutions.
-tags: [xiaomi, bootloader]
+tags: [xiaomi, bootloader, info]
 ---
 
 A reference for error codes returned by the Mi Unlock Tools, with descriptions and solutions.

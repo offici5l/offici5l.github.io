@@ -16,14 +16,14 @@ If you're about to make a purchase and want to be sure before handing over money
 Check the ROM version string on the device. The two letters before the last two characters indicate the region:
 
 ```
-OS3.0.10.0.WOJCNXM  — China      (Destined for: China)
-OS3.0.10.0.WOJMIXM  — Global     (Destined for: Worldwide)
-OS3.0.10.0.WOJTWXM  — Taiwan     (Destined for: Taiwan)
-OS3.0.10.0.WOJRUXM  — Russia     (Destined for: Russia)
-OS3.0.10.0.WOJIDXM  — Indonesia  (Destined for: Indonesia)
-OS3.0.10.0.WOJTRXM  — Turkey     (Destined for: Turkey)
-OS3.0.10.0.WOJEUXM  — Europe     (Destined for: Europe)
-OS3.0.10.0.WOJINXM  — India      (Destined for: India)
+OS3.0.10.0.WOJCNXM  — China (Destined for: China)
+OS3.0.10.0.WOJMIXM  — Global (Destined for: Worldwide)
+OS3.0.10.0.WOJTWXM  — Taiwan (Destined for: Taiwan)
+OS3.0.10.0.WOJRUXM  — Russia (Destined for: Russia)
+OS3.0.10.0.WOJIDXM  — Indonesia (Destined for: Indonesia)
+OS3.0.10.0.WOJTRXM  — Turkey (Destined for: Turkey)
+OS3.0.10.0.WOJEUXM  — Europe (Destined for: Europe)
+OS3.0.10.0.WOJINXM  — India (Destined for: India)
 ```
 
 If those two letters are **not CN**, the device is not a Chinese unit.
@@ -35,8 +35,10 @@ If those two letters are **not CN**, the device is not a Chinese unit.
 ### Step 2: IMEI Verification
 
 Dial `*#06#` to retrieve your IMEI numbers, then go to:
+[https://www.mi.com/global/verify#/en/tab/imei](https://www.mi.com/global/verify#/en/tab/imei)
 
-**https://www.mi.com/global/verify#/en/tab/imei**
+
+****
 
 Try the first IMEI, the second IMEI, and the serial number (S/N). If the device isn't a Chinese unit, all three should return:
 
@@ -53,7 +55,8 @@ Dial `*#*#6484#*#*` → **Software version** → **CPU ID**
 
 Then go to:
 
-**https://offici5l.github.io/MiCheck/**
+[https://offici5l.github.io/MiCheck](https://offici5l.github.io/MiCheck/)
+
 
 Enter the CPU ID and the device codename. If the device isn't a Chinese unit, you'll get:
 
