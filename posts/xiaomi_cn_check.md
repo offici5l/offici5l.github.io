@@ -54,9 +54,7 @@ Try the first IMEI, the second IMEI, and the serial number (S/N). If the device 
 Dial `*#*#6484#*#*` → **Software version** → **CPU ID**
 
 Then go to:
-
 [https://offici5l.github.io/MiCheck](https://offici5l.github.io/MiCheck/)
-
 
 Enter the CPU ID and the device codename. If the device isn't a Chinese unit, you'll get:
 
