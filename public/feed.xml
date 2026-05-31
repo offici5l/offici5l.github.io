@@ -7,5 +7,12 @@
     <atom:link href="https://offici5l.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <language>en</language>
 
+    <item>
+      <title>How to Verify That the Xiaomi You're About to Buy Isn't a Chinese Unit</title>
+      <link>https://offici5l.github.io/post/micheck/</link>
+      <description>Before you buy, run these three checks to confirm the Xiaomi you're holding isn't a Chinese unit passed off as international.</description>
+      <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="true">https://offici5l.github.io/post/micheck/</guid>
+    </item>
   </channel>
 </rss>

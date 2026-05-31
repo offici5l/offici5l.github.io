@@ -112,7 +112,7 @@ def parse_frontmatter(text):
     return fm, text[end + 3:].strip()
 
 def slugify(filename):
-    return os.path.splitext(filename)[0]
+    return 'post/' + os.path.splitext(filename)[0]
 
 def fmt_date(s):
     try:
