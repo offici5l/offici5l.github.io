@@ -78,8 +78,8 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 .avatar {
-  width: 64px;
-  height: 64px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--dim);
