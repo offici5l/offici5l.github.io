@@ -315,7 +315,7 @@ def build_home(posts=None):
         f'    {THEME_BTN}\n'
         '  </div>\n'
         '  <div class="header">\n'
-        f'    <img class="avatar" src="{esc(AVATAR)}" alt="{esc(SITE_NAME)}" width="64" height="64" loading="eager" decoding="async">\n'
+        f'    <img class="avatar" src="{esc(AVATAR)}" alt="{esc(SITE_NAME)}" width="76" height="76" loading="eager" decoding="async">\n'
         f'    <p class="identity-bio">{esc(SITE_BIO)}</p>\n'
         '    <div id="socials"></div>\n'
         '  </div>\n'
