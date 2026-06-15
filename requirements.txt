@@ -1,2 +1,0 @@
-markdown-it-py
-mdit_py_plugins
