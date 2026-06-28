@@ -355,3 +355,55 @@
   backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(false); });
 
 }());
+
+(function () {
+  var btn    = document.getElementById('cf-submit');
+  var status = document.getElementById('contact-status');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var name    = document.getElementById('cf-name').value.trim();
+    var email   = document.getElementById('cf-email').value.trim();
+    var message = document.getElementById('cf-message').value.trim();
+    if (!message) {
+      status.textContent = 'Please enter a message.';
+      return;
+    }
+    var captcha = document.querySelector('textarea[name=h-captcha-response]');
+    var captchaVal = captcha ? captcha.value : '';
+    if (!captchaVal) {
+      status.textContent = 'Please complete the captcha.';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.textContent = '';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: '7f033f14-0c92-4205-ab36-b67da9a73303',
+        name: name,
+        email: email,
+        message: message,
+        'h-captcha-response': captchaVal
+      })
+    }).then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.success) {
+          status.textContent = 'Message sent.';
+          document.getElementById('cf-name').value = '';
+          document.getElementById('cf-email').value = '';
+          document.getElementById('cf-message').value = '';
+        } else {
+          status.textContent = 'Something went wrong.';
+        }
+        btn.disabled = false;
+        btn.textContent = 'Send';
+      })
+      .catch(function () {
+        status.textContent = 'Network error.';
+        btn.disabled = false;
+        btn.textContent = 'Send';
+      });
+  });
+}());

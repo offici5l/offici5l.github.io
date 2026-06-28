@@ -99,6 +99,30 @@
       </a>
     </div>
   </div>
+
+  <div class="contact-divider" aria-hidden="true"></div>
+
+  <div class="section" id="contact-section">
+    <div class="contact-header">
+      <div class="contact-label">Contact</div>
+    </div>
+    <div class="contact-field">
+      <input type="text" id="cf-name" placeholder="Name (optional)" autocomplete="off">
+    </div>
+    <div class="contact-field">
+      <input type="email" id="cf-email" placeholder="Email (optional)" autocomplete="off">
+    </div>
+    <div class="contact-field">
+      <textarea id="cf-message" placeholder="Message" rows="4"></textarea>
+    </div>
+    <input type="checkbox" name="botcheck" style="display:none;">
+    <div class="h-captcha" data-captcha="true"></div>
+    <div class="contact-footer">
+      <button class="contact-btn" id="cf-submit">Send</button>
+      <p id="contact-status"></p>
+    </div>
+  </div>
+
 </div>
 
 <div id="sr-alert" role="alert" aria-live="assertive" class="sr-only"></div>
@@ -162,5 +186,6 @@
   }
 </script>
 
+<script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>
