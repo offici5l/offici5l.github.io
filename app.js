@@ -357,23 +357,65 @@
 }());
 
 (function () {
-  var btn    = document.getElementById('cf-submit');
-  var status = document.getElementById('contact-status');
+  var trigger   = document.getElementById('contact-trigger');
+  var backdrop  = document.getElementById('contact-backdrop');
+  var closeBtn  = document.getElementById('contact-modal-close');
+  var btn       = document.getElementById('cf-submit');
+  var status    = document.getElementById('contact-status');
+  var copyBtn   = document.getElementById('contact-copy-btn');
+  var emailLink = document.getElementById('contact-email-link');
+  var isOpen    = false;
+
+  emailLink.textContent = CONFIG.email;
+  emailLink.href = 'mailto:' + CONFIG.email;
+
+  copyBtn.addEventListener('click', function () {
+    navigator.clipboard.writeText(CONFIG.email).then(function () {
+      copyBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      setTimeout(function () {
+        copyBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      }, 1500);
+    });
+  });
+
+  function openContact() {
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    isOpen = true;
+    history.replaceState(null, '', '#contact');
+    setTimeout(function () { closeBtn.focus(); }, 280);
+  }
+  function closeContact() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    isOpen = false;
+    status.textContent = '';
+    history.replaceState(null, '', location.pathname);
+  }
+  function resetForm() {
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-email').value = '';
+    document.getElementById('cf-message').value = '';
+    if (window.hcaptcha) { try { window.hcaptcha.reset(); } catch (_) {} }
+  }
+
+  trigger.addEventListener('click', openContact);
+  closeBtn.addEventListener('click', closeContact);
+  backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeContact(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen) closeContact(); });
+
+  if (location.hash === '#contact') openContact();
+
   if (!btn) return;
   btn.addEventListener('click', function () {
-    var name    = document.getElementById('cf-name').value.trim();
-    var email   = document.getElementById('cf-email').value.trim();
-    var message = document.getElementById('cf-message').value.trim();
-    if (!message) {
-      status.textContent = 'Please enter a message.';
-      return;
-    }
-    var captcha = document.querySelector('textarea[name=h-captcha-response]');
+    if (btn.disabled) return;
+    var name      = document.getElementById('cf-name').value.trim();
+    var email     = document.getElementById('cf-email').value.trim();
+    var message   = document.getElementById('cf-message').value.trim();
+    if (!message) { status.textContent = 'Please enter a message.'; return; }
+    var captcha    = document.querySelector('textarea[name=h-captcha-response]');
     var captchaVal = captcha ? captcha.value : '';
-    if (!captchaVal) {
-      status.textContent = 'Please complete the captcha.';
-      return;
-    }
+    if (!captchaVal) { status.textContent = 'Please complete the captcha.'; return; }
     btn.disabled = true;
     btn.textContent = 'Sending...';
     status.textContent = '';
@@ -391,14 +433,13 @@
       .then(function (d) {
         if (d.success) {
           status.textContent = 'Message sent.';
-          document.getElementById('cf-name').value = '';
-          document.getElementById('cf-email').value = '';
-          document.getElementById('cf-message').value = '';
+          resetForm();
+          setTimeout(function () { closeContact(); }, 2000);
         } else {
           status.textContent = 'Something went wrong.';
+          btn.disabled = false;
+          btn.textContent = 'Send';
         }
-        btn.disabled = false;
-        btn.textContent = 'Send';
       })
       .catch(function () {
         status.textContent = 'Network error.';

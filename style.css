@@ -294,25 +294,56 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .avatar { width: 76px; height: 76px; }
 }
 
-#contact-section { width: 100%; }
-.contact-divider {
-  width: 100%;
-  height: 1px;
-  background: var(--line);
-  margin: -12px 0;
-}
-.contact-header {
-  margin-bottom: 16px;
-}
-.contact-label {
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--sub);
+.contact-trigger { color: var(--sub); transition: color .15s; }
+.contact-trigger:hover { color: var(--fg); }
+
+.contact-email-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--dim);
+  border: 1px solid var(--line);
+  border-radius: 10px;
   margin-bottom: 4px;
 }
+.contact-email-text {
+  font-size: .82rem;
+  color: var(--fg);
+  flex: 1;
+  word-break: break-all;
+}
+.contact-copy-btn {
+  color: var(--sub);
+  padding: 4px;
+  border-radius: 5px;
+  transition: color .15s, background .15s;
+  flex-shrink: 0;
+  display: inline-flex;
+}
+.contact-copy-btn:hover { color: var(--fg); background: var(--line); }
+.contact-or {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+  color: var(--sub);
+  font-size: .75rem;
+}
+.contact-or::before,
+.contact-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
 .contact-field { margin-bottom: 10px; }
+.contact-field-hint {
+  font-size: .72rem;
+  color: var(--sub);
+  margin-top: 5px;
+  padding-left: 2px;
+}
 .contact-field input,
 .contact-field textarea {
   width: 100%;
@@ -321,7 +352,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--fg);
-  font-size: .88rem;
+  font-size: .85rem;
   font-family: var(--sans);
   resize: none;
   box-sizing: border-box;
