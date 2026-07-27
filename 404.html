@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Moved</title>
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f8fafc;
+            text-align: center;
+            padding: 1rem;
+        }
+        a { color: #3b82f6; font-weight: 600; }
+        p { color: #475569; }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h2>Page not found</h2>
+        <p>This project may have moved.</p>
+    </div>
+
+    <script>
+        const path = window.location.pathname;
+        const redirects = {
+            "/fcetool": "https://fcetool.github.io",
+            "/fcetool/": "https://fcetool.github.io"
+        };
+
+        if (redirects[path]) {
+            document.getElementById("content").innerHTML = `
+                <h2>This project has moved</h2>
+                <p>fcetool is now at:</p>
+                <p><a href="${redirects[path]}">${redirects[path]}</a></p>
+            `;
+        }
+    </script>
+</body>
+</html>
