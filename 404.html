@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Moved</title>
-    <style>
-        body {
-            font-family: -apple-system, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background: #f8fafc;
-            text-align: center;
-            padding: 1rem;
-        }
-        a { color: #3b82f6; font-weight: 600; }
-        p { color: #475569; }
-    </style>
+    <title>Page Not Found</title>
 </head>
 <body>
     <div id="content">
-        <h2>Page not found</h2>
-        <p>This project may have moved.</p>
+        <h2>404 - Page Not Found</h2>
+        <p>The page you are looking for does not exist.</p>
     </div>
 
     <script>
         const path = window.location.pathname;
-        const redirects = {
-            "/fcetool": "https://fcetool.github.io",
-            "/fcetool/": "https://fcetool.github.io"
+ 
+        const routes = {
+            "/fcetool": {
+                title: "Project Moved",
+                html: `
+                    <h2>Project Has Moved</h2>
+                    <p>fcetool has moved from <code>github.com/offici5l/fcetool</code> to <strong>github.com/fcetool</strong></p>
+                    <p><a href="https://fcetool.github.io">Go to new location</a></p>
+                `
+            }
+            /* ,
+            "/another-project": {
+                title: "Moved",
+                html: `<p>New content here...</p>`
+            }
+            */
         };
 
-        if (redirects[path]) {
-            document.getElementById("content").innerHTML = `
-                <h2>This project has moved</h2>
-                <p>fcetool is now at:</p>
-                <p><a href="${redirects[path]}">${redirects[path]}</a></p>
-            `;
+        if (routes[path]) {
+            document.getElementById("content").innerHTML = routes[path].html;
+            document.title = routes[path].title;
         }
     </script>
 </body>
