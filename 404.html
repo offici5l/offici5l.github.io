@@ -12,7 +12,6 @@
     </div>
 
     <script>
-        // إزالة الشرطة المائلة الأخيرة لتوحيد دعم /fcetool و /fcetool/
         const path = window.location.pathname.replace(/\/$/, "");
 
         const routes = {
@@ -21,15 +20,9 @@
                 html: `
                     <h2>Project Has Moved</h2>
                     <p>fcetool has moved from <code>github.com/offici5l/fcetool</code> to <strong>github.com/fcetool</strong></p>
-                    <p><a href="https://fcetool.github.io">Go to new location: https://fcetool.github.io</a></p>
+                    <p>Go to new location:<br><a href="https://fcetool.github.io">https://fcetool.github.io</a></p>
                 `
             }
-            /* ,
-            "/another-project": {
-                title: "Moved",
-                html: `<p>New content here...</p>`
-            }
-            */
         };
 
         if (routes[path]) {
