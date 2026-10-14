@@ -26,6 +26,11 @@ jobs:
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           path: 'public'
 
+      - name: Version assets
+        run: |
+          V=$(git -C public rev-parse --short HEAD)
+          sed -i -E "s#(style\.css|app\.js|config\.js)\"#\1?v=$V\"#g" public/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
